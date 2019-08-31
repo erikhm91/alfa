@@ -16,14 +16,14 @@
         :width="canvas.width"
         :height="canvas.height"
       ></canvas>
-      <!-- <img
+      <img
         id="image"
         class="img"
         :src="letter.image"
         :alt="letter.alt"
         :width="canvas.width"
         :height="canvas.height"
-      /> -->
+      />
     </div>
   </div>
 </template>
@@ -198,7 +198,7 @@ export default {
     // but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and
     // "target.offsetTop" to get the correct values in relation to the top left of the canvas.
     getTouchPos(event) {
-        console.log("reading touch");
+        // console.log("reading touch");
         if(event.touches) {
             if (event.touches.length == 1) { // Only deal with one finger
 
@@ -206,10 +206,7 @@ export default {
               this.cursor.current.x = event.targetTouches[0].pageX - rect.left;
               this.cursor.current.y = event.targetTouches[0].pageY - rect.top;
 
-
                 // var touch = event.touches[0]; // Get the information for finger #1
-                
-
 
                 // // this.cursor.current.x=touch.pageX-touch.target.offsetLeft;
                 // // this.cursor.current.y=touch.pageY-touch.target.offsetTop;
@@ -220,14 +217,9 @@ export default {
                 // console.log("touch.pageX: " + touch.pageX );
                 // console.log("touch.pageY: " + touch.pageY);
                 // console.log("touch.target: " + touch.target.offsetLeft);
-                
-
             }
         }
     }
-
-  
-
   }
 };
 </script>
