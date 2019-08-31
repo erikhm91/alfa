@@ -102,7 +102,7 @@ export default {
       var r = 255;
       var g = 0;
       var b = 0;
-      var a = 50;
+      var a = 75;
 
       // Select a fill style
       ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
