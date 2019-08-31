@@ -16,14 +16,14 @@
         :width="canvas.width"
         :height="canvas.height"
       ></canvas>
-      <img
+      <!-- <img
         id="image"
         class="img"
         :src="letter.image"
         :alt="letter.alt"
         :width="canvas.width"
         :height="canvas.height"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -168,9 +168,9 @@ export default {
     // Draw something when a touch start is detected
     sketchpadTouchStart(event) {
         // Update the touch co-ordinates
-        getTouchPos(event);
+        this.getTouchPos(event);
 
-        drawLine(ctx,event.touchX,event.touchY,this.touchSize);
+        this.drawLine();
 
         // Prevents an additional mousedown event being triggered
         event.preventDefault();
@@ -183,12 +183,11 @@ export default {
     },
 
     // Draw something and prevent the default scrolling when touch movement is detected
-    sketchpadTouchMove(e) { 
+    sketchpadTouchMove(event) { 
         // Update the touch co-ordinates
-        getTouchPos(e);
-
+        this.getTouchPos(event);
         // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-        drawLine(); 
+        this.drawLine(); 
 
         // Prevent a scrolling action as a result of this touchmove triggering.
         event.preventDefault();
@@ -199,11 +198,30 @@ export default {
     // but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and
     // "target.offsetTop" to get the correct values in relation to the top left of the canvas.
     getTouchPos(event) {
+        console.log("reading touch");
         if(event.touches) {
             if (event.touches.length == 1) { // Only deal with one finger
-                var touch = e.touches[0]; // Get the information for finger #1
-                this.cursor.current.x=touch.pageX-touch.target.offsetLeft;
-                this.cursor.current.y=touch.pageY-touch.target.offsetTop;
+
+                var rect = event.target.getBoundingClientRect();
+              this.cursor.current.x = event.targetTouches[0].pageX - rect.left;
+              this.cursor.current.y = event.targetTouches[0].pageY - rect.top;
+
+
+                // var touch = event.touches[0]; // Get the information for finger #1
+                
+
+
+                // // this.cursor.current.x=touch.pageX-touch.target.offsetLeft;
+                // // this.cursor.current.y=touch.pageY-touch.target.offsetTop;
+                
+                // this.cursor.current.x=touch.clientX - touch.target.offsetLeft;
+                // this.cursor.current.y=touch.clientY - touch.target.offsetTop;
+
+                // console.log("touch.pageX: " + touch.pageX );
+                // console.log("touch.pageY: " + touch.pageY);
+                // console.log("touch.target: " + touch.target.offsetLeft);
+                
+
             }
         }
     }
