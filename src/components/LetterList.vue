@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     selectLetter(letter) {
-      console.log("value passed on click:" + letter);
       this.selectedLetter = letter;
       /* this.selectedLetter = value.l; */
       this.selectedImage = letter.image;
@@ -61,11 +60,6 @@ export default {
     }
     
   },
-  computed: {
-    toUpper() {
-      return;
-    }
-  }
 };
 </script>
 
@@ -88,10 +82,10 @@ li {
 
 .letter {
   margin: 10px;
-  font-size: 100px;
+  font-size: 20px;
   color: red;
   cursor: pointer;
-  width: 200px;
+  width: 100px;
   height: fit-content;
 }
 </style>

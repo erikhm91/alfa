@@ -3,7 +3,6 @@
         <h1>
             Lær alfabetet!
         </h1>
-
     </div>
 
 </template>

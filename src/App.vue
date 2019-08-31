@@ -12,11 +12,11 @@
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <footer class="col-md-12 text-center">
         <unnr-footer></unnr-footer>
       </footer>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -24,12 +24,14 @@
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import LetterList from "./components/LetterList.vue";
+import DrawLetter from "./components/tasks/DrawLetter.vue";
 
 export default {
   components: {
     unnrHeader: Header,
     unnrFooter: Footer,
-    unnrLetterList: LetterList
+    unnrLetterList: LetterList,
+    unnrDrawLetter: DrawLetter
   },
 
   methods: {
