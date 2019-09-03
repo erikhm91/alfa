@@ -32,18 +32,18 @@ export default {
       letters: [
         {
           l: "A",
-          image: require("../assets/apekatt.png"),
-          alt: "Apekatt"
+          image: require("../assets/a.png"),
+          alt: "A"
         },
         {
           l: "B",
-          image: require("../assets/bil.png"),
-          alt: "Bil"
+          image: require("../assets/b.png"),
+          alt: "B"
         },
         {
           l: "C",
-          image: require("../assets/cola.jpg"),
-          alt: "Cola"
+          image: require("../assets/c.png"),
+          alt: "C"
         }
       ]
     };
