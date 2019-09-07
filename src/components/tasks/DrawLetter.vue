@@ -3,12 +3,9 @@
   <div class="row">
     <div class="col-md-4 text-right">
         <input type="submit" value="Clear Sketchpad" id="clearbutton" @click="clearCanvas()" />
-        <input
-          type="submit"
-          value="Vis/skjul hjelpebilde"
-          id="hideImageButton"
-          @click="showImage=!showImage"
-        />
+        <button class="btn btn-primary" type="button" id="clearbutton2" @click="clearCanvas()">
+          Clear Sketchpad button
+        </button>
     </div>
 
     <div id="container" class="col-md-8 text-left">
@@ -22,12 +19,12 @@
         :width="canvas.width"
         :height="canvas.height"
       ></canvas>
-      <div v-if="showImage">
+      <div>
         <img
-          id="image"
+          id="taskImage"
           class="img"
-          :src="letter.image"
-          :alt="letter.alt"
+          :src="task.image"
+          :alt="task.alt"
           :width="canvas.width"
           :height="canvas.height"
         />
@@ -40,16 +37,8 @@
 <script>
 export default {
   props: {
-    letter: {
-      type: Object,
-      default() {
-        return {
-          l: "A",
-          image: require("../../assets/a.png"),
-          alt: "Apekatt"
-          /*   sound: "../assets/apekatt.mp3" */
-        };
-      }
+    task: {
+      type: Object
     }
   },
 
@@ -73,11 +62,6 @@ export default {
         size: 25
       },
       mousePressed: false,
-      // touchSize: 25,
-      // touchX : 0,
-      // touchY : 0,
-      // lastX : -1,
-      // lastY : -1
       showImage: true
     };
   },
@@ -85,6 +69,7 @@ export default {
   created: function() {
     //initiate eventlistener on window on startup (as window not available in template)
     window.addEventListener("mouseup", this.handleMouseUp);
+    console.log(this.task);
   },
   destroyed: function() {
     window.removeEventListener("mouseup", this.handleMouseUp);
@@ -95,7 +80,6 @@ export default {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // this.canvasBlank = true;
     },
 
     drawLine(event) {

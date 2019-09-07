@@ -13,53 +13,37 @@
 
     <div v-else>
       <unnr-letter-details :letter="selectedLetter" @backToList="backToList()"></unnr-letter-details>
-      </div>
+    </div>
   </div>
 </template>
 
 
 <script>
-import LetterDetails from './LetterDetails.vue';
+import Tasks from './tasks.json';
+import LetterDetails from "./LetterDetails.vue";
 export default {
-    components: {
-        unnrLetterDetails: LetterDetails
-    },
+  components: {
+    unnrLetterDetails: LetterDetails
+  },
   data() {
     return {
       letterClicked: false,
       selectedLetter: {},
-      selectedImage: "",
-      letters: [
-        {
-          l: "A",
-          image: require("../assets/a.png"),
-          alt: "A"
-        },
-        {
-          l: "B",
-          image: require("../assets/b.png"),
-          alt: "B"
-        },
-        {
-          l: "C",
-          image: require("../assets/c.png"),
-          alt: "C"
-        }
-      ]
+      // selectedImage: "",
+      letters: Tasks.letters,
     };
   },
   methods: {
     selectLetter(letter) {
       this.selectedLetter = letter;
       /* this.selectedLetter = value.l; */
-      this.selectedImage = letter.image;
+      // this.selectedImage = letter.image;
       this.letterClicked = true;
     },
     backToList() {
-        this.letterClicked = false;
+      this.letterClicked = false;
     }
-    
-  },
+  }
 };
 </script>
 

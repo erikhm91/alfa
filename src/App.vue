@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="containertop">
     <div class="row">
       <header class="col-md-12 text-center">
         <unnr-header></unnr-header>
@@ -45,10 +45,13 @@ export default {
 };
 </script>
 
-<style scoped>
-
-.container {
+<style>
+#containertop {
   margin-top: 30px;
+}
+
+div {
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 </style>

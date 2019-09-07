@@ -1,0 +1,47 @@
+{
+    "letters": [
+        {
+            "l": "A",
+            "tasks": [
+                {
+                    "image": "/assets/a.png",
+                    "alt": "A"
+                },
+                {
+                    "image": "",
+                    "alt": ""
+                },
+                {
+                    "image": "/assets/apekatt.png",
+                    "alt": "apekatt.png"
+                }
+            ]
+        },
+        {
+            "l": "B",
+            "tasks": [
+                {
+                    "image": "/assets/b.png",
+                    "alt": "B"
+                },
+                {
+                    "image": "",
+                    "alt": ""
+                },
+                {
+                    "image": "/assets/bil.png",
+                    "alt": "bil.png"
+                }
+            ]
+        },
+        {
+            "l": "C",
+            "tasks": [
+                {
+                    "image": "/assets/c.png",
+                    "alt": "C"
+                }
+            ]
+        }
+    ]
+}
