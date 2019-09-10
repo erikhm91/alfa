@@ -4,7 +4,10 @@
 $body-bg: #000;
 $body-color: #111; */
 
-$primary: $yellow;
+$theme-colors: (
+    "primary": red,
+    "danger": yellow
+);
 
 // custom.scss
 @import 'node_modules/bootstrap/scss/bootstrap';

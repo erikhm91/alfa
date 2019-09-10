@@ -3,9 +3,10 @@ import App from './App.vue';
 import BootstrapVue from 'bootstrap-vue';
 
 Vue.config.productionTip = false
+import './styles/app.scss';
 
 Vue.use(BootstrapVue);
-import './styles/global.scss'
+
 
 new Vue({
   render: h => h(App),
