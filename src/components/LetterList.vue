@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="!letterClicked">
-      <ul class="row list-unstyled text-center">
+      <ul class="list-unstyled text-center">
         <li
-          class="letter list-group-item"
+          class="letter list-group-item list-group-item-action rounded-circle border-primary"
           v-for="(letter, i) in letters"
           v-bind:key="i"
           @click="selectLetter(letter)"
@@ -15,11 +15,12 @@
       <unnr-letter-details :letter="selectedLetter" @backToList="backToList()"></unnr-letter-details>
     </div>
   </div>
+  
 </template>
 
 
 <script>
-import Tasks from './tasks.json';
+import Tasks from "./tasks.json";
 import LetterDetails from "./LetterDetails.vue";
 export default {
   components: {
@@ -29,15 +30,12 @@ export default {
     return {
       letterClicked: false,
       selectedLetter: {},
-      // selectedImage: "",
-      letters: Tasks.letters,
+      letters: Tasks.letters
     };
   },
   methods: {
     selectLetter(letter) {
       this.selectedLetter = letter;
-      /* this.selectedLetter = value.l; */
-      // this.selectedImage = letter.image;
       this.letterClicked = true;
     },
     backToList() {
@@ -48,28 +46,14 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 30px;
-}
-/* 
-div {
-    border: solid 1px black;
-} */
-
 ul {
   list-style: none;
 }
 
 li {
   display: inline;
-}
-
-.letter {
   margin: 10px;
-  font-size: 20px;
-  color: red;
-  cursor: pointer;
-  width: 100px;
-  height: fit-content;
-}
+  cursor: pointer; 
+  font-size: 1.5rem;
+  }
 </style>

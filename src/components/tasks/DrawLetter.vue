@@ -2,8 +2,7 @@
 <template>
   <div class="row">
     <div class="col-md-4 text-right">
-        <input type="submit" value="Clear Sketchpad" id="clearbutton" @click="clearCanvas()" />
-        <button class="btn btn-primary" type="button" id="clearbutton2" @click="clearCanvas()">
+        <button class="btn btn-secondary" type="button" id="clearbutton2" @click="clearCanvas()">
           Clear Sketchpad button
         </button>
     </div>

@@ -1,13 +1,15 @@
 <template>
-  <div class="container" id="containertop">
-    <div class="row">
-      <header class="col-md-12 text-center">
-        <unnr-header></unnr-header>
-      </header>
+  <div>
+    <!-- header. navbar etc -->
+
+    <!-- hero section - Title, logo, landing page etc. For now named Header-->
+    <div>
+        <unnr-hero></unnr-hero>
     </div>
 
-    <div class="row">
-      <div class="col-md-12 text-center">
+    <!-- content section -->
+    <div class="container">
+      <div>
         <unnr-letter-list></unnr-letter-list>
       </div>
     </div>
@@ -16,19 +18,19 @@
       <footer class="col-md-12 text-center">
         <unnr-footer></unnr-footer>
       </footer>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
+import Hero from "./components/Hero.vue";
 import Footer from "./components/Footer.vue";
 import LetterList from "./components/LetterList.vue";
 import DrawLetter from "./components/tasks/DrawLetter.vue";
 
 export default {
   components: {
-    unnrHeader: Header,
+    unnrHero: Hero,
     unnrFooter: Footer,
     unnrLetterList: LetterList,
     unnrDrawLetter: DrawLetter
@@ -46,12 +48,9 @@ export default {
 </script>
 
 <style>
-#containertop {
-  margin-top: 30px;
-}
-
-div {
+/* div {
   font-family: "Comic Sans MS", cursive, sans-serif;
-}
+} */
+/* @import './styles/global.scss' */
 
 </style>

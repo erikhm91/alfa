@@ -1,12 +1,10 @@
-//config to set a base directory in app
+const path = require("path");
 
-// var path = require('path')
-// module.exports = {
-//     configureWebpack: {
-//         resolve: {
-//             alias: {
-//                 src: path.resolve(__dirname, 'src')
-//             }
-//         },
-//     }
-// }
+module.exports = {
+  pluginOptions: {
+    'style-resources-loader': {
+      preProcessor: 'scss',
+      patterns: [path.resolve(__dirname, "./src/styles/global.scss")]
+    }
+  }
+}

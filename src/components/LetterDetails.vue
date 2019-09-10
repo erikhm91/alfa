@@ -2,50 +2,47 @@
   <div>
     <div class="row">
       <div class="text-right col-md-3">
-        <button type="button" class="btn btn-primary" @click="backToList">Tilbake</button>
+        
+          <button @click="backToList" class="btn btn-primary">Tilbake</button>
       </div>
       <div class="text-left col-md-9">
         <p>Valgt bokstav: {{letter.l}}</p>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-3">
-        <button v-if="prevTaskExist" @click="prevTask()">Forrige oppgave</button>
+    <div class="row text-center">
+      <div class="col-3">
+        <span v-if="prevTaskExist" @click="prevTask()"
+            class="clickable">
+          <unnr-arrow-left></unnr-arrow-left>
+        </span>
       </div>
 
-      <!-- previous: <div class="col-md-6 text-center">
-        <unnr-draw-letter :letter="letter"></unnr-draw-letter>
-      </div>-->
-
-      <div class="col-md-6 text-center">
+      <div class="col-6">
         <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
 
-      <div class="col-md-3">
-        <button v-if="nextTaskExist" @click="nextTask()">Neste oppgave</button>
+      <div class="col-3">
+        <span v-if="nextTaskExist" @click="nextTask()"
+            class="clickable">
+              <unnr-arrow-right></unnr-arrow-right>
+        </span>
+        <!-- <unnr-arrow-left></unnr-arrow-left> -->
       </div>
     </div>
-
-    <!-- <div id="letterImage" class="text-center">
-      <img type="button" class="clickable" :src="letter.image" :alt="letter.alt" style="height:400px" />
-    </div>-->
   </div>
 </template>
 
 
 <script>
 import DrawLetter from "./tasks/DrawLetter.vue";
+import ArrowLeft from "./icons/ArrowLeft.vue";
+import ArrowRight from "./icons/ArrowRight.vue";
+
 export default {
   props: {
     letter: {
-      type: Object,
-      default: {
-        l: "A",
-        // image: require("../assets/apekatt.jpg"),
-        alt: "Apekatt"
-        /*   sound: "../assets/apekatt.mp3" */
-      }
+      type: Object
     }
   },
   data() {
@@ -55,7 +52,9 @@ export default {
     };
   },
   components: {
-    unnrDrawLetter: DrawLetter
+    unnrDrawLetter: DrawLetter,
+    unnrArrowLeft: ArrowLeft,
+    unnrArrowRight: ArrowRight
   },
   computed: {
     nextTaskExist() {
@@ -82,7 +81,7 @@ export default {
       this.$emit("backToList", true);
     },
     //**********************************//can remove these checks as button disappears if not valid************************ */
-    prevTask() { 
+    prevTask() {
       if (this.taskIndex > 0) {
         this.taskIndex--;
       }
@@ -98,6 +97,8 @@ export default {
 </script>
 
 <style scoped>
+$primary: red;
+
 .clickable {
   cursor: pointer;
 }
