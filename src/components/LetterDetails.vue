@@ -12,18 +12,18 @@
     </div>
 
     <div class="row text-center">
-      <div class="col-2 mt-5">
+      <div class="col-md-2 col-s-6 mt-5">
         <span v-if="prevTaskExist" @click="prevTask()"
             class="clickable">
           <unnr-arrow-left></unnr-arrow-left>
         </span>
       </div>
 
-      <div class="col-8">
+      <div class="col-md-8 col-xs-12">
         <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
 
-      <div class="col-2 mt-5">
+      <div class="col-md-2 col-xs-6 mt-5">
         <span v-if="nextTaskExist" @click="nextTask()"
             class="clickable">
               <unnr-arrow-right></unnr-arrow-right>

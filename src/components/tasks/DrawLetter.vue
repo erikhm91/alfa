@@ -1,7 +1,7 @@
 
 <template>
   <div class="row mt-4 text-center">
-    <div class="col-2">
+    <div class="col-md-2 col-xs-4">
       <div>
         <button
           class="btn btn-secondary text-light"
@@ -12,30 +12,31 @@
       </div>
     </div>
 
-    <div class="col-10 text-left">
+    <div class="col-md-10 text-left col-xs-12">
       <div>
-        <div class="centerdraw">
-        <canvas
-        
-          id="canvas"
-          v-on:mousedown="mouseDown"
-          v-on:mousemove="mouseMove"
-          v-on:touchstart="sketchpadTouchStart"
-          v-on:touchend="sketchpadTouchEnd"
-          v-on:touchmove="sketchpadTouchMove"
-          :width="canvas.width"
-          :height="canvas.height"
-        ></canvas>
-        <div>
-          <img
-            id="taskImage"
-            class="img"
-            :src="task.image"
-            :alt="task.alt"
+        <div class="centerdraw" style="height:300px; width:400px">
+          <canvas
+            id="canvas"
+            
+
+            v-on:mousedown="mouseDown"
+            v-on:mousemove="mouseMove"
+            v-on:touchstart="sketchpadTouchStart"
+            v-on:touchend="sketchpadTouchEnd"
+            v-on:touchmove="sketchpadTouchMove"
             :width="canvas.width"
             :height="canvas.height"
-          />
-        </div>
+          ></canvas>
+          <div>
+            <img
+              id="taskImage"
+              class="img"
+              :src="task.image"
+              :alt="task.alt"
+              :width="canvas.width"
+              :height="canvas.height"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -55,8 +56,8 @@ export default {
     return {
       // canvasBlank: true,
       canvas: {
-        height: "400 px",
-        width: "500 px"
+        height: "300 px",
+        width: "400 px"
       },
 
       cursor: {
@@ -75,7 +76,6 @@ export default {
     };
   },
   computed: {
-
     //**************not in use atm************************ */
     canvasHeight() {
       var reduction = window.innerHeight / 2;
@@ -251,7 +251,7 @@ canvas {
   border: 0.25rem solid $secondary;
   position: absolute;
   z-index: 20;
-  display: block
+  display: block;
 }
 
 .img {
@@ -260,12 +260,10 @@ canvas {
 }
 
 #drawcontainer {
-  
   /* display: block; */
 }
 
 .centerdraw {
-  
   border: 1px solid black;
   position: relative;
 }
