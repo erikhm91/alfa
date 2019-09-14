@@ -28,19 +28,21 @@
 <script>
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../../styles/variables.scss';
+
 svg {
-    fill: white;
+    fill: $secondary;
 }
 
-svg:hover {
+/* svg:hover {
   fill: beige;
-}
-
+} */
+/* 
 svg {
-      stroke: black;
+      stroke: $primary;
   stroke-width: 5;
-}
+} */
 
 </style>
 

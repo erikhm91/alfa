@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-4 mt-4">
     <div class="row text-center">
       <div class="col-12">
         <h1>Lær alfabetet!</h1>
@@ -11,12 +11,12 @@
 
 <script></script>
 
-<style>
-/* .container {
-  margin-top: 30px;
-  margin-bottom: 30px;
+<style scoped lang="scss">
+@import '@/styles/_variables.scss';
+h1 {
   text-decoration: overline;
-} */
+  color: $primary;
+}
 /* 
 @import "..\styles\global.scss"; */
 

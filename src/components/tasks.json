@@ -1,47 +1,409 @@
 {
-    "letters": [
-        {
-            "l": "A",
-            "tasks": [
-                {
-                    "image": "/assets/a.png",
-                    "alt": "A"
-                },
-                {
-                    "image": "",
-                    "alt": ""
-                },
-                {
-                    "image": "/assets/apekatt.png",
-                    "alt": "apekatt.png"
-                }
-            ]
-        },
-        {
-            "l": "B",
-            "tasks": [
-                {
-                    "image": "/assets/b.png",
-                    "alt": "B"
-                },
-                {
-                    "image": "",
-                    "alt": ""
-                },
-                {
-                    "image": "/assets/bil.png",
-                    "alt": "bil.png"
-                }
-            ]
-        },
-        {
-            "l": "C",
-            "tasks": [
-                {
-                    "image": "/assets/c.png",
-                    "alt": "C"
-                }
-            ]
-        }
-    ]
+ "letters": [
+{
+"l": "A",
+"tasks": [
+{
+"image": "/assets/tracing_images/A.jpg",
+"alt": "A"
+},
+{
+"image": "/assets/tracing_images/A2.jpg",
+"alt": "A"
+}
+]
+}
+,
+{
+"l": "B",
+"tasks": [
+{
+"image": "/assets/tracing_images/B.jpg",
+"alt": "B"
+},
+{
+"image": "/assets/tracing_images/B2.jpg",
+"alt": "B"
+}
+]
+}
+,
+{
+"l": "C",
+"tasks": [
+{
+"image": "/assets/tracing_images/C.jpg",
+"alt": "C"
+},
+{
+"image": "/assets/tracing_images/C2.jpg",
+"alt": "C"
+}
+]
+}
+,
+{
+"l": "D",
+"tasks": [
+{
+"image": "/assets/tracing_images/D.jpg",
+"alt": "D"
+},
+{
+"image": "/assets/tracing_images/D2.jpg",
+"alt": "D"
+}
+]
+}
+,
+{
+"l": "E",
+"tasks": [
+{
+"image": "/assets/tracing_images/E.jpg",
+"alt": "E"
+},
+{
+"image": "/assets/tracing_images/E2.jpg",
+"alt": "E"
+}
+]
+}
+,
+{
+"l": "F",
+"tasks": [
+{
+"image": "/assets/tracing_images/F.jpg",
+"alt": "F"
+},
+{
+"image": "/assets/tracing_images/F2.jpg",
+"alt": "F"
+}
+]
+}
+,
+{
+"l": "G",
+"tasks": [
+{
+"image": "/assets/tracing_images/G.jpg",
+"alt": "G"
+},
+{
+"image": "/assets/tracing_images/G2.jpg",
+"alt": "G"
+}
+]
+}
+,
+{
+"l": "H",
+"tasks": [
+{
+"image": "/assets/tracing_images/H.jpg",
+"alt": "H"
+},
+{
+"image": "/assets/tracing_images/H2.jpg",
+"alt": "H"
+}
+]
+}
+,
+{
+"l": "I",
+"tasks": [
+{
+"image": "/assets/tracing_images/I.jpg",
+"alt": "I"
+},
+{
+"image": "/assets/tracing_images/I2.jpg",
+"alt": "I"
+}
+]
+}
+,
+{
+"l": "J",
+"tasks": [
+{
+"image": "/assets/tracing_images/J.jpg",
+"alt": "J"
+},
+{
+"image": "/assets/tracing_images/J2.jpg",
+"alt": "J"
+}
+]
+}
+,
+{
+"l": "K",
+"tasks": [
+{
+"image": "/assets/tracing_images/K.jpg",
+"alt": "K"
+},
+{
+"image": "/assets/tracing_images/K2.jpg",
+"alt": "K"
+}
+]
+}
+,
+{
+"l": "L",
+"tasks": [
+{
+"image": "/assets/tracing_images/L.jpg",
+"alt": "L"
+},
+{
+"image": "/assets/tracing_images/L2.jpg",
+"alt": "L"
+}
+]
+}
+,
+{
+"l": "M",
+"tasks": [
+{
+"image": "/assets/tracing_images/M.jpg",
+"alt": "M"
+},
+{
+"image": "/assets/tracing_images/M2.jpg",
+"alt": "M"
+}
+]
+}
+,
+{
+"l": "N",
+"tasks": [
+{
+"image": "/assets/tracing_images/N.jpg",
+"alt": "N"
+},
+{
+"image": "/assets/tracing_images/N2.jpg",
+"alt": "N"
+}
+]
+}
+,
+{
+"l": "O",
+"tasks": [
+{
+"image": "/assets/tracing_images/O.jpg",
+"alt": "O"
+},
+{
+"image": "/assets/tracing_images/O2.jpg",
+"alt": "O"
+}
+]
+}
+,
+{
+"l": "P",
+"tasks": [
+{
+"image": "/assets/tracing_images/P.jpg",
+"alt": "P"
+},
+{
+"image": "/assets/tracing_images/P2.jpg",
+"alt": "P"
+}
+]
+}
+,
+{
+"l": "Q",
+"tasks": [
+{
+"image": "/assets/tracing_images/Q.jpg",
+"alt": "Q"
+},
+{
+"image": "/assets/tracing_images/Q2.jpg",
+"alt": "Q"
+}
+]
+}
+,
+{
+"l": "R",
+"tasks": [
+{
+"image": "/assets/tracing_images/R.jpg",
+"alt": "R"
+},
+{
+"image": "/assets/tracing_images/R2.jpg",
+"alt": "R"
+}
+]
+}
+,
+{
+"l": "S",
+"tasks": [
+{
+"image": "/assets/tracing_images/S.jpg",
+"alt": "S"
+},
+{
+"image": "/assets/tracing_images/S2.jpg",
+"alt": "S"
+}
+]
+}
+,
+{
+"l": "T",
+"tasks": [
+{
+"image": "/assets/tracing_images/T.jpg",
+"alt": "T"
+},
+{
+"image": "/assets/tracing_images/T2.jpg",
+"alt": "T"
+}
+]
+}
+,
+{
+"l": "U",
+"tasks": [
+{
+"image": "/assets/tracing_images/U.jpg",
+"alt": "U"
+},
+{
+"image": "/assets/tracing_images/U2.jpg",
+"alt": "U"
+}
+]
+}
+,
+{
+"l": "V",
+"tasks": [
+{
+"image": "/assets/tracing_images/V.jpg",
+"alt": "V"
+},
+{
+"image": "/assets/tracing_images/V2.jpg",
+"alt": "V"
+}
+]
+}
+,
+{
+"l": "W",
+"tasks": [
+{
+"image": "/assets/tracing_images/W.jpg",
+"alt": "W"
+},
+{
+"image": "/assets/tracing_images/W2.jpg",
+"alt": "W"
+}
+]
+}
+,
+{
+"l": "X",
+"tasks": [
+{
+"image": "/assets/tracing_images/X.jpg",
+"alt": "X"
+},
+{
+"image": "/assets/tracing_images/X2.jpg",
+"alt": "X"
+}
+]
+}
+,
+{
+"l": "Y",
+"tasks": [
+{
+"image": "/assets/tracing_images/Y.jpg",
+"alt": "Y"
+},
+{
+"image": "/assets/tracing_images/Y2.jpg",
+"alt": "Y"
+}
+]
+}
+,
+{
+"l": "Z",
+"tasks": [
+{
+"image": "/assets/tracing_images/Z.jpg",
+"alt": "Z"
+},
+{
+"image": "/assets/tracing_images/Z2.jpg",
+"alt": "Z"
+}
+]
+}
+,
+{
+"l": "Æ",
+"tasks": [
+{
+"image": "/assets/tracing_images/Æ.jpg",
+"alt": "Æ"
+},
+{
+"image": "/assets/tracing_images/Æ2.jpg",
+"alt": "Æ"
+}
+]
+}
+,
+{
+"l": "Ø",
+"tasks": [
+{
+"image": "/assets/tracing_images/Ø.jpg",
+"alt": "Ø"
+},
+{
+"image": "/assets/tracing_images/Ø2.jpg",
+"alt": "Ø"
+}
+]
+}
+,
+{
+"l": "Å",
+"tasks": [
+{
+"image": "/assets/tracing_images/Å.jpg",
+"alt": "Å"
+},
+{
+"image": "/assets/tracing_images/Å2.jpg",
+"alt": "Å"
+}
+]
+}
+]
 }

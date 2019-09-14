@@ -1,32 +1,42 @@
 
 <template>
-  <div class="row">
-    <div class="col-md-4 text-right">
-        <button class="btn btn-secondary" type="button" id="clearbutton2" @click="clearCanvas()">
-          Clear Sketchpad button
-        </button>
+  <div class="row mt-4 text-center">
+    <div class="col-2">
+      <div>
+        <button
+          class="btn btn-secondary text-light"
+          type="button"
+          id="clearbutton2"
+          @click="clearCanvas()"
+        >Clear Sketchpad button</button>
+      </div>
     </div>
 
-    <div id="container" class="col-md-8 text-left">
-      <canvas
-        id="canvas"
-        v-on:mousedown="mouseDown"
-        v-on:mousemove="mouseMove"
-        v-on:touchstart="sketchpadTouchStart"
-        v-on:touchend="sketchpadTouchEnd"
-        v-on:touchmove="sketchpadTouchMove"
-        :width="canvas.width"
-        :height="canvas.height"
-      ></canvas>
+    <div class="col-10 text-left">
       <div>
-        <img
-          id="taskImage"
-          class="img"
-          :src="task.image"
-          :alt="task.alt"
+        <div class="centerdraw">
+        <canvas
+        
+          id="canvas"
+          v-on:mousedown="mouseDown"
+          v-on:mousemove="mouseMove"
+          v-on:touchstart="sketchpadTouchStart"
+          v-on:touchend="sketchpadTouchEnd"
+          v-on:touchmove="sketchpadTouchMove"
           :width="canvas.width"
           :height="canvas.height"
-        />
+        ></canvas>
+        <div>
+          <img
+            id="taskImage"
+            class="img"
+            :src="task.image"
+            :alt="task.alt"
+            :width="canvas.width"
+            :height="canvas.height"
+          />
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -45,8 +55,8 @@ export default {
     return {
       // canvasBlank: true,
       canvas: {
-        height: 400,
-        width: 350
+        height: "400 px",
+        width: "500 px"
       },
 
       cursor: {
@@ -63,6 +73,21 @@ export default {
       mousePressed: false,
       showImage: true
     };
+  },
+  computed: {
+
+    //**************not in use atm************************ */
+    canvasHeight() {
+      var reduction = window.innerHeight / 2;
+      var height = window.innerHeight - reduction;
+      return height + "px";
+    },
+    canvasWidth() {
+      var reduction = window.innerWidth / 1.5;
+      var width = window.innerWidth - reduction;
+      return width + "px";
+    }
+    //****************************************** */
   },
 
   created: function() {
@@ -219,11 +244,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "@/styles/_variables.scss";
+
 canvas {
-  border: 1px solid black;
+  border: 0.25rem solid $secondary;
   position: absolute;
   z-index: 20;
+  display: block
 }
 
 .img {
@@ -231,7 +259,14 @@ canvas {
   z-index: 10;
 }
 
-#container {
+#drawcontainer {
+  
+  /* display: block; */
+}
+
+.centerdraw {
+  
+  border: 1px solid black;
   position: relative;
 }
 </style>

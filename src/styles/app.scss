@@ -3,11 +3,19 @@
 /* // Your variable overrides
 $body-bg: #000;
 $body-color: #111; */
+@import 'variables.scss';
+ 
 
 $theme-colors: (
-    "primary": red,
-    "danger": yellow
+    "primary": $primary,
+    "secondary": $secondary
 );
+
+// $font-size-base: 1.5rem;
+$font-family-sans-serif: "Comic Sans MS", cursive, sans-serif;
+
+$body-bg: $background;
+//  $body-color: black;
 
 // custom.scss
 @import 'node_modules/bootstrap/scss/bootstrap';

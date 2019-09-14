@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div hidden>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
     <div class="row">
       <div class="text-right col-md-3">
         
@@ -11,23 +12,22 @@
     </div>
 
     <div class="row text-center">
-      <div class="col-3">
+      <div class="col-2 mt-5">
         <span v-if="prevTaskExist" @click="prevTask()"
             class="clickable">
           <unnr-arrow-left></unnr-arrow-left>
         </span>
       </div>
 
-      <div class="col-6">
+      <div class="col-8">
         <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
 
-      <div class="col-3">
+      <div class="col-2 mt-5">
         <span v-if="nextTaskExist" @click="nextTask()"
             class="clickable">
               <unnr-arrow-right></unnr-arrow-right>
         </span>
-        <!-- <unnr-arrow-left></unnr-arrow-left> -->
       </div>
     </div>
   </div>
@@ -97,15 +97,14 @@ export default {
 </script>
 
 <style scoped>
-$primary: red;
 
 .clickable {
   cursor: pointer;
 }
-
+/* 
 p {
-  font-size: 25px;
-}
+  font-size: 1px;
+} */
 
 /* div {
   border: 1px solid black;

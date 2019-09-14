@@ -1,9 +1,11 @@
 <template>
   <div>
     <div v-if="!letterClicked">
-      <ul class="list-unstyled text-center">
+      <ul class="list-group-inline row text-center">   <!-- "list-unstyled text-center list-group-inline"> -->
+        
+        <!-- "letter list-group-item list-group-item-action rounded-circle border-primary" -->
         <li
-          class="letter list-group-item list-group-item-action rounded-circle border-primary"
+          class="list-group-item col-2 rounded-circle border-primary"  
           v-for="(letter, i) in letters"
           v-bind:key="i"
           @click="selectLetter(letter)"
@@ -30,7 +32,7 @@ export default {
     return {
       letterClicked: false,
       selectedLetter: {},
-      letters: Tasks.letters
+      letters: Tasks.letters //read from jsonfile
     };
   },
   methods: {
@@ -45,15 +47,16 @@ export default {
 };
 </script>
 
-<style scoped>
-ul {
-  list-style: none;
-}
+<style scoped lang="scss">
+
+// @import '@/styles/app.scss';
 
 li {
   display: inline;
-  margin: 10px;
+  margin: 1rem;
   cursor: pointer; 
-  font-size: 1.5rem;
+  font-size: 2rem;
+  // background-color: $primary;
+  border: 0.25rem solid;
   }
 </style>

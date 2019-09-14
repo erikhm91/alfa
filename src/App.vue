@@ -14,11 +14,6 @@
       </div>
     </div>
 
-    <!-- <div class="row">
-      <footer class="col-md-12 text-center">
-        <unnr-footer></unnr-footer>
-      </footer>
-    </div>-->
   </div>
 </template>
 
@@ -48,9 +43,4 @@ export default {
 </script>
 
 <style>
-/* div {
-  font-family: "Comic Sans MS", cursive, sans-serif;
-} */
-/* @import './styles/global.scss' */
-
 </style>
