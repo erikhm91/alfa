@@ -54,12 +54,13 @@ li {
   // display: inline;
   margin: 1rem;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   // background-color: $primary;
   border: 0.25rem solid;
-  height: 5rem;
+  height: 7rem;
   -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  padding: 1.2rem;
 }
 </style> 
