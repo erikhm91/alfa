@@ -9,11 +9,13 @@
       <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
     <div class="row">
-      <div class="toolbaritem text-right col-md-3">
-        <button @click="backToList" class="btn btn-primary">Tilbake</button>
+      <div class="col-6 toolbaritem">
+        <span @click="backToList()" class="clickable">
+              <unnr-arrow-back></unnr-arrow-back>
+        </span>
       </div>
-      <div class="toolbaritem col-md-3">
-        <p>Valgt bokstav: {{letter.l}}</p>
+      <div class="col-6 toolbaritem">
+        <!-- <p>Valgt bokstav: {{letter.l}}</p> -->
       </div>
     </div>
     <div class="row justify-content-center">
@@ -21,13 +23,13 @@
         <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
     </div>
-    <div class="row  justify-content-center">
-      <div class="col-md-3 col-xs-6">
+    <div class="row justify-content-center">
+      <div class="col-md-2 col-xs-4">
         <span v-if="prevTaskExist" @click="prevTask()" class="clickable">
           <unnr-arrow-left></unnr-arrow-left>
         </span>
       </div>
-      <div class="col-md-3 col-xs-6">
+      <div class="col-md-2 col-xs-4">
         <span v-if="nextTaskExist" @click="nextTask()" class="clickable">
           <unnr-arrow-right></unnr-arrow-right>
         </span>
@@ -41,6 +43,7 @@
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
+import ArrowBack from "./icons/ArrowBack.vue";
 
 export default {
   props: {
@@ -57,7 +60,8 @@ export default {
   components: {
     unnrDrawLetter: DrawLetter,
     unnrArrowLeft: ArrowLeft,
-    unnrArrowRight: ArrowRight
+    unnrArrowRight: ArrowRight,
+    unnrArrowBack: ArrowBack
   },
   computed: {
     nextTaskExist() {
@@ -102,8 +106,7 @@ export default {
 }
 
 .toolbaritem {
-  height: 4rem;
-  width: 4rem;
+  height: 6rem;
 }
 
 .arrow {
