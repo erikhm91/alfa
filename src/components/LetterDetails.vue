@@ -1,13 +1,16 @@
 <template>
   <div>
     <div hidden>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
-    <div class="row">
-      <div class="text-right col-md-3">
+    <div class="toolbar row">
+      <div class="toolbaritem text-right col-md-3">
         
           <button @click="backToList" class="btn btn-primary">Tilbake</button>
       </div>
-      <div class="text-left col-md-9">
+      <div class="toolbaritem col-md-3">
         <p>Valgt bokstav: {{letter.l}}</p>
+      </div>
+      <div class="toolbaritem text-left col-md-6 btn btn-primary" @click="playSound()">
+            <unnr-speaker></unnr-speaker>
       </div>
     </div>
 
@@ -38,6 +41,7 @@
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
+import Speaker from "./icons/Speaker.vue";
 
 export default {
   props: {
@@ -54,7 +58,8 @@ export default {
   components: {
     unnrDrawLetter: DrawLetter,
     unnrArrowLeft: ArrowLeft,
-    unnrArrowRight: ArrowRight
+    unnrArrowRight: ArrowRight,
+    unnrSpeaker: Speaker
   },
   computed: {
     nextTaskExist() {
@@ -73,10 +78,10 @@ export default {
     }
   },
   methods: {
-    /*     playSound() {
+        playSound() {
        var audio = new Audio("../assets/apekatt.mp3");
         audio.play();
-    }, */
+    },
     backToList() {
       this.$emit("backToList", true);
     },
@@ -89,6 +94,7 @@ export default {
     nextTask() {
       if (this.letter.tasks.length > this.taskIndex + 1) {
         this.taskIndex++;
+        console.log("navigating to nexttask, updated taskIndex");
       }
     }
     //************************************************************************************************************** */
@@ -100,6 +106,15 @@ export default {
 
 .clickable {
   cursor: pointer;
+}
+
+.toolbar {
+  height: 4rem;
+}
+
+.toolbaritem {
+  height: inherit;
+  width: 4rem;
 }
 /* 
 p {

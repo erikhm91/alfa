@@ -2,23 +2,31 @@
 <template>
   <div class="row mt-4 text-center">
     <div class="col-md-2 col-xs-4">
-      <div>
-        <button
-          class="btn btn-secondary text-light"
-          type="button"
-          id="clearbutton2"
-          @click="clearCanvas()"
-        >Clear Sketchpad button</button>
+      <div class="row">
+        <div class="col-12">
+          <button
+            class="btn btn-secondary text-light"
+            type="button"
+            id="clearbutton2"
+            @click="clearCanvas()"
+          >Clear Sketchpad button</button>
+        </div>
+        <div class="col-12">
+          <button
+            class="btn btn-secondary text-light"
+            type="button"
+            id="playSoundButton"
+            @click="playSound()"
+          >playsound</button>
+        </div>
       </div>
     </div>
 
     <div class="col-md-10 text-left col-xs-12">
       <div>
-        <div class="centerdraw" style="height:300px; width:400px">
+        <div class="centerdraw mt-1" style="height:300px; width:400px">
           <canvas
             id="canvas"
-            
-
             v-on:mousedown="mouseDown"
             v-on:mousemove="mouseMove"
             v-on:touchstart="sketchpadTouchStart"
@@ -52,6 +60,20 @@ export default {
     }
   },
 
+  watched: {
+    task: {
+      //when task is changed, clear the canvas.
+      immediate: true,
+      handler(val, oldval) {
+        this.clearCanvas();
+        console.log("attempted to clear canvas");
+      }
+    },
+    task(newValue) {
+      console.log("attempted to clear canvas");
+    }
+  },
+
   data: function() {
     return {
       // canvasBlank: true,
@@ -69,7 +91,7 @@ export default {
           x: -1,
           y: -1
         },
-        size: 25
+        size: 9
       },
       mousePressed: false,
       showImage: true
@@ -93,13 +115,17 @@ export default {
   created: function() {
     //initiate eventlistener on window on startup (as window not available in template)
     window.addEventListener("mouseup", this.handleMouseUp);
-    console.log(this.task);
   },
   destroyed: function() {
     window.removeEventListener("mouseup", this.handleMouseUp);
   },
 
   methods: {
+    playSound() {
+      var audio = new Audio("../../assets/apekatt.mp3");
+      audio.play();
+    },
+
     clearCanvas() {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
@@ -118,15 +144,16 @@ export default {
       var ctx = c.getContext("2d");
 
       // Let's use black by setting RGB values to 0, and 255 alpha (completely opaque)
-      var r = 255;
-      var g = 0;
-      var b = 0;
-      var a = 75;
+      var r = 33;
+      var g = 171;
+      var b = 205;
+      var a = 255;
 
       // Select a fill style
       ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
       // Set the line "cap" style to round, so lines at different angles can join into each other
       ctx.lineCap = "round";
+      ctx.lineJoin = "round";
       // Draw a filled line
       ctx.beginPath();
       // First, move to the old (previous) position
@@ -248,7 +275,6 @@ export default {
 @import "@/styles/_variables.scss";
 
 canvas {
-  border: 0.25rem solid $secondary;
   position: absolute;
   z-index: 20;
   display: block;
@@ -264,7 +290,7 @@ canvas {
 }
 
 .centerdraw {
-  border: 1px solid black;
+  outline: 0.25rem solid $secondary;
   position: relative;
 }
 </style>
