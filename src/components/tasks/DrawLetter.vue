@@ -1,28 +1,25 @@
 
 <template>
-  <div class="row mt-4 text-center">
-    <div class="col-md-2 col-xs-4">
+  <div class="row mt-4 justify-content-center">
+    <div class="col-md-2 col-xs-4">   <!--  -->
       <div class="row">
         <div class="col-12">
           <button
-            class="btn btn-secondary text-light"
-            type="button"
-            id="clearbutton2"
-            @click="clearCanvas()"
-          >Clear Sketchpad button</button>
+            class="btn btn-secondary"
+            @click="playSound()">
+            <unnr-speaker></unnr-speaker>
+          </button>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-1">
           <button
-            class="btn btn-secondary text-light"
-            type="button"
-            id="playSoundButton"
-            @click="playSound()"
-          >playsound</button>
+            class="btn btn-secondary"
+            @click="clearCanvas()">
+            <unnr-eraser></unnr-eraser>
+          </button>
         </div>
       </div>
     </div>
-
-    <div class="col-md-10 text-left col-xs-12">
+    <div class="col-md-10 col-xs-12">     <!--  -->
       <div>
         <div class="centerdraw mt-1" style="height:300px; width:400px">
           <canvas
@@ -53,33 +50,25 @@
 
 
 <script>
+import Speaker from "../icons/Speaker.vue";
+import Eraser from "../icons/Eraser.vue";
 export default {
   props: {
     task: {
       type: Object
     }
   },
-
-  watched: {
-    task: {
-      //when task is changed, clear the canvas.
-      immediate: true,
-      handler(val, oldval) {
-        this.clearCanvas();
-        console.log("attempted to clear canvas");
-      }
-    },
-    task(newValue) {
-      console.log("attempted to clear canvas");
-    }
+  components: {
+    unnrSpeaker: Speaker,
+    unnrEraser: Eraser
   },
 
   data: function() {
     return {
       // canvasBlank: true,
       canvas: {
-        height: "300 px",
-        width: "400 px"
+        height: "300px",
+        width: "400px"
       },
 
       cursor: {
@@ -292,5 +281,9 @@ canvas {
 .centerdraw {
   outline: 0.25rem solid $secondary;
   position: relative;
+}
+
+.outline {
+  border: solid black 1px;
 }
 </style>

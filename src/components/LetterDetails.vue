@@ -1,35 +1,35 @@
 <template>
   <div>
-    <div hidden>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
-    <div class="toolbar row">
+    <div hidden>
+      Icons made by
+      <a
+        href="https://www.flaticon.com/authors/dave-gandy"
+        title="Dave Gandy"
+      >Dave Gandy</a> from
+      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </div>
+    <div class="row">
       <div class="toolbaritem text-right col-md-3">
-        
-          <button @click="backToList" class="btn btn-primary">Tilbake</button>
+        <button @click="backToList" class="btn btn-primary">Tilbake</button>
       </div>
       <div class="toolbaritem col-md-3">
         <p>Valgt bokstav: {{letter.l}}</p>
       </div>
-      <div class="toolbaritem text-left col-md-6 btn btn-primary" @click="playSound()">
-            <unnr-speaker></unnr-speaker>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-7 col-xs-12">
+        <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
     </div>
-
-    <div class="row text-center">
-      <div class="col-md-2 col-s-6 mt-5">
-        <span v-if="prevTaskExist" @click="prevTask()"
-            class="clickable">
+    <div class="row  justify-content-center">
+      <div class="col-md-3 col-xs-6">
+        <span v-if="prevTaskExist" @click="prevTask()" class="clickable">
           <unnr-arrow-left></unnr-arrow-left>
         </span>
       </div>
-
-      <div class="col-md-8 col-xs-12">
-        <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
-      </div>
-
-      <div class="col-md-2 col-xs-6 mt-5">
-        <span v-if="nextTaskExist" @click="nextTask()"
-            class="clickable">
-              <unnr-arrow-right></unnr-arrow-right>
+      <div class="col-md-3 col-xs-6">
+        <span v-if="nextTaskExist" @click="nextTask()" class="clickable">
+          <unnr-arrow-right></unnr-arrow-right>
         </span>
       </div>
     </div>
@@ -41,7 +41,6 @@
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
-import Speaker from "./icons/Speaker.vue";
 
 export default {
   props: {
@@ -58,8 +57,7 @@ export default {
   components: {
     unnrDrawLetter: DrawLetter,
     unnrArrowLeft: ArrowLeft,
-    unnrArrowRight: ArrowRight,
-    unnrSpeaker: Speaker
+    unnrArrowRight: ArrowRight
   },
   computed: {
     nextTaskExist() {
@@ -78,10 +76,6 @@ export default {
     }
   },
   methods: {
-        playSound() {
-       var audio = new Audio("../assets/apekatt.mp3");
-        audio.play();
-    },
     backToList() {
       this.$emit("backToList", true);
     },
@@ -103,19 +97,19 @@ export default {
 </script>
 
 <style scoped>
-
 .clickable {
   cursor: pointer;
 }
 
-.toolbar {
-  height: 4rem;
-}
-
 .toolbaritem {
-  height: inherit;
+  height: 4rem;
   width: 4rem;
 }
+
+.arrow {
+  height: 6rem;
+}
+
 /* 
 p {
   font-size: 1px;

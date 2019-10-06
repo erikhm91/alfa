@@ -1,11 +1,12 @@
 <template>
   <div>
     <div v-if="!letterClicked">
-      <ul class="list-group-inline row text-center">   <!-- "list-unstyled text-center list-group-inline"> -->
-        
+      <ul class="row list-group-inline justify-content-center">
+        <!-- "list-unstyled text-center list-group-inline"> -->
+
         <!-- "letter list-group-item list-group-item-action rounded-circle border-primary" -->
         <li
-          class="list-group-item col-2 rounded-circle border-primary"  
+          class="list-group-item rounded-lg col-2 border-primary text-center"
           v-for="(letter, i) in letters"
           v-bind:key="i"
           @click="selectLetter(letter)"
@@ -17,7 +18,6 @@
       <unnr-letter-details :letter="selectedLetter" @backToList="backToList()"></unnr-letter-details>
     </div>
   </div>
-  
 </template>
 
 
@@ -48,15 +48,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 // @import '@/styles/app.scss';
 
 li {
-  display: inline;
+  // display: inline;
   margin: 1rem;
-  cursor: pointer; 
+  cursor: pointer;
   font-size: 2rem;
+  font-weight: bold;
   // background-color: $primary;
   border: 0.25rem solid;
-  }
-</style>
+  height: 5rem;
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+}
+</style> 

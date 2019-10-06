@@ -1,10 +1,6 @@
 <template>
   <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
   <div>
-    Icons made by
-    <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from
-    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-    <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
     <svg
       version="1.1"
       id="Layer_1"
@@ -12,6 +8,8 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
+      width="100%"
+            height="100%"
       viewBox="0 0 511.758 511.758"
       style="enable-background:new 0 0 511.758 511.758;"
       xml:space="preserve"
