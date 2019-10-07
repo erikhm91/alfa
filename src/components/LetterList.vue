@@ -48,18 +48,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// @import '@/styles/app.scss';
+@import '../styles/variables.scss';
 
 li {
   // display: inline;
-  margin: 1rem;
+  margin: 0.5rem;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 2.8rem;
   font-weight: bold;
   // background-color: $primary;
-  border: 0.25rem solid;
+  border: 0.50rem solid;
   height: 7rem;
   -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
+  background-color: $letterlistcolor;
+  color: white;
+  white-space: nowrap;
+  
 }
 </style> 

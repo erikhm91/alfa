@@ -15,7 +15,9 @@
 @import '@/styles/_variables.scss';
 h1 {
   text-decoration: overline;
-  color: $primary;
+  color: $letterlistcolor;
+  font-size: 3.5rem;
+  font-weight: bold;
 }
 /* 
 @import "..\styles\global.scss"; */

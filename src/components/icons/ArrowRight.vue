@@ -30,7 +30,7 @@
 <style scoped lang="scss">
 @import '@/styles/_variables.scss';
 svg {
-  fill: $secondary;
+  fill: $primary;
 }
 /* 
 svg:hover {

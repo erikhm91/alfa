@@ -32,7 +32,7 @@
 @import '../../styles/variables.scss';
 
 svg {
-    fill: $primary;
+    fill: $letterlistcolor;
 }
 
 /* svg:hover {

@@ -32,7 +32,7 @@
 @import '../../styles/variables.scss';
 
 svg {
-    fill: $secondary;
+    fill: $primary;
 }
 
 /* svg:hover {

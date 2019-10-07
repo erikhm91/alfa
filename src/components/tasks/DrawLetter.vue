@@ -5,14 +5,14 @@
       <div class="row">
         <div class="col-12">
           <button
-            class="btn btn-secondary"
+            class="btn btn-primary"
             @click="playSound()">
             <unnr-speaker></unnr-speaker>
           </button>
         </div>
         <div class="col-12 mt-1">
           <button
-            class="btn btn-secondary"
+            class="btn btn-primary"
             @click="clearCanvas()">
             <unnr-eraser></unnr-eraser>
           </button>
@@ -279,7 +279,7 @@ canvas {
 }
 
 .centerdraw {
-  outline: 0.25rem solid $secondary;
+  outline: 0.25rem solid $primary;
   position: relative;
 }
 
