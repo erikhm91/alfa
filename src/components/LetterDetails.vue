@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div hidden>
       Icons made by
       <a
@@ -9,17 +9,14 @@
       <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
     <div class="row">
-      <div class="col-6 toolbaritem">
+      <div class="col-1 backbutton"> <!-- backbutton class overrides bootstrap positioning. -->
         <span @click="backToList()" class="clickable">
               <unnr-arrow-back></unnr-arrow-back>
         </span>
       </div>
-      <div class="col-6 toolbaritem">
-        <!-- <p>Valgt bokstav: {{letter.l}}</p> -->
-      </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-md-7 col-xs-12">
+      <div class="col-md-12 col-xs-12">
         <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
     </div>
@@ -105,12 +102,17 @@ export default {
   cursor: pointer;
 }
 
-.toolbaritem {
+.backbutton {
   height: 6rem;
+  position: fixed; top: 1rem; left: 1rem; 
 }
 
 .arrow {
   height: 6rem;
+}
+
+.outline {
+  border: solid black 1px;
 }
 
 /* 

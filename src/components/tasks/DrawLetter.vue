@@ -1,50 +1,47 @@
 
 <template>
-  <div class="row mt-4 justify-content-center">
-    <div class="col-md-2 col-xs-4">   <!--  -->
+  <div class="row justify-content-center">
+    <div class="col-lg-2 col-md-2 col-xs-3">
+      <!--  -->
       <div class="row">
         <div class="col-12">
-          <button
-            class="btn btn-primary"
-            @click="playSound()">
+          <button class="btn btn-primary" @click="playSound()">
             <unnr-speaker></unnr-speaker>
           </button>
         </div>
-        <div class="col-12 mt-1">
-          <button
-            class="btn btn-primary"
-            @click="clearCanvas()">
+        <div class="col-12 mt-2">
+          <button class="btn btn-primary" @click="clearCanvas()">
             <unnr-eraser></unnr-eraser>
           </button>
         </div>
       </div>
     </div>
-    <div class="col-md-10 col-xs-12">     <!--  -->
-      <div>
-        <div class="centerdraw mt-1" style="height:300px; width:400px">
-          <canvas
-            id="canvas"
-            v-on:mousedown="mouseDown"
-            v-on:mousemove="mouseMove"
-            v-on:touchstart="sketchpadTouchStart"
-            v-on:touchend="sketchpadTouchEnd"
-            v-on:touchmove="sketchpadTouchMove"
-            :width="canvas.width"
-            :height="canvas.height"
-          ></canvas>
-          <div>
-            <img
-              id="taskImage"
-              class="img"
-              :src="task.image"
-              :alt="task.alt"
-              :width="canvas.width"
-              :height="canvas.height"
-            />
-          </div>
+    <div class="col-lg-8 col-md-8 col-xs-9">
+      <!--  -->
+      <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
+        <canvas
+          id="canvas"
+          v-on:mousedown="mouseDown"
+          v-on:mousemove="mouseMove"
+          v-on:touchstart="sketchpadTouchStart"
+          v-on:touchend="sketchpadTouchEnd"
+          v-on:touchmove="sketchpadTouchMove"
+          :width="canvasWidth"
+          :height="canvasHeight"
+        ></canvas>
+        <div>
+          <img
+            id="taskImage"
+            class="img"
+            :src="task.image"
+            :alt="task.alt"
+            :width="canvasWidth"
+            :height="canvasHeight"
+          />
         </div>
       </div>
     </div>
+    <div class="col-lg-1 col-md-1 col-xs-0"></div>
   </div>
 </template>
 
@@ -65,7 +62,7 @@ export default {
 
   data: function() {
     return {
-      // canvasBlank: true,
+      // canvas sizes here not in use atm
       canvas: {
         height: "300px",
         width: "400px"
@@ -87,18 +84,16 @@ export default {
     };
   },
   computed: {
-    //**************not in use atm************************ */
     canvasHeight() {
-      var reduction = window.innerHeight / 2;
+      var reduction = window.innerHeight / 3.5;
       var height = window.innerHeight - reduction;
       return height + "px";
     },
     canvasWidth() {
-      var reduction = window.innerWidth / 1.5;
+      var reduction = window.innerWidth / 3;
       var width = window.innerWidth - reduction;
       return width + "px";
     }
-    //****************************************** */
   },
 
   created: function() {
@@ -237,15 +232,36 @@ export default {
       if (event.touches) {
         if (event.touches.length == 1) {
           // Only deal with one finger
+          // var canvas = document.getElementById("canvas");
 
           var rect = event.target.getBoundingClientRect();
-          this.cursor.current.x = event.targetTouches[0].pageX - rect.left;
-          this.cursor.current.y = event.targetTouches[0].pageY - rect.top;
+
+          // var p = $("body");
+
+
+          const html = document.querySelector("html");
+          // $(".info").text("scrollTop:" + p.scrollTop());
+
+          const container = document.querySelector(".drawcontainer");
+          var scrollTop = html.scrollTop;
+          var scrollLeft = html.scrollLeft;
+
+          console.log("event.target: " + event.target);
+          console.log("scrolltop: " + scrollTop);
+          console.log("scrollLeft: " + scrollLeft);
+
+          this.cursor.current.x =
+            event.targetTouches[0].pageX - rect.left - scrollLeft;
+          this.cursor.current.y =
+            event.targetTouches[0].pageY - rect.top - scrollTop;
 
           // var touch = event.touches[0]; // Get the information for finger #1
 
-          // // this.cursor.current.x=touch.pageX-touch.target.offsetLeft;
-          // // this.cursor.current.y=touch.pageY-touch.target.offsetTop;
+          // this.cursor.current.x = event.targetTouches[0].pageX - canvas.clientLeft;
+          // this.cursor.current.y = event.targetTouches[0].pageY - canvas.clientTop;
+
+          // this.cursor.current.x = touch.pageX-touch.target.offsetLeft;
+          // this.cursor.current.y = touch.pageY-touch.target.offsetTop;
 
           // this.cursor.current.x=touch.clientX - touch.target.offsetLeft;
           // this.cursor.current.y=touch.clientY - touch.target.offsetTop;
@@ -274,13 +290,11 @@ canvas {
   z-index: 10;
 }
 
-#drawcontainer {
-  /* display: block; */
-}
-
-.centerdraw {
+.drawcontainer {
   outline: 0.25rem solid $primary;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .outline {

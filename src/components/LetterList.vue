@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!letterClicked">
+    <div v-if="!letterClicked" class="container">
       <ul class="row list-group-inline justify-content-center">
         <!-- "list-unstyled text-center list-group-inline"> -->
 
@@ -14,7 +14,7 @@
       </ul>
     </div>
 
-    <div v-else>
+    <div v-else class="container-fluid">
       <unnr-letter-details :letter="selectedLetter" @backToList="backToList()"></unnr-letter-details>
     </div>
   </div>

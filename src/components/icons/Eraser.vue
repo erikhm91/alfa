@@ -103,7 +103,6 @@
 
 <style scoped lang="scss">
 // @import "../../styles/variables.scss";
-
 // svg {
 //   //fill: $secondary;
 //   fill: white;

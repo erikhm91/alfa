@@ -8,11 +8,11 @@
     </div>
 
     <!-- content section -->
-    <div class="container">
+    <!-- <div class="container"> -->
       <div>
         <unnr-letter-list></unnr-letter-list>
       </div>
-    </div>
+    <!-- </div> -->
 
   </div>
 </template>
