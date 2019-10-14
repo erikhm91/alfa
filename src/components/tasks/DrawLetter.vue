@@ -249,11 +249,13 @@ export default {
           var scrollLeft = html.scrollLeft;
 
           //use the highest offset value to handle ipad/mobile browsers as well as desktop
-          const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+          const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop, document.scrollingElement);
+          const scrollElem = document.scrollingElement;
 
           console.log("event.target: " + event.target);
           console.log("scrolltop: " + scrollTop);
           console.log("scrollLeft: " + scrollLeft);
+          console.log("scrollingelement: " + scrollElem )
 
           this.cursor.current.x =
             event.targetTouches[0].pageX - rect.left - scrollLeft;
