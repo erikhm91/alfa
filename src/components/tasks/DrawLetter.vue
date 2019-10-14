@@ -113,10 +113,12 @@ export default {
     clearCanvas() {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     },
 
-    drawLine(event) {
+
+    // removed event param (just to know, it exists as for all callbacks)
+    drawLine() { 
       //   If lastX is not set, set lastX and lastY to the current position
       if (this.cursor.previous.x == -1) {
         this.cursor.previous.x = this.cursor.current.x;
@@ -242,9 +244,12 @@ export default {
           const html = document.querySelector("html");
           // $(".info").text("scrollTop:" + p.scrollTop());
 
-          const container = document.querySelector(".drawcontainer");
-          var scrollTop = html.scrollTop;
+          // const container = document.querySelector(".drawcontainer");
+          // var scrollTop = html.scrollTop;
           var scrollLeft = html.scrollLeft;
+
+          //use the highest offset value to handle ipad/mobile browsers as well as desktop
+          const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
 
           console.log("event.target: " + event.target);
           console.log("scrolltop: " + scrollTop);
