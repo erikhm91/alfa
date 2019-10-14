@@ -113,9 +113,8 @@ export default {
     clearCanvas() {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
-      ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     },
-
 
     // removed event param (just to know, it exists as for all callbacks)
     drawLine() { 
@@ -240,22 +239,23 @@ export default {
 
           // var p = $("body");
 
-
-          const html = document.querySelector("html");
+          // const html = document.querySelector("html");
           // $(".info").text("scrollTop:" + p.scrollTop());
 
           // const container = document.querySelector(".drawcontainer");
           // var scrollTop = html.scrollTop;
-          var scrollLeft = html.scrollLeft;
+          // var scrollLeft = html.scrollLeft;
 
           //use the highest offset value to handle ipad/mobile browsers as well as desktop
-          const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop, document.scrollingElement);
-          const scrollElem = document.scrollingElement;
+          const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+          const scrollLeft = Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft);
+          
+          // document.scrollingElement,
 
           console.log("event.target: " + event.target);
           console.log("scrolltop: " + scrollTop);
           console.log("scrollLeft: " + scrollLeft);
-          console.log("scrollingelement: " + scrollElem )
+          
 
           this.cursor.current.x =
             event.targetTouches[0].pageX - rect.left - scrollLeft;
