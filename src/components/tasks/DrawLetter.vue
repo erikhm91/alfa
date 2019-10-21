@@ -62,11 +62,12 @@ export default {
 
   data: function() {
     return {
-      // canvas sizes here not in use atm
+      // canvas sizes here not in use atm****
       canvas: {
         height: "300px",
         width: "400px"
       },
+      // *************************************
 
       cursor: {
         current: {
@@ -85,7 +86,7 @@ export default {
   },
   computed: {
     canvasHeight() {
-      var reduction = window.innerHeight / 3.5;
+      var reduction = window.innerHeight / 2.5;
       var height = window.innerHeight - reduction;
       return height + "px";
     },
@@ -102,6 +103,11 @@ export default {
   },
   destroyed: function() {
     window.removeEventListener("mouseup", this.handleMouseUp);
+  },
+  watch: {
+    task() {
+      this.clearCanvas();
+    }
   },
 
   methods: {
@@ -297,7 +303,9 @@ canvas {
   z-index: 10;
 }
 
-.drawcontainer {
+.drawcontainer {  
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
   outline: 0.25rem solid $primary;
   position: relative;
   margin-left: auto;

@@ -21,12 +21,12 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-md-2 col-xs-4">
+      <div class="col-md-2 col-xs-4 arrow">
         <span v-if="prevTaskExist" @click="prevTask()" class="clickable">
           <unnr-arrow-left></unnr-arrow-left>
         </span>
       </div>
-      <div class="col-md-2 col-xs-4">
+      <div class="col-md-2 col-xs-4 arrow">
         <span v-if="nextTaskExist" @click="nextTask()" class="clickable">
           <unnr-arrow-right></unnr-arrow-right>
         </span>
@@ -89,7 +89,6 @@ export default {
     nextTask() {
       if (this.letter.tasks.length > this.taskIndex + 1) {
         this.taskIndex++;
-        console.log("navigating to nexttask, updated taskIndex");
       }
     }
     //************************************************************************************************************** */
@@ -104,11 +103,11 @@ export default {
 
 .backbutton {
   height: 6rem;
-  position: fixed; top: 1rem; left: 1rem; 
+  position: absolute; top: 1rem; left: 1rem; 
 }
 
 .arrow {
-  height: 6rem;
+  height: 12rem;
 }
 
 .outline {
