@@ -75,7 +75,7 @@ export default {
   methods: {
     backToList() {
       this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
-      this.$router.push({ name: 'letterlist'});
+      this.$router.push({ name: 'menu'});
     },
     //**********************************//can remove these checks as button disappears if not valid************************ */
     prevTask() {

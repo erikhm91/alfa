@@ -26,9 +26,6 @@
 </template>
 
 <script>
-import Tasks from "./tasks.json";
-import LetterDetails from "./LetterDetails.vue";
-
 export default {
   // components: {
   //   unnrLetterDetails: LetterDetails
@@ -42,15 +39,6 @@ export default {
     };
   },
 
-  watch: {
-    // $route(to, from) {
-    //   updateLetterStatus();
-    //   console.log("Updated color visit: " + this.selectedLetter);
-    // },
-    letterClicked(value) {
-      console.log("letter clicked watcher");
-    }
-  },
   methods: {
     computedColor(letter) {
       if (letter.visit === true) {
@@ -62,24 +50,22 @@ export default {
 
     selectLetter(letter) {
       this.selectedLetter = letter;
-      console.log("letterclicked: " + this.letterClicked);
       this.letterClicked = true;
-      console.log("letterclicked now set to: " + this.letterClicked );
 
       //update store with selected letter, so can easily get it in the letterdetails component.
       this.$store.commit("SET_ACTIVE_LETTER", letter);
 
       //navigate to router programmatically:
-      this.$router.push({ name: "details" });
+      this.$router.push({ name: "menu" });
     },
-    updateLetterStatus() {
-      if (this.letterClicked == true) {
-        this.letterClicked = false;
-        // update lettercolor to visited by setting class:
-        this.selectedLetter.visit = true;
-        console.log("Updated color visit: " + this.selectedLetter);
-      }
-    }
+    // updateLetterStatus() {
+    //   if (this.letterClicked == true) {
+    //     this.letterClicked = false;
+    //     // update lettercolor to visited by setting class:
+    //     this.selectedLetter.visit = true;
+    //     console.log("Updated color visit: " + this.selectedLetter);
+    //   }
+    // }
   }
 };
 </script>

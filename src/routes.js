@@ -2,7 +2,7 @@ import LetterDetails from './components/LetterDetails.vue';
 import LetterList from './components/LetterList.vue';
 import Footer from './components/Footer.vue';
 import LetterTaskMenu from './components/LetterTaskMenu.vue';
-
+import FindOnPicture from './components/tasks/FindOnPicture.vue';
 // const Bar = () => import(/* webpackChunkName: "bar" */ './Bar.vue')
 // const Baz = () => import(/* webpackChunkName: "bar" */ './Baz.vue')
 
@@ -23,11 +23,9 @@ import LetterTaskMenu from './components/LetterTaskMenu.vue';
 export const routes = [/* 
     {path: '', component: App }, */
     { path: '', component: LetterList, name: 'letterlist'},
-    // { path: /menu}
-    { path: '/letter', component: LetterDetails, name: 'details' },
-    ,
-    { path: '/b', component: Footer, name: 'footer' }
-
+    { path: '/menu', component: LetterTaskMenu, name: 'menu'},
+    { path: '/write', component: LetterDetails, name: 'details' },
+    { path: '/find', component: FindOnPicture, name: 'findonpicture' }
 
 
 ];
