@@ -1,55 +1,56 @@
 <template>
-  <div>
-    <div v-if="!letterClicked" class="container">
-      <ul class="row list-group-inline justify-content-center">
-        <!-- "list-unstyled text-center list-group-inline"> -->
+  <div class="container">
+    <!-- 
+    <div v-if="!letterClicked" class="container">-->
 
-        <!-- "letter list-group-item list-group-item-action rounded-circle border-primary" -->
-        <li
-          class="list-group-item rounded-lg col-2 border-primary text-center"
-          :class="computedColor(letter)"
-          v-for="(letter, i) in letters"
-          v-bind:key="i"
-          @click="selectLetter(letter)"
-        >{{ letter.l }} {{ letter.l.toLowerCase() }}</li>
-        <!--  {{ letter.l }} {{ letter.l.toLowerCase() }} -->
-        <!-- <unnr-letter-list-item :text=letter.l></unnr-letter-list-item> -->
-      </ul>
-    </div>
+    <ul class="row list-group-inline justify-content-center">
+      <!-- "list-unstyled text-center list-group-inline"> -->
 
-    <div v-else>
-      <unnr-letter-details :letter="selectedLetter" @backToList="backToList()"></unnr-letter-details>
-    </div>
+      <!-- "letter list-group-item list-group-item-action rounded-circle border-primary" -->
+      <li
+        class="list-group-item rounded-lg col-2 border-primary text-center"
+        :class="computedColor(letter)"
+        v-for="(letter, i) in letters"
+        v-bind:key="i"
+        @click="selectLetter(letter)"
+      >{{ letter.l }} {{ letter.l.toLowerCase() }}</li>
+      <!--  {{ letter.l }} {{ letter.l.toLowerCase() }} -->
+      <!-- <unnr-letter-list-item :text=letter.l></unnr-letter-list-item> -->
+    </ul>
+    <!-- </div> -->
+
+    <!--  <div v-else>
+      <unnr-letter-details  @backToList="backToList()"></unnr-letter-details>    :letter="selectedLetter"
+    </div>-->
   </div>
 </template>
-
 
 <script>
 import Tasks from "./tasks.json";
 import LetterDetails from "./LetterDetails.vue";
 
 export default {
-  components: {
-    unnrLetterDetails: LetterDetails
-  },
+  // components: {
+  //   unnrLetterDetails: LetterDetails
+  // },
   data() {
     return {
       letterClicked: false,
       selectedLetter: {},
-      letters: Tasks.letters //read from jsonfile
+      // letters: Tasks.letters //read from jsonfile
+      letters : this.$store.getters.letters
     };
   },
-  // computed: {
-  //   computedColor(letter) {
-  //     console.log(letter);
-  //     if (letter.visit === true) {
-  //       return "visited";
-  //     } else {
-  //       return "";
-  //     }
-  //   }
-  // },
 
+  watch: {
+    // $route(to, from) {
+    //   updateLetterStatus();
+    //   console.log("Updated color visit: " + this.selectedLetter);
+    // },
+    letterClicked(value) {
+      console.log("letter clicked watcher");
+    }
+  },
   methods: {
     computedColor(letter) {
       if (letter.visit === true) {
@@ -61,21 +62,23 @@ export default {
 
     selectLetter(letter) {
       this.selectedLetter = letter;
+      console.log("letterclicked: " + this.letterClicked);
       this.letterClicked = true;
+      console.log("letterclicked now set to: " + this.letterClicked );
+
+      //update store with selected letter, so can easily get it in the letterdetails component.
+      this.$store.commit("SET_ACTIVE_LETTER", letter);
+
+      //navigate to router programmatically:
+      this.$router.push({ name: "details" });
     },
-    backToList() {
-      this.letterClicked = false;
-      // let refstring = this.selectedLetter.l;
-      // let $ref = this.$refs[refstring];
-      // console.log($ref)
-
-      // update lettercolor to visited by setting class:
-      this.selectedLetter.visit = true;
-      console.log(this.selectedLetter);
-
-      // if (letter.l === this.selectedLetter) {
-      //   letter.visit = true;
-      // }
+    updateLetterStatus() {
+      if (this.letterClicked == true) {
+        this.letterClicked = false;
+        // update lettercolor to visited by setting class:
+        this.selectedLetter.visit = true;
+        console.log("Updated color visit: " + this.selectedLetter);
+      }
     }
   }
 };

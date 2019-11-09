@@ -17,7 +17,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-md-12 col-xs-12">
-        <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
+        <unnr-draw-letter :task="activeLetter.tasks[taskIndex]"></unnr-draw-letter>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -35,7 +35,6 @@
   </div>
 </template>
 
-
 <script>
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
@@ -43,15 +42,11 @@ import ArrowRight from "./icons/ArrowRight.vue";
 import ArrowBack from "./icons/ArrowBack.vue";
 
 export default {
-  props: {
-    letter: {
-      type: Object
-    }
-  },
   data() {
     return {
       taskIndex: 0,
-      selectedTask: this.letter.tasks[0]
+      selectedTask: this.$store.getters.activeLetter.tasks[0],
+      activeLetter : this.$store.getters.activeLetter
     };
   },
   components: {
@@ -62,7 +57,8 @@ export default {
   },
   computed: {
     nextTaskExist() {
-      if (this.letter.tasks.length > this.taskIndex + 1) {
+      console.log(this.activeLetter);
+      if ( this.$store.getters.activeLetter.tasks.length > this.taskIndex + 1) {   //should implement better reading of values. map getters.
         return true;
       } else {
         return false;
@@ -78,7 +74,8 @@ export default {
   },
   methods: {
     backToList() {
-      this.$emit("backToList", true);
+      this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
+      this.$router.push({ name: 'letterlist'});
     },
     //**********************************//can remove these checks as button disappears if not valid************************ */
     prevTask() {
@@ -87,7 +84,7 @@ export default {
       }
     },
     nextTask() {
-      if (this.letter.tasks.length > this.taskIndex + 1) {
+      if (this.activeLetter.tasks.length > this.taskIndex + 1) {
         this.taskIndex++;
       }
     }
