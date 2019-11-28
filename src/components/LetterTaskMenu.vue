@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-2">
+      <div class="col-3">
         <button class="btn btn-primary" @click="navigateToDraw()">
           <img
             src="../../public/assets/menu-writing.png"
@@ -28,7 +28,7 @@
         </button>
       </div>
 
-      <div class="col-2">
+      <div class="col-3">
         <button class="btn btn-primary" @click="navigateToFindOnPicture()">
           <img
             src="../../public/assets/menu-canvas.png"

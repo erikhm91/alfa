@@ -101,6 +101,9 @@ export default {
     //initiate eventlistener on window on startup (as window not available in template)
     window.addEventListener("mouseup", this.handleMouseUp);
   },
+  mounted() {
+    this.audio = new Audio();
+  },
   destroyed: function() {
     window.removeEventListener("mouseup", this.handleMouseUp);
   },
@@ -112,8 +115,8 @@ export default {
 
   methods: {
     playSound() {
-      var audio = new Audio("../../assets/apekatt.mp3");
-      audio.play();
+      this.audio.src = "../../assets/apekatt.mp3";
+      this.audio.play();
     },
 
     clearCanvas() {
@@ -123,7 +126,7 @@ export default {
     },
 
     // removed event param (just to know, it exists as for all callbacks)
-    drawLine() { 
+    drawLine() {
       //   If lastX is not set, set lastX and lastY to the current position
       if (this.cursor.previous.x == -1) {
         this.cursor.previous.x = this.cursor.current.x;
@@ -253,13 +256,20 @@ export default {
           // var scrollLeft = html.scrollLeft;
 
           //use the highest offset value to handle ipad/mobile browsers as well as desktop
-          const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
-          const scrollLeft = Math.max(window.pageXOffset, document.documentElement.scrollLeft, document.body.scrollLeft);
+          const scrollTop = Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          );
+          const scrollLeft = Math.max(
+            window.pageXOffset,
+            document.documentElement.scrollLeft,
+            document.body.scrollLeft
+          );
 
-          console.log("event.target: " + event.target);
-          console.log("scrolltop: " + scrollTop);
-          console.log("scrollLeft: " + scrollLeft);
-          
+          // console.log("event.target: " + event.target);
+          // console.log("scrolltop: " + scrollTop);
+          // console.log("scrollLeft: " + scrollLeft);
 
           this.cursor.current.x =
             event.targetTouches[0].pageX - rect.left - scrollLeft;
@@ -301,7 +311,7 @@ canvas {
   z-index: 10;
 }
 
-.drawcontainer {  
+.drawcontainer {
   -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
   outline: 0.25rem solid $primary;

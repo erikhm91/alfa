@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Tasks from "../components/tasks.json";
+import Tasks from "../components/writing_tasks.json";
 
 Vue.use(Vuex)
 
