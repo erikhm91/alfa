@@ -43,9 +43,9 @@ export default {
 
     computedColorActive(letter) {
       if (letter.enabled === true) {
-        return "active";
+        return "enabledletter";
       } else {
-        return "notActive";
+        return "disabledletter";
       }
     },
 
@@ -80,15 +80,16 @@ li {
   height: 7rem;
   -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  background-color: $letterlistcolor;
+  // background-color: $letterlistcolor;
   color: white;
   white-space: nowrap;
 }
 
-.active {
-  background-color: $success;
+.enabledletter {
+  background-color: $letterlistcolor;
 }
-.disabled {
+
+.disabledletter {
   background-color: $pencilcolor;
 }
 
