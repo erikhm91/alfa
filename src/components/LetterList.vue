@@ -4,7 +4,7 @@
         <div class="row">
       <div class="col-1 headertool"> <!-- backbutton class overrides bootstrap positioning. -->
         <span @click="navigateToConfig()">
-              <unnr-config-symbol height="100px" width="100px"></unnr-config-symbol>
+              <unnr-config-symbol height="80px" width="80px"></unnr-config-symbol>
         </span>
       </div>
     </div>
@@ -89,7 +89,7 @@ export default {
 
 .headertool {
   height: 6rem;
-  position: absolute; top: 1rem; right: 1rem; 
+  position: absolute; top: 1rem; right: 3rem; 
 }
 
 li {
