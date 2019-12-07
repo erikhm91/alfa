@@ -11,7 +11,7 @@
 
     <ul class="row list-group-inline justify-content-center">
       <li
-        class="list-group-item rounded-lg col-2 border-primary text-center"
+        class="transform list-group-item rounded-lg col-2 border-primary text-center"
         :class="computedColorActive(letter)"
         v-for="(letter, i) in letters"
         v-bind:key="i"
@@ -91,6 +91,14 @@ li {
 
 .disabledletter {
   background-color: $pencilcolor;
+}
+
+.transform {
+  -webkit-transition: all 0.17s ease-out;  
+  -moz-transition: all 0.17s ease-out;  
+  -o-transition: all 0.17s ease-out;  
+  -ms-transition: all 0.17s ease-out;  
+  transition: all 0.17s ease-out;
 }
 
 </style> 
