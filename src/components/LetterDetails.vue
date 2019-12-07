@@ -9,7 +9,7 @@
       <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
     <div class="row">
-      <div class="col-1 backbutton"> <!-- backbutton class overrides bootstrap positioning. -->
+      <div class="col-1 headertool"> <!-- backbutton class overrides bootstrap positioning. -->
         <span @click="backToList()" class="clickable">
               <unnr-arrow-back></unnr-arrow-back>
         </span>
@@ -98,7 +98,7 @@ export default {
   cursor: pointer;
 }
 
-.backbutton {
+.headertool {
   height: 6rem;
   position: absolute; top: 1rem; left: 1rem; 
 }

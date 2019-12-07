@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+
+        <div class="row">
+      <div class="col-1 headertool"> <!-- backbutton class overrides bootstrap positioning. -->
+        <span @click="navigateToConfig()">
+              <unnr-config-symbol></unnr-config-symbol>
+        </span>
+      </div>
+    </div>
     <!-- 
     <div v-if="!letterClicked" class="container">-->
 
@@ -10,7 +18,7 @@
       <li
         class="list-group-item rounded-lg col-2 border-primary text-center"
         :class="computedColor(letter)"
-        v-for="(letter, i) in letters"
+        v-for="(letter, i) in enabledLetters"
         v-bind:key="i"
         @click="selectLetter(letter)"
       >{{ letter.l }} {{ letter.l.toLowerCase() }}</li>
@@ -26,6 +34,7 @@
 </template>
 
 <script>
+import ConfigSymbol from "./icons/ConfigSymbol.vue";
 export default {
   // components: {
   //   unnrLetterDetails: LetterDetails
@@ -39,6 +48,17 @@ export default {
     };
   },
 
+  components: {
+    UnnrConfigSymbol: ConfigSymbol
+  },
+  computed: {
+    enabledLetters() {
+      return this.$store.getters.letters.filter(function(letter) {
+        return letter.enabled;
+      })
+    }
+  },
+
   methods: {
     computedColor(letter) {
       if (letter.visit === true) {
@@ -47,31 +67,30 @@ export default {
         return "";
       }
     },
-
     selectLetter(letter) {
       this.selectedLetter = letter;
       this.letterClicked = true;
 
       //update store with selected letter, so can easily get it in the letterdetails component.
       this.$store.commit("SET_ACTIVE_LETTER", letter);
-
       //navigate to router programmatically:
       this.$router.push({ name: "menu" });
     },
-    // updateLetterStatus() {
-    //   if (this.letterClicked == true) {
-    //     this.letterClicked = false;
-    //     // update lettercolor to visited by setting class:
-    //     this.selectedLetter.visit = true;
-    //     console.log("Updated color visit: " + this.selectedLetter);
-    //   }
-    // }
+    navigateToConfig() {
+      console.log("navigating to config");
+      this.$router.push({ name: "config" });
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
 @import "../styles/variables.scss";
+
+.headertool {
+  height: 6rem;
+  position: absolute; top: 1rem; right: 1rem; 
+}
 
 li {
   // display: inline;

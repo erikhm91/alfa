@@ -2,6 +2,7 @@
  "letters": [
 {
 "l": "A",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -21,6 +22,7 @@
 ,
 {
 "l": "B",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -40,6 +42,7 @@
 ,
 {
 "l": "C",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -59,6 +62,7 @@
 ,
 {
 "l": "D",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -78,6 +82,7 @@
 ,
 {
 "l": "E",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -97,6 +102,7 @@
 ,
 {
 "l": "F",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -116,6 +122,7 @@
 ,
 {
 "l": "G",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -135,6 +142,7 @@
 ,
 {
 "l": "H",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -154,6 +162,7 @@
 ,
 {
 "l": "I",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -173,6 +182,7 @@
 ,
 {
 "l": "J",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -192,6 +202,7 @@
 ,
 {
 "l": "K",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -211,6 +222,7 @@
 ,
 {
 "l": "L",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -230,6 +242,7 @@
 ,
 {
 "l": "M",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -249,6 +262,7 @@
 ,
 {
 "l": "N",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -268,6 +282,7 @@
 ,
 {
 "l": "O",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -287,6 +302,7 @@
 ,
 {
 "l": "P",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -306,6 +322,7 @@
 ,
 {
 "l": "Q",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -325,6 +342,7 @@
 ,
 {
 "l": "R",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -344,6 +362,7 @@
 ,
 {
 "l": "S",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -363,6 +382,7 @@
 ,
 {
 "l": "T",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -382,6 +402,7 @@
 ,
 {
 "l": "U",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -401,6 +422,7 @@
 ,
 {
 "l": "V",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -420,6 +442,7 @@
 ,
 {
 "l": "W",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -439,6 +462,7 @@
 ,
 {
 "l": "X",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -458,6 +482,7 @@
 ,
 {
 "l": "Y",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -477,6 +502,7 @@
 ,
 {
 "l": "Z",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -496,6 +522,7 @@
 ,
 {
 "l": "Æ",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -515,6 +542,7 @@
 ,
 {
 "l": "Ø",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
@@ -534,6 +562,7 @@
 ,
 {
 "l": "Å",
+"enabled": true,
 "visit": false,
 "tasks": [
 {
