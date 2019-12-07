@@ -2,8 +2,8 @@
   <div class="container mb-4 mt-4">
     <div class="row">
       <div class="col-1"></div>
-      <div class="col-10 text-center">
-        <h1>Lær alfabetet!</h1>
+      <div class="col-12 text-center">
+        <h1>Lær bokstavene!</h1>
       </div>
       <div class="col-1">
         <!-- <button class="btn" @click="navigateToConfig()"><unnr-config-symbol></unnr-config-symbol></button> -->
@@ -33,7 +33,7 @@
 h1 {
   text-decoration: overline;
   color: $letterlistcolor;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 

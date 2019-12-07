@@ -21,14 +21,15 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-md-2 col-xs-4 arrow">
+      <div class="col-md-1"></div>
+      <div class="col-md-3 col-4 arrow">
         <span v-if="prevTaskExist" @click="prevTask()" class="clickable">
-          <unnr-arrow-left></unnr-arrow-left>
+          <unnr-arrow-left height="200px" width="200px"></unnr-arrow-left>
         </span>
       </div>
-      <div class="col-md-2 col-xs-4 arrow">
+      <div class="col-md-3 col-4 arrow">
         <span v-if="nextTaskExist" @click="nextTask()" class="clickable">
-          <unnr-arrow-right></unnr-arrow-right>
+          <unnr-arrow-right height="200px" width="200px"></unnr-arrow-right>
         </span>
       </div>
     </div>
@@ -103,9 +104,9 @@ export default {
   position: absolute; top: 1rem; left: 1rem; 
 }
 
-.arrow {
+/* .arrow {
   height: 12rem;
-}
+} */
 
 .outline {
   border: solid black 1px;
@@ -116,7 +117,4 @@ p {
   font-size: 1px;
 } */
 
-/* div {
-  border: 1px solid black;
-} */
 </style>

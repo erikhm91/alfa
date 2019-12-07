@@ -4,7 +4,7 @@
         <div class="row">
       <div class="col-1 headertool"> <!-- backbutton class overrides bootstrap positioning. -->
         <span @click="navigateToConfig()">
-              <unnr-config-symbol></unnr-config-symbol>
+              <unnr-config-symbol height="100px" width="100px"></unnr-config-symbol>
         </span>
       </div>
     </div>

@@ -8,8 +8,8 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-      height="100%"
-      width="100%"
+    :width="width"
+            :height="height"
       viewBox="0 0 29.643 29.643"
       style="enable-background:new 0 0 29.643 29.643;"
       xml:space="preserve"
@@ -39,6 +39,13 @@
     </svg>
   </div>
 </template>
+<script>
+export default {
+  props: ['height', 'width']
+}
+</script>
+
+
 <style scoped lang="scss">
 @import '@/styles/_variables.scss';
 svg {
