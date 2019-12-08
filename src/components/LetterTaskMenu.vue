@@ -51,16 +51,6 @@
           />
         </button>
       </div>
-        <div class="col-4 mb-4">
-        <button class="btn btn-primary" @click="navigateToRoute('writeword')">
-          <img
-            src="../../public/assets/menu-writeword.png"
-            alt="Skriv ord med bokstaven."
-            width="100%"
-            height="100%"
-          />
-        </button>
-      </div>
       </div>
       </div>
 
