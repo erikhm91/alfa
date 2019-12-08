@@ -17,7 +17,9 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-3">
+      <div class="col-9">
+      <div class="row">
+      <div class="col-4 mb-4">
         <button class="btn btn-primary" @click="navigateToRoute('details')">
           <img
             src="../../public/assets/menu-writeletter.png"
@@ -28,7 +30,7 @@
         </button>
       </div>
 
-      <div class="col-3">
+      <div class="col-4 mb-4">
         <button class="btn btn-primary" @click="navigateToRoute('findonpicture')">
           <img
             src="../../public/assets/menu-canvas.png"
@@ -39,7 +41,7 @@
         </button>
       </div>
 
-      <div class="col-3">
+      <div class="col-4 mb-4">
         <button class="btn btn-primary" @click="navigateToRoute('writeword')">
           <img
             src="../../public/assets/menu-writeword.png"
@@ -48,6 +50,18 @@
             height="100%"
           />
         </button>
+      </div>
+        <div class="col-4 mb-4">
+        <button class="btn btn-primary" @click="navigateToRoute('writeword')">
+          <img
+            src="../../public/assets/menu-writeword.png"
+            alt="Skriv ord med bokstaven."
+            width="100%"
+            height="100%"
+          />
+        </button>
+      </div>
+      </div>
       </div>
 
     </div>
@@ -58,6 +72,8 @@
 <script>
 import ArrowBack from "./icons/ArrowBack.vue";
 export default {
+  
+
     components: {
     unnrArrowBack: ArrowBack
   },
@@ -79,9 +95,9 @@ export default {
 </script>
 
 <style scoped>
-.container {
+/* .container {
   margin-top: 30px;
-}
+} */
 
 .backbutton {
   height: 6rem;

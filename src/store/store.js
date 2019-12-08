@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Tasks from "../components/letterlist.json";
+import AppList from "../components/userconfig/appconfig.json";
 
 Vue.use(Vuex)
 
@@ -8,7 +9,8 @@ export const store = new Vuex.Store({
 
     state: {
         activeLetter: {},
-        letters: Tasks.letters //read from jsonfile
+        letters: Tasks.letters, //read from jsonfile
+        appList: AppList.apps
     },
     mutations: {
         TOGGLE_ENABLE_LETTER(state, letterObj) {

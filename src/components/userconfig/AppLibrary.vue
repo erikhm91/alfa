@@ -2,23 +2,15 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-1 headertool">
-        <span @click="backToList()" class="clickable">
+        <span @click="navigateToRoute('config')" class="clickable">
           <unnr-arrow-back></unnr-arrow-back>
         </span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-3">
-        <div class="row justify-content-center">
-          <div class="col-9">
-            <button class="btn btn-secondary"><unnr-app-list-icon height="100%" width="100%"></unnr-app-list-icon>
-            </button>
-            </div>
-        </div>
-      </div>
+    <div class="row justify-content-center">
 
       <div class="col-9">
-        <ul class="row list-group-inline justify-content-center">
+        <ul class="row list-group-inline ">
           <li
             class="transform list-group-item rounded-lg col-2 border-primary text-center"
             :class="computedColorActive(letter)"
@@ -33,8 +25,8 @@
 </template>
 
 <script>
-import ArrowBack from "./icons/ArrowBack.vue";
-import AppListIcon from "./icons/AppListIcon.vue";
+import ArrowBack from "@/components/icons/ArrowBack.vue";
+import AppListIcon from "@/components/icons/AppListIcon.vue";
 export default {
   data() {
     return {
@@ -52,7 +44,12 @@ export default {
 
   methods: {
     backToList() {
-      this.$router.push({ name: "letterlist" });
+      this.$router.push({ name: "config" });
+    },
+    navigateToRoute(route) {
+      this.$router.push({
+        name: route
+      })
     },
 
     computedColorActive(letter) {
@@ -75,7 +72,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../styles/variables.scss";
+@import "@/styles/_variables.scss";
 
 .headertool {
   height: 6rem;

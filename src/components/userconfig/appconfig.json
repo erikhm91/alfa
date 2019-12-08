@@ -1,0 +1,25 @@
+{
+    "apps": [
+        {
+            "appname": "write word",
+            "route": "writeword",
+            "enabled": true,
+            "visit": false,
+            "icon": "../../public/assets/menu-writeword.png"
+        },
+        {
+            "appname": "find on picture",
+            "route": "findonpicture",
+            "enabled": true,
+            "visit": false,
+            "icon": "../../public/assets/menu-canvas.png"
+        },
+        {
+            "appname": "write letter",
+            "route": "details",
+            "enabled": true,
+            "visit": false,
+            "icon": "../../public/assets/menu-writeletter.png"
+        }
+    ]
+}
