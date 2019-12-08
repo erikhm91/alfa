@@ -1,23 +1,37 @@
 <template>
   <div class="container">
-
     <div class="row">
       <div class="col-1 headertool">
         <span @click="backToList()" class="clickable">
-              <unnr-arrow-back></unnr-arrow-back>
+          <unnr-arrow-back></unnr-arrow-back>
         </span>
       </div>
     </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="row">
+          <div class="col-6">col1</div>
 
-    <ul class="row list-group-inline justify-content-center">
-      <li
-        class="transform list-group-item rounded-lg col-2 border-primary text-center"
-        :class="computedColorActive(letter)"
-        v-for="(letter, i) in letters"
-        v-bind:key="i"
-        @click="selectLetter(letter)"
-      >{{ letter.l }} {{ letter.l.toLowerCase() }}</li>
-    </ul>
+          <div class="col-6">col2</div>
+
+          <div class="col-6">rad2col1</div>
+
+          <div class="col-6">rad2col2</div>
+        </div>
+      </div>
+
+      <div class="col-8">
+        <ul class="row list-group-inline justify-content-center">
+          <li
+            class="transform list-group-item rounded-lg col-2 border-primary text-center"
+            :class="computedColorActive(letter)"
+            v-for="(letter, i) in letters"
+            v-bind:key="i"
+            @click="selectLetter(letter)"
+          >{{ letter.l }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,7 +42,7 @@ export default {
     return {
       letterClicked: false,
       selectedLetter: {},
-      letters : this.$store.getters.letters
+      letters: this.$store.getters.letters
     };
   },
 
@@ -38,7 +52,7 @@ export default {
 
   methods: {
     backToList() {
-      this.$router.push({ name: 'letterlist'});
+      this.$router.push({ name: "letterlist" });
     },
 
     computedColorActive(letter) {
@@ -55,7 +69,7 @@ export default {
 
       //enable letter in store so it is visible in letterlist
       this.$store.commit("TOGGLE_ENABLE_LETTER", letter);
-    },
+    }
   }
 };
 </script>
@@ -65,7 +79,9 @@ export default {
 
 .headertool {
   height: 6rem;
-  position: absolute; top: 1rem; left: 1rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
   cursor: pointer;
 }
 
@@ -94,11 +110,10 @@ li {
 }
 
 .transform {
-  -webkit-transition: all 0.17s ease-out;  
-  -moz-transition: all 0.17s ease-out;  
-  -o-transition: all 0.17s ease-out;  
-  -ms-transition: all 0.17s ease-out;  
+  -webkit-transition: all 0.17s ease-out;
+  -moz-transition: all 0.17s ease-out;
+  -o-transition: all 0.17s ease-out;
+  -ms-transition: all 0.17s ease-out;
   transition: all 0.17s ease-out;
 }
-
 </style> 
