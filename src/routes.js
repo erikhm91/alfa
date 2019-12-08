@@ -4,6 +4,7 @@ import Footer from './components/Footer.vue';
 import LetterTaskMenu from './components/LetterTaskMenu.vue';
 import FindOnPicture from './components/tasks/FindOnPicture.vue';
 import Config from './components/Config.vue';
+import WriteWord from './components/WriteWord.vue';
 // const Bar = () => import(/* webpackChunkName: "bar" */ './Bar.vue')
 // const Baz = () => import(/* webpackChunkName: "bar" */ './Baz.vue')
 
@@ -26,6 +27,7 @@ export const routes = [/*
     
     { path: '', component: LetterList, name: 'letterlist'},
     { path: '/menu', component: LetterTaskMenu, name: 'menu'},
+{ path: '/writeword', component: WriteWord, name: 'writeword'},
     { path: '/write', component: LetterDetails, name: 'details' },
     { path: '/find', component: FindOnPicture, name: 'findonpicture'},
     { path: '/config', component: Config, name: 'config'}

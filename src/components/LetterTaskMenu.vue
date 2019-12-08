@@ -18,10 +18,10 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-3">
-        <button class="btn btn-primary" @click="navigateToDraw()">
+        <button class="btn btn-primary" @click="navigateToRoute('details')">
           <img
-            src="../../public/assets/menu-writing.png"
-            alt="Lær å skrive bokstaven"
+            src="../../public/assets/menu-writeletter.png"
+            alt="Lær å skrive bokstaven."
             width="100%"
             height="100%"
           />
@@ -29,15 +29,27 @@
       </div>
 
       <div class="col-3">
-        <button class="btn btn-primary" @click="navigateToFindOnPicture()">
+        <button class="btn btn-primary" @click="navigateToRoute('findonpicture')">
           <img
             src="../../public/assets/menu-canvas.png"
-            alt="Lær å skrive bokstaven"
+            alt="Finn ord med bokstaven på bilder."
             width="100%"
             height="100%"
           />
         </button>
       </div>
+
+      <div class="col-3">
+        <button class="btn btn-primary" @click="navigateToRoute('writeword')">
+          <img
+            src="../../public/assets/menu-writeword.png"
+            alt="Skriv ord med bokstaven."
+            width="100%"
+            height="100%"
+          />
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -53,8 +65,10 @@ export default {
     navigateToDraw() {
       this.$router.push({ name: "details" });
     },
-    navigateToFindOnPicture() {
-      this.$router.push({ name: "findonpicture" });
+    navigateToRoute(route) {
+      this.$router.push({
+        name: route
+      })
     },
      backToList() {
       this.$router.push({ name: 'letterlist'});

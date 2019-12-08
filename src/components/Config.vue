@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-1 headertool">
         <span @click="backToList()" class="clickable">
@@ -8,19 +8,16 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-4">
-        <div class="row">
-          <div class="col-6">col1</div>
-
-          <div class="col-6">col2</div>
-
-          <div class="col-6">rad2col1</div>
-
-          <div class="col-6">rad2col2</div>
+      <div class="col-3">
+        <div class="row justify-content-center">
+          <div class="col-9">
+            <button class="btn btn-secondary"><unnr-app-list-icon height="100%" width="100%"></unnr-app-list-icon>
+            </button>
+            </div>
         </div>
       </div>
 
-      <div class="col-8">
+      <div class="col-9">
         <ul class="row list-group-inline justify-content-center">
           <li
             class="transform list-group-item rounded-lg col-2 border-primary text-center"
@@ -37,6 +34,7 @@
 
 <script>
 import ArrowBack from "./icons/ArrowBack.vue";
+import AppListIcon from "./icons/AppListIcon.vue";
 export default {
   data() {
     return {
@@ -47,7 +45,9 @@ export default {
   },
 
   components: {
-    unnrArrowBack: ArrowBack
+    unnrArrowBack: ArrowBack,
+    unnrAppListIcon: AppListIcon
+
   },
 
   methods: {
@@ -106,7 +106,7 @@ li {
 }
 
 .disabledletter {
-  background-color: $pencilcolor;
+  background-color: $disabledcolor;
 }
 
 .transform {
