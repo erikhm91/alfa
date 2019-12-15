@@ -24,11 +24,17 @@ export const store = new Vuex.Store({
             // get index of element:
             var index = state.letters.findIndex(obj => obj.l === letter)
             state.letters[index].visit = true;
+        },
+        TOGGLE_ENABLE_APP(state, appObj) {
+            var index = state.appList.findIndex(obj => obj.id === appObj.id)
+            state.appList[index].enabled = !state.appList[index].enabled;
         }
     },
-    getters: { //se om det fungerer med denne syntaxen
+    getters: {
         activeLetter : state => state.activeLetter,
-        letters : state => state.letters
+        letters : state => state.letters,
+        appList : state => state.appList,
+        
     }
 
 })

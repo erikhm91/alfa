@@ -8,64 +8,81 @@
       </div>
     </div>
     <div class="row justify-content-center">
+      <!-- <div class="col-9"> -->
+      <!-- bootstrap cards -->
+      <!-- :img-src="imgurl(app.icon)" -->
+      <!-- img-src="../../../public/assets/menu-writeword.png"  doesn't work -->
+      <b-card-group deck>
+        <div v-for="(app, i) in appList" v-bind:key="i">
+          <b-card
+            :title="app.name"
+            :img-src="getImage(app.icon)"
+            :img-alt="app.alt"
+            img-top
+            tag="article"
+            style="max-width: 17rem;"
+            class="mb-2"
+          >
+            <b-card-text>
+              <p>{{app.desc}}</p>
+              <p>Læringsmål: {{app.goal}}</p>
+              <p>Læringsfase: {{app.phase}}</p>
+            </b-card-text>
 
-      <div class="col-9">
-        <ul class="row list-group-inline ">
-          <li
-            class="transform list-group-item rounded-lg col-2 border-primary text-center"
-            :class="computedColorActive(letter)"
-            v-for="(letter, i) in letters"
-            v-bind:key="i"
-            @click="selectLetter(letter)"
-          >{{ letter.l }}</li>
-        </ul>
-      </div>
+            <b-button>
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" :id="i" 
+                @click="toggleApp(app)"
+                />
+                <label class="custom-control-label" :for="i"></label>
+              </div>
+            </b-button>
+          </b-card>
+        </div>
+      </b-card-group>
+      <!-- <li class v-for="(app, i) in appList" v-bind:key="i">{{ app.appname }}</li> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
 
 <script>
 import ArrowBack from "@/components/icons/ArrowBack.vue";
-import AppListIcon from "@/components/icons/AppListIcon.vue";
+// import AppListIcon from "@/components/icons/AppListIcon.vue";
+
 export default {
   data() {
     return {
       letterClicked: false,
       selectedLetter: {},
-      letters: this.$store.getters.letters
+      appList: this.$store.getters.appList
     };
   },
 
   components: {
     unnrArrowBack: ArrowBack,
-    unnrAppListIcon: AppListIcon
-
+    // unnrAppListIcon: AppListIcon
   },
 
   methods: {
+    printValue(value) {
+      console.log("value: " + value);
+    },
+    getImage(filename) {
+      return require("../../../public/assets/" + filename);
+    },
     backToList() {
       this.$router.push({ name: "config" });
     },
     navigateToRoute(route) {
       this.$router.push({
         name: route
-      })
+      });
     },
 
-    computedColorActive(letter) {
-      if (letter.enabled === true) {
-        return "enabledletter";
-      } else {
-        return "disabledletter";
-      }
-    },
-
-    selectLetter(letter) {
-      this.selectedLetter = letter;
-      this.letterClicked = true;
-
+    toggleApp(app) {
       //enable letter in store so it is visible in letterlist
-      this.$store.commit("TOGGLE_ENABLE_LETTER", letter);
+      this.$store.commit("TOGGLE_ENABLE_APP", app);
     }
   }
 };
@@ -80,37 +97,5 @@ export default {
   top: 1rem;
   left: 1rem;
   cursor: pointer;
-}
-
-li {
-  // display: inline;
-  margin: 0.5rem;
-  cursor: pointer;
-  font-size: 2.8rem;
-  font-weight: bold;
-  // background-color: $primary;
-  border: 0.5rem solid;
-  height: 7rem;
-  -webkit-box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.05);
-  // background-color: $letterlistcolor;
-  color: white;
-  white-space: nowrap;
-}
-
-.enabledletter {
-  background-color: $letterlistcolor;
-}
-
-.disabledletter {
-  background-color: $disabledcolor;
-}
-
-.transform {
-  -webkit-transition: all 0.17s ease-out;
-  -moz-transition: all 0.17s ease-out;
-  -o-transition: all 0.17s ease-out;
-  -ms-transition: all 0.17s ease-out;
-  transition: all 0.17s ease-out;
 }
 </style> 

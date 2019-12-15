@@ -8,7 +8,6 @@ import { store } from './store/store'
 Vue.config.productionTip = false
 import './styles/app.scss';
 
-
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 

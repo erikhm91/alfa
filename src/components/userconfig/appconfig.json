@@ -1,25 +1,44 @@
 {
     "apps": [
-        {
-            "appname": "write word",
-            "route": "writeword",
-            "enabled": true,
-            "visit": false,
-            "icon": "../../public/assets/menu-writeword.png"
-        },
-        {
-            "appname": "find on picture",
-            "route": "findonpicture",
-            "enabled": true,
-            "visit": false,
-            "icon": "../../public/assets/menu-canvas.png"
-        },
-        {
-            "appname": "write letter",
+        {   
+
+            "id": 1,
+            "name": "Skriv bokstav",
+            "alt": "Skriv bokstaver",
             "route": "details",
             "enabled": true,
             "visit": false,
-            "icon": "../../public/assets/menu-writeletter.png"
+            "icon": "menu-writeletter.png",
+            "desc": "Spor stor og liten bokstav.",
+            "goal": "Bli kjent med bokstavene",
+            "phase": "1"
+
+        },
+        {
+            "id": 2,
+            "name": "Finn på bilde",
+            "alt": "Finn ord på bilde",
+            "route": "findonpicture",
+            "enabled": true,
+            "visit": false,
+            "icon": "menu-canvas.png",
+            "desc": "Finn og trykk på bilder av ord som begynner på valgt bokstav.",
+            "goal": "Leke seg til læring",
+            "phase": "1"
+
+        },
+        {   
+            "id": 3,
+            "name": "Skriv ord",
+            "alt": "Skriv ord",
+            "route": "writeword",
+            "enabled": true,
+            "visit": false,
+            "icon": "menu-writeword.png",
+            "desc": "Spor korte ord som begynner på valgt bokstav.",
+            "goal": "Ordtrening",
+            "phase": "2"
         }
+
     ]
 }
