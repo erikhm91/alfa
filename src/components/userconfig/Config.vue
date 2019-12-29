@@ -11,8 +11,11 @@
       <div class="col-3">
         <div class="row justify-content-center">
           <div class="col-9">
-            <button class="btn btn-secondary" @click="navigateToRoute('applibrary')"><unnr-app-list-icon height="100%" width="100%"></unnr-app-list-icon>
+            
+            <button class="btn" @click="navigateToRoute('applibrary')"><unnr-app-list-icon height="100%" width="100%"></unnr-app-list-icon>
+            Tilpass oppgavetyper
             </button>
+            
             </div>
         </div>
       </div>
