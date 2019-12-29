@@ -25,8 +25,9 @@ export const store = new Vuex.Store({
             var index = state.letters.findIndex(obj => obj.l === letter)
             state.letters[index].visit = true;
         },
-        TOGGLE_ENABLE_APP(state, appObj) {
-            var index = state.appList.findIndex(obj => obj.id === appObj.id)
+        TOGGLE_ENABLE_APP(state, appId) {
+            console.log("toggle enable app triggered");
+            var index = state.appList.findIndex(obj => obj.id === appId)
             state.appList[index].enabled = !state.appList[index].enabled;
         }
     },

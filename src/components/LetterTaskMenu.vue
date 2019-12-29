@@ -11,48 +11,26 @@
     <div class="row">
       <div class="col-1 backbutton">
         <!-- backbutton class overrides bootstrap positioning. -->
-        <span @click="backToList()" class="clickable">
+        <span @click="navigateToRoute('letterlist')" class="clickable">
           <unnr-arrow-back></unnr-arrow-back>
         </span>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-9">
-      <div class="row">
-      <div class="col-4 mb-4">
-        <button class="btn btn-primary" @click="navigateToRoute('details')">
+    <div class="container">
+    <ul class="row list-group-inline list-unstyled justify-content-center">    
+      <li class="col-4 mb-4"     
+      v-for="(app, i) in enabledApps"
+      >
+        <button class="btn btn-primary" @click="navigateToRoute(app.route)">
           <img
-            src="../../public/assets/menu-writeletter.png"
-            alt="Lær å skrive bokstaven."
+            :src="getImage(app.icon)"
+            :alt="app.alt"
             width="100%"
             height="100%"
           />
         </button>
-      </div>
-
-      <div class="col-4 mb-4">
-        <button class="btn btn-primary" @click="navigateToRoute('findonpicture')">
-          <img
-            src="../../public/assets/menu-canvas.png"
-            alt="Finn ord med bokstaven på bilder."
-            width="100%"
-            height="100%"
-          />
-        </button>
-      </div>
-
-      <div class="col-4 mb-4">
-        <button class="btn btn-primary" @click="navigateToRoute('writeword')">
-          <img
-            src="../../public/assets/menu-writeword.png"
-            alt="Skriv ord med bokstaven."
-            width="100%"
-            height="100%"
-          />
-        </button>
-      </div>
-      </div>
-      </div>
+      </li>
+    </ul>
 
     </div>
   </div>
@@ -62,23 +40,31 @@
 <script>
 import ArrowBack from "./icons/ArrowBack.vue";
 export default {
-  
+  // data() {
+  //   return {
+  //     appList: this.$store.getters.appList
+  //   }
+  // },
+  computed: {
+    enabledApps() {
+      return this.$store.getters.appList.filter(function(app) {
+        return app.enabled;
+      })
+    }
+  },
 
     components: {
     unnrArrowBack: ArrowBack
   },
   methods: {
-    navigateToDraw() {
-      this.$router.push({ name: "details" });
-    },
     navigateToRoute(route) {
       this.$router.push({
         name: route
       })
     },
-     backToList() {
-      this.$router.push({ name: 'letterlist'});
-    }
+    getImage(filename) {
+      return require("../../public/assets/" + filename);
+    },
 
   }
 };
@@ -91,6 +77,15 @@ export default {
 
 .backbutton {
   height: 6rem;
-  position: absolute; top: 1rem; left: 1rem; 
+  position: absolute; top: 1rem; left: 1rem;
+  cursor: pointer;
+}
+
+.unnr-slidein {
+    position: absolute;
+    transition: all 2s ease-in-out;
+    -webkit-transition: all 2s ease-in-out; /** Chrome & Safari **/
+    -moz-transition: all 2s ease-in-out; /** Firefox **/
+    -o-transition: all 2s ease-in-out; /** Opera **/
 }
 </style>
