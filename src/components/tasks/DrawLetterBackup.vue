@@ -17,8 +17,8 @@
       </div>
     </div>
     <div class="col-lg-8 col-md-8 col-xs-9">
+      <!--  -->
       <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
-        <!-- change to add a component around the canvas itself, just for drawing functionality -->
         <canvas
           id="canvas"
           v-on:mousedown="mouseDown"
@@ -49,10 +49,6 @@
 <script>
 import Speaker from "../icons/Speaker.vue";
 import Eraser from "../icons/Eraser.vue";
-import UnnrDrawTool from '../utilities/draw.js';
-// const unnrDrawToolInstance = new UnnrDrawTool();
-// console.log(unnrDrawToolInstance);
-
 export default {
   props: {
     task: {
@@ -72,8 +68,6 @@ export default {
         width: "400px"
       },
       // *************************************
-      // drawTool: UnnrDrawTool,
-      drawTool : Object,
 
       cursor: {
         current: {
@@ -109,10 +103,6 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
-    //create draw tool instance
-    const c = document.getElementById("canvas");
-    const ctx = c.getContext("2d");
-    this.drawTool = new UnnrDrawTool(ctx);
   },
   destroyed: function() {
     window.removeEventListener("mouseup", this.handleMouseUp);
@@ -130,18 +120,13 @@ export default {
     },
 
     clearCanvas() {
-      this.drawTool.clearCanvas();
+      var c = document.getElementById("canvas");
+      var ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     },
 
     // removed event param (just to know, it exists as for all callbacks)
     drawLine() {
-  
-      // var c = document.getElementById("canvas");
-      // var ctx = c.getContext("2d");
-      // this.drawTool.assignContext(ctx);
-      // this.drawTool.drawLine(ctx);
-
-
       //   If lastX is not set, set lastX and lastY to the current position
       if (this.cursor.previous.x == -1) {
         this.cursor.previous.x = this.cursor.current.x;
