@@ -26,7 +26,7 @@ export const store = new Vuex.Store({
             state.letters[index].visit = true;
         },
         TOGGLE_ENABLE_APP(state, appId) {
-            console.log("toggle enable app triggered");
+            // console.log("toggle enable app triggered");
             var index = state.appList.findIndex(obj => obj.id === appId)
             state.appList[index].enabled = !state.appList[index].enabled;
         }

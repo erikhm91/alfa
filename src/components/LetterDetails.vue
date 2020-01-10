@@ -9,7 +9,7 @@
       <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
     <div class="row">
-      <div class="col-1 headertool"> <!-- backbutton class overrides bootstrap positioning. -->
+      <div class="col-1 headertool">
         <span @click="backToList()" class="clickable">
               <unnr-arrow-back></unnr-arrow-back>
         </span>
@@ -23,12 +23,12 @@
     <div class="row justify-content-center">
       <div class="col-md-1"></div>
       <div class="col-md-3 col-4 arrow">
-        <span v-if="prevTaskExist" @click="prevTask()" class="clickable">
+        <span v-show="prevTaskExist" @click="prevTask()" class="clickable">
           <unnr-arrow-left height="200px" width="200px"></unnr-arrow-left>
         </span>
       </div>
       <div class="col-md-3 col-4 arrow">
-        <span v-if="nextTaskExist" @click="nextTask()" class="clickable">
+        <span v-show="nextTaskExist" @click="nextTask()" class="clickable">
           <unnr-arrow-right height="200px" width="200px"></unnr-arrow-right>
         </span>
       </div>
@@ -58,7 +58,6 @@ export default {
   },
   computed: {
     nextTaskExist() {
-      console.log(this.activeLetter);
       if ( this.$store.getters.activeLetter.tasks.length > this.taskIndex + 1) {   //should implement better reading of values. map getters.
         return true;
       } else {
@@ -104,17 +103,8 @@ export default {
   position: absolute; top: 1rem; left: 1rem; 
 }
 
-/* .arrow {
-  height: 12rem;
-} */
-
 .outline {
   border: solid black 1px;
 }
-
-/* 
-p {
-  font-size: 1px;
-} */
 
 </style>
