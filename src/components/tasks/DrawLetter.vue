@@ -1,7 +1,6 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-lg-2 col-md-2 col-12">
-      <!--  -->
       <div class="row mb-2 mb-md-0 justify-content-center">
         <div class="col-md-12 col-s-12 col-3">
           <button class="btn btn-primary" @click="playSound()">

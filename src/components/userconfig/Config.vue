@@ -1,25 +1,15 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-1 headertool">
-        <span @click="backToList()" class="clickable">
-          <unnr-arrow-back></unnr-arrow-back>
-        </span>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-3">
         <div class="row justify-content-center">
           <div class="col-9">
-            
             <button class="btn" @click="navigateToRoute('applibrary')"><unnr-app-list-icon height="100%" width="100%"></unnr-app-list-icon>
             Tilpass oppgavetyper
             </button>
-            
             </div>
         </div>
       </div>
-
       <div class="col-9">
         <ul class="row list-group-inline justify-content-center">
           <li
@@ -36,7 +26,6 @@
 </template>
 
 <script>
-import ArrowBack from "@/components/icons/ArrowBack.vue";
 import AppListIcon from "@/components/icons/AppListIcon.vue";
 export default {
   data() {
@@ -46,23 +35,15 @@ export default {
       letters: this.$store.getters.letters
     };
   },
-
   components: {
-    unnrArrowBack: ArrowBack,
     unnrAppListIcon: AppListIcon
-
   },
-
   methods: {
-    backToList() {
-      this.$router.push({ name: "letterlist" });
-    },
     navigateToRoute(route) {
       this.$router.push({
         name: route
       })
     },
-
     computedColorActive(letter) {
       if (letter.enabled === true) {
         return "enabledletter";
@@ -70,11 +51,9 @@ export default {
         return "disabledletter";
       }
     },
-
     selectLetter(letter) {
       this.selectedLetter = letter;
       this.letterClicked = true;
-
       //enable letter in store so it is visible in letterlist
       this.$store.commit("TOGGLE_ENABLE_LETTER", letter);
     }
@@ -84,15 +63,6 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/_variables.scss";
-
-.headertool {
-  height: 6rem;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  cursor: pointer;
-}
-
 li {
   // display: inline;
   margin: 0.5rem;

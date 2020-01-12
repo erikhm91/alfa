@@ -4,7 +4,7 @@
 
     <!-- hero section - Title, logo, landing page etc. For now named Header-->
     <div>
-        <unnr-hero></unnr-hero>
+        <unnr-header></unnr-header>
     </div>
     <hr>
    
@@ -23,14 +23,14 @@
 </template>
 
 <script>
-import Hero from "./components/Hero.vue";
+import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import LetterList from "./components/LetterList.vue";
 import DrawLetter from "./components/tasks/DrawLetter.vue";
 
 export default {
   components: {
-    unnrHero: Hero,
+    unnrHeader: Header,
     unnrFooter: Footer,
     unnrLetterList: LetterList,
     unnrDrawLetter: DrawLetter

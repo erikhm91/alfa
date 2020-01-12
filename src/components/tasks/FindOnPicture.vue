@@ -1,21 +1,5 @@
 <template>
   <div class="container">
-    <div hidden>
-      Icons made by
-      <a
-        href="https://www.flaticon.com/authors/dave-gandy"
-        title="Dave Gandy"
-      >Dave Gandy</a> from
-      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-    </div>
-    <div class="row">
-      <div class="col-1 backbutton">
-        <!-- backbutton class overrides bootstrap positioning. -->
-        <span @click="backToList()" class="clickable">
-          <unnr-arrow-back></unnr-arrow-back>
-        </span>
-      </div>
-    </div>
     <div class="row justify-content-center">
       <div class="col-12 text-center">
         <img
@@ -43,8 +27,6 @@
 </template>
 
 <script>
-import ArrowBack from "../icons/ArrowBack.vue";
-
 export default {
   data() {
     return {
@@ -58,14 +40,7 @@ export default {
   mounted() {
     this.audio = new Audio();
   },
-  components: {
-    unnrArrowBack: ArrowBack
-  },
   methods: {
-    backToList() {
-      this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
-      this.$router.push({ name: "menu" });
-    },
     clickMap() {
       this.playSound();
       console.log("image clicked");
@@ -87,13 +62,6 @@ export default {
 <style scoped>
 .clickable {
   cursor: pointer;
-}
-
-.backbutton {
-  height: 6rem;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
 }
 
 .outline {

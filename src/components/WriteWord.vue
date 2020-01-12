@@ -1,20 +1,5 @@
 <template>
   <div class="container-fluid">
-    <div hidden>
-      Icons made by
-      <a
-        href="https://www.flaticon.com/authors/dave-gandy"
-        title="Dave Gandy"
-      >Dave Gandy</a> from
-      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-    </div>
-    <div class="row">
-      <div class="col-1 headertool"> <!-- backbutton class overrides bootstrap positioning. -->
-        <span @click="backToList()" class="clickable">
-              <unnr-arrow-back></unnr-arrow-back>
-        </span>
-      </div>
-    </div>
     <div class="row justify-content-center">
       <div class="col-md-12 col-xs-12">
 
@@ -42,7 +27,6 @@
 import DrawWord from "./tasks/DrawWord.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
-import ArrowBack from "./icons/ArrowBack.vue";
 
 export default {
   data() {
@@ -57,7 +41,6 @@ export default {
     unnrDrawWord: DrawWord,
     unnrArrowLeft: ArrowLeft,
     unnrArrowRight: ArrowRight,
-    unnrArrowBack: ArrowBack
   },
   computed: {
     nextTaskExist() {
@@ -76,10 +59,6 @@ export default {
     }
   },
   methods: {
-    backToList() {
-      this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
-      this.$router.push({ name: 'menu'});
-    },
     //**********************************//can remove these checks as button disappears if not valid************************ */
     prevTask() {
       if (this.taskIndex > 0) {
@@ -89,6 +68,7 @@ export default {
     nextTask() {
       if (this.tasks.length > this.taskIndex + 1) {
         this.taskIndex++;
+         this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
       }
     }
     //************************************************************************************************************** */
@@ -101,22 +81,8 @@ export default {
   cursor: pointer;
 }
 
-.headertool {
-  height: 6rem;
-  position: absolute; top: 1rem; left: 1rem; 
-}
-
-/* .arrow {
-  height: 12rem;
-} */
-
 .outline {
   border: solid black 1px;
 }
-
-/* 
-p {
-  font-size: 1px;
-} */
 
 </style>

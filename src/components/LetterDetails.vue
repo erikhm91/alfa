@@ -1,20 +1,5 @@
 <template>
   <div class="container-fluid">
-    <div hidden>
-      Icons made by
-      <a
-        href="https://www.flaticon.com/authors/dave-gandy"
-        title="Dave Gandy"
-      >Dave Gandy</a> from
-      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-    </div>
-    <div class="row">
-      <div class="col-1 headertool">
-        <span @click="backToList()" class="clickable">
-              <unnr-arrow-back></unnr-arrow-back>
-        </span>
-      </div>
-    </div>
     <div class="row justify-content-center">
       <div class="col-md-12 col-xs-12">
         <unnr-draw-letter :task="activeLetter.tasks[taskIndex]"></unnr-draw-letter>
@@ -40,8 +25,6 @@
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
-import ArrowBack from "./icons/ArrowBack.vue";
-
 export default {
   data() {
     return {
@@ -53,8 +36,7 @@ export default {
   components: {
     unnrDrawLetter: DrawLetter,
     unnrArrowLeft: ArrowLeft,
-    unnrArrowRight: ArrowRight,
-    unnrArrowBack: ArrowBack
+    unnrArrowRight: ArrowRight
   },
   computed: {
     nextTaskExist() {
@@ -73,10 +55,6 @@ export default {
     }
   },
   methods: {
-    backToList() {
-      this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
-      this.$router.push({ name: 'menu'});
-    },
     //**********************************//can remove these checks as button disappears if not valid************************ */
     prevTask() {
       if (this.taskIndex > 0) {
@@ -86,6 +64,8 @@ export default {
     nextTask() {
       if (this.activeLetter.tasks.length > this.taskIndex + 1) {
         this.taskIndex++;
+        //sets letter visited/green when navigating to new task
+        this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
       }
     }
     //************************************************************************************************************** */
@@ -97,12 +77,6 @@ export default {
 .clickable {
   cursor: pointer;
 }
-
-.headertool {
-  height: 6rem;
-  position: absolute; top: 1rem; left: 1rem; 
-}
-
 .outline {
   border: solid black 1px;
 }
