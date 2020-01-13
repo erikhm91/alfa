@@ -6,8 +6,7 @@
     <div>
         <unnr-header></unnr-header>
     </div>
-    <hr>
-   
+    <hr>  
   
     <!-- content section -->
     <!-- <div class="container"> -->
@@ -47,5 +46,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+
 </style>
