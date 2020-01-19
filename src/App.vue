@@ -7,8 +7,6 @@
         <unnr-header></unnr-header>
     </div>
 
-    <hr>  
-  
     <!-- content section -->
     <!-- <div class="container"> -->
       <div>

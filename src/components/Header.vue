@@ -51,7 +51,7 @@
         <div class="row justify-content-center">
           <div class="col-3 headerbutton">
             <span @click="navigateToRoute('letterlist')">
-              <h1>Lær bokstavene!</h1>
+              <h1>Mester</h1>
             </span>
           </div>
         </div>
