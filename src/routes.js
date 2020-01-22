@@ -29,7 +29,7 @@ export const routes = [/*
     { path: '', component: LetterList, name: 'letterlist'},
     { path: '/menu', component: LetterTaskMenu, name: 'menu'},
 { path: '/writeword', component: WriteWord, name: 'writeword'},
-    { path: '/write', component: LetterDetails, name: 'details' },
+    { path: '/trackletter', component: LetterDetails, name: 'trackletter' },
     { path: '/find', component: FindOnPicture, name: 'findonpicture'},
     { path: '/config', component: Config, name: 'config'},
     { path: '/config/apps', component: AppLibrary, name: 'applibrary'}
