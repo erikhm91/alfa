@@ -25,12 +25,20 @@
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
+// import store from '../store/store';
 export default {
+  props: ["letter"],
+
   data() {
     return {
       taskIndex: 0,
+      activeLetter : this.$store.getters.activeLetter,
+      // this.$store.getters['letterObject'](this.letter),
       selectedTask: this.$store.getters.activeLetter.tasks[0],
-      activeLetter : this.$store.getters.activeLetter
+      // selectedTask: activeLetter.tasks[0],
+
+
+      // 
     };
   },
   components: {
@@ -38,6 +46,7 @@ export default {
     unnrArrowLeft: ArrowLeft,
     unnrArrowRight: ArrowRight
   },
+
   computed: {
     nextTaskExist() {
       if ( this.$store.getters.activeLetter.tasks.length > this.taskIndex + 1) {   //should implement better reading of values. map getters.
@@ -80,5 +89,4 @@ export default {
 .outline {
   border: solid black 1px;
 }
-
 </style>

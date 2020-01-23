@@ -6,6 +6,7 @@ import FindOnPicture from './components/tasks/FindOnPicture.vue';
 import Config from './components/userconfig/Config.vue';
 import WriteWord from './components/WriteWord.vue';
 import AppLibrary from './components/userconfig/AppLibrary.vue';
+import { store } from './store/store.js';
 // const Bar = () => import(/* webpackChunkName: "bar" */ './Bar.vue')
 // const Baz = () => import(/* webpackChunkName: "bar" */ './Baz.vue')
 
@@ -22,16 +23,28 @@ import AppLibrary from './components/userconfig/AppLibrary.vue';
 //     );
 // }
 
-
 export const routes = [/* 
     {path: '', component: App }, */
-    
-    { path: '', component: LetterList, name: 'letterlist'},
-    { path: '/menu', component: LetterTaskMenu, name: 'menu'},
-{ path: '/writeword', component: WriteWord, name: 'writeword'},
-    { path: '/trackletter', component: LetterDetails, name: 'trackletter' },
-    { path: '/find', component: FindOnPicture, name: 'findonpicture'},
-    { path: '/config', component: Config, name: 'config'},
-    { path: '/config/apps', component: AppLibrary, name: 'applibrary'}
+
+    { path: '', component: LetterList, name: 'letterlist' },
+    { path: '/menu', component: LetterTaskMenu, name: 'menu' },
+    { path: '/writeword', component: WriteWord, name: 'writeword' },
+    {
+        path: '/trackletter/:letter', component: LetterDetails, props: true, name: 'trackletter',
+        beforeEnter(to, from, next) {
+            // // loadImage(next);
+            console.log("param:" + to.params.letter);
+            // console.log("navigated to trackletter route, beforeEnter");
+            store.commit("SET_ACTIVE_LETTER", to.params.letter);
+            next();
+        },
+        beforeUpdate(to, from, next) {
+            store.commit("SET_ACTIVE_LETTER", to.params.letter);
+            next();
+        }
+    },
+    { path: '/find', component: FindOnPicture, name: 'findonpicture' },
+    { path: '/config', component: Config, name: 'config' },
+    { path: '/config/apps', component: AppLibrary, name: 'applibrary' }
 
 ];

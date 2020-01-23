@@ -1,4 +1,5 @@
 <template>
+<div>
   <canvas
     id="canvas"
     v-on:mousedown="mouseDown"
@@ -9,6 +10,16 @@
     :width="canvasWidth"
     :height="canvasHeight"
   ></canvas>
+
+     <img
+            id="taskImage"
+            class="clickanimation center"
+            src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
+            alt="bilde"
+            width="0px"
+            height="0px"
+     >
+  </div>
 </template>
 
 
@@ -26,7 +37,11 @@ export default {
     clearCanvasTrigger: {
         type: Boolean,
         default: false
+    },
+    drawImage: {
+      type: String
     }
+    
   },
 
   data() {
@@ -50,6 +65,14 @@ export default {
   created: function() {
     //initiate eventlistener on window on startup (as window not available in template)
     window.addEventListener("mouseup", this.handleMouseUp);
+  },
+
+  mounted() {
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var image = document.getElementById("taskImage");
+    console.log(this.canvasWidth + this.canvasHeight);
+    context.drawImage(image, 0, 0, 100, 100);
   },
 
   destroyed: function() {

@@ -41,7 +41,7 @@
     <img v-if="animation"
             id="taskImage"
             class="clickanimation center"
-            src="https://cdn.vox-cdn.com/thumbor/3xHq2Shga3kfsw-lTM2Vlss3CgM=/0x0:2040x1360/1200x800/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/65093706/mdoying_180118_2249_0338stills.0.jpg"
+            src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
             alt="bilde"
             width="200px"
             height="200px"
@@ -79,26 +79,21 @@ export default {
         return "";
       }
     },
-    // animation(letter) {
-    //  console.log("activeLetter: " + letter);
-    //  if (letter.activeLetter === true) {
-    //     return "letterclicked";
-    //   } else {
-    //     return "";
-    //   }
-    // },
     selectLetter(letter) {
       this.selectedLetter = letter;
       this.letterClicked = true;
       //update store with selected letter, so can easily get it in the letterdetails component. Should really be route/url parameter
-      this.$store.commit("SET_ACTIVE_LETTER", letter);
+      this.$store.commit("SET_ACTIVE_LETTER_BY_OBJ", letter);
       
       //trigger animation and sound
       this.playSound("../../assets/apekatt.mp3");
       this.animation = true;
 
-      //delay navigation until animation has played
-      setTimeout(() => { this.$router.push({ name: "trackletter" }); }, 2000);
+      //delay navigation until animation has played and image loaded
+
+      // const imagePath = this.$store.getters.activeLetter.tasks[0].image;
+      console.log("selected letter: " + this.selectedLetter.l);
+      setTimeout(() => { this.$router.push({ name: "trackletter", params: {letter: this.selectedLetter.l}}); }, 2000);
 
       //navigate to router programmatically:
       // this.$router.push({ name: "trackletter" });

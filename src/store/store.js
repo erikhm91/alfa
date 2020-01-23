@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import Tasks from "../components/letterlist.json";
 import AppList from "../components/userconfig/appconfig.json";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 
@@ -17,8 +17,14 @@ export const store = new Vuex.Store({
             var index = state.letters.findIndex(obj => obj.l === letterObj.l)
             state.letters[index].enabled = !state.letters[index].enabled;
         },
-        SET_ACTIVE_LETTER(state, activeLetter) {
+        SET_ACTIVE_LETTER_BY_OBJ(state, activeLetter) {
             state.activeLetter = activeLetter;
+            console.log("updated active letter by obj");
+        },
+        SET_ACTIVE_LETTER(state, letter) {
+        var index = state.letters.findIndex(obj => obj.l === letter)
+            state.activeLetter = state.letters[index];
+            console.log("updated active letter");
         },
         SET_LETTER_VISITED(state, letter) {
             // get index of element:
@@ -35,7 +41,7 @@ export const store = new Vuex.Store({
         activeLetter : state => state.activeLetter,
         letters : state => state.letters,
         appList : state => state.appList,
-        
+        letterObject : state => letterParam => state.letters.find(obj => obj.l == letterParam)
     }
 
 })

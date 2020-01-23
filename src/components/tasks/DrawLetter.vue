@@ -16,10 +16,14 @@
     </div>
     <div class="col-lg-8 col-md-8 col-xs-9">
       <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
+
+<!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
+
         <unnrCanvas class="canvas"
           :canvasHeight="canvasHeight"
           :canvasWidth="canvasWidth"
           :clearCanvasTrigger="clearCanvasTrigger"
+          :drawImage="task.image"
         ></unnrCanvas>
         <div>
           <img
@@ -79,6 +83,7 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
+    console.log("task.image: " +  this.task.image);
   },
   watch: {
     task() {
