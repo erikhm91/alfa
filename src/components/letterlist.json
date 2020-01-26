@@ -4,6 +4,7 @@
 "l": "A",
 "enabled": true,
 "visit": false,
+"illustration": "",
 "tasks": [
 {
 "image": "/assets/tracing_images/A.jpg",
@@ -84,6 +85,7 @@
 "l": "E",
 "enabled": true,
 "visit": false,
+"illustration": "https://i.pinimg.com/564x/7a/5f/17/7a5f17afbb8faf096dde75cd04012e62.jpg",
 "tasks": [
 {
 "image": "/assets/tracing_images/E.jpg",

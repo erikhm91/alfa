@@ -12,24 +12,30 @@
             <unnr-eraser></unnr-eraser>
           </button>
         </div>
+        <div class="col-md-12 mt-md-2 col-s-12 col-3">
+          <button class="btn btn-primary" @click="triggerDrawAnimation()">
+            <unnr-question></unnr-question>
+          </button>
+        </div>
       </div>
     </div>
     <div class="col-lg-8 col-md-8 col-xs-9">
       <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
+        <!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
 
-<!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
-
-        <unnrCanvas class="canvas"
+        <unnrCanvas
+          class="canvas"
           :canvasHeight="canvasHeight"
           :canvasWidth="canvasWidth"
           :clearCanvasTrigger="clearCanvasTrigger"
-          :drawImage="task.image"
+          :drawAnimationTrigger="drawAnimationTrigger"
+          :drawImage="task.url"
         ></unnrCanvas>
         <div>
           <img
             id="taskImage"
             class="img"
-            :src="task.image"
+            :src="task.src"
             :alt="task.alt"
             :width="canvasWidth"
             :height="canvasHeight"
@@ -44,17 +50,20 @@
 <script>
 import Speaker from "../icons/Speaker.vue";
 import Eraser from "../icons/Eraser.vue";
+import Question from "../icons/Question.vue";
 import Canvas from "../utilities/Canvas.vue";
 
 export default {
-  props: {
-    task: {
-      type: Object
-    }
-  },
+  // props: {
+  //   task: {
+  //     type: HTMLImageElement
+  //   }
+  // },
+  props: ["task"],
   components: {
     unnrSpeaker: Speaker,
     unnrEraser: Eraser,
+    unnrQuestion: Question,
     unnrCanvas: Canvas
   },
 
@@ -66,7 +75,8 @@ export default {
         width: "400px"
       },
       // *************************************
-      clearCanvasTrigger: false
+      clearCanvasTrigger: false,
+      drawAnimationTrigger: false
     };
   },
   computed: {
@@ -83,7 +93,7 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
-    console.log("task.image: " +  this.task.image);
+    console.log("task.src: " + this.task.src);
   },
   watch: {
     task() {
@@ -99,6 +109,10 @@ export default {
     clearCanvas() {
       //change value to trigger update in child component
       this.clearCanvasTrigger = !this.clearCanvasTrigger;
+    },
+
+    triggerDrawAnimation() {
+      this.drawAnimationTrigger = !this.drawAnimationTrigger;
     }
   }
 };

@@ -1,24 +1,24 @@
 <template>
-<div>
-  <canvas
-    id="canvas"
-    v-on:mousedown="mouseDown"
-    v-on:mousemove="mouseMove"
-    v-on:touchstart="sketchpadTouchStart"
-    v-on:touchend="sketchpadTouchEnd"
-    v-on:touchmove="sketchpadTouchMove"
-    :width="canvasWidth"
-    :height="canvasHeight"
-  ></canvas>
+  <div>
+    <canvas
+      id="canvas"
+      v-on:mousedown="mouseDown"
+      v-on:mousemove="mouseMove"
+      v-on:touchstart="sketchpadTouchStart"
+      v-on:touchend="sketchpadTouchEnd"
+      v-on:touchmove="sketchpadTouchMove"
+      :width="canvasWidth"
+      :height="canvasHeight"
+    ></canvas>
 
-     <img
-            id="taskImage"
-            class="clickanimation center"
-            src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
-            alt="bilde"
-            width="0px"
-            height="0px"
-     >
+    <img
+      class="picture"
+      id="taskImage"
+      src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
+      alt="illustration.alt"
+      width="100px"
+      height="100px"
+    />
   </div>
 </template>
 
@@ -35,13 +35,19 @@ export default {
       required: true
     },
     clearCanvasTrigger: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false
+    },
+    drawAnimationTrigger: {
+      type: Boolean,
+      default: false
     },
     drawImage: {
       type: String
     }
-    
+    // illustration: {
+    //   type: HTMLImageElement
+    // }
   },
 
   data() {
@@ -58,7 +64,8 @@ export default {
         size: 9
       },
       mousePressed: false,
-      showImage: true
+      showImage: true,
+      animationRequestId: null
     };
   },
 
@@ -68,11 +75,11 @@ export default {
   },
 
   mounted() {
-    var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
-    var image = document.getElementById("taskImage");
-    console.log(this.canvasWidth + this.canvasHeight);
-    context.drawImage(image, 0, 0, 100, 100);
+    // var canvas = document.getElementById("canvas");
+    // var context = canvas.getContext("2d");
+    // var image = document.getElementById("taskImage");
+    // console.log(this.canvasWidth + this.canvasHeight);
+    // context.drawImage(image, 0, 0, 100, 100);
   },
 
   destroyed: function() {
@@ -80,9 +87,12 @@ export default {
   },
 
   watch: {
-      clearCanvasTrigger(newVal, oldVal) {
-        this.clearCanvas();
-      }
+    clearCanvasTrigger(newVal, oldVal) {
+      this.clearCanvas();
+    },
+    drawAnimationTrigger(newVal, oldVal) {
+      this.writeA();
+    }
   },
 
   methods: {
@@ -90,6 +100,169 @@ export default {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    },
+
+    async writeA() {
+      if (this.animationRequestId != null) {
+      }
+      let A = [
+        { startX: 200, startY: 300, endX: 300, endY: 100 },
+
+        { startX: 300, startY: 100, endX: 400, endY: 300 },
+
+        { startX: 250, startY: 200, endX: 350, endY: 200 }
+      ];
+
+      var i;
+      for (i = 0; i < A.length; i++) {
+        await this.animateLine(A[i]);
+      }
+    },
+
+    animateLine(lineObj) {
+      //async function
+      return new Promise((resolve, reject) => {
+        console.log("drawing triggered");
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        let startX = lineObj.startX;
+        let startY = lineObj.startY;
+        let endX = lineObj.endX;
+        let endY = lineObj.endY;
+
+        //calculate number of iterations for drawing loop
+        const diffX = Math.abs(endX - startX);
+        const diffY = Math.abs(endY - startY);
+        let iterations = 0;
+        if (diffX >= diffY) {
+          iterations = diffX / 4;
+        } else {
+          iterations = diffY / 4;
+        }
+        console.log("iterations: " + iterations);
+        let maxCount = Math.round(iterations);
+        console.log("maxCount: " + maxCount);
+
+        let xIncrement = (endX - startX) / maxCount;
+        console.log("xIncrement: " + xIncrement);
+
+        let yIncrement = (endY - startY) / maxCount;
+        console.log("yIncrement: " + yIncrement);
+
+        endX = startX + xIncrement;
+        endY = startY + yIncrement;
+
+        let count = 0;
+        let framesPerSecond = 60;
+        let requestId;
+
+        function animate() {
+          // ctx.clearRect(0, 0, innerWidth, innerHeight);
+          setTimeout(function() {
+            requestId = requestAnimationFrame(animate);
+
+            if (count >= maxCount) {
+              cancelAnimationFrame(requestId);
+              console.log(
+                "execution of method complete! requestID: " + requestId
+              );
+              resolve("completed");
+            }
+
+            // console.log(
+            //   "startX: " +
+            //     startX +
+            //     ", endX:" +
+            //     endX +
+            //     ", startY:" +
+            //     startY +
+            //     ", endY" +
+            //     endY
+            // );
+
+            // console.log("iterationnr: " + count + " out of " + maxCount);
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+
+            ctx.lineWidth = 12;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            ctx.strokeStyle = "#000";
+            ctx.stroke();
+
+            startX += xIncrement;
+            endX += xIncrement;
+            startY += yIncrement;
+            endY += yIncrement;
+            count += 1;
+          }, 1000 / framesPerSecond);
+        }
+        animate();
+      });
+    },
+
+    animateArc(arcObj) {
+      //async function
+      // return new Promise((resolve, reject) => {
+
+      console.log("drawing triggered");
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+
+      let centerX = 200;
+      let centerY = 300;
+      let radius = 50;
+      let startAngle = 0 // in radians, 0 is 3 o'clock
+      let endAngle = 2 * Math.PI // full circle
+
+      angleDiff = endAngle - startAngle
+
+
+      let count = 0;
+      let requestId;
+
+        function animate() {
+          // ctx.clearRect(0, 0, innerWidth, innerHeight);
+            requestId = requestAnimationFrame(animate);
+
+            if (count >= maxCount) {
+              cancelAnimationFrame(requestId);
+              console.log("execution of method complete! requestID: " + requestId);
+              resolve("completed");
+            }
+
+            // console.log(
+            //   "startX: " +
+            //     startX +
+            //     ", endX:" +
+            //     endX +
+            //     ", startY:" +
+            //     startY +
+            //     ", endY" +
+            //     endY
+            // );
+
+            // console.log("iterationnr: " + count + " out of " + maxCount);
+  
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+
+      ctx.strokeStyle = "#000";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = this.cursor.size;
+      ctx.stroke();
+
+            startX += xIncrement;
+            endX += xIncrement;
+            startY += yIncrement;
+            endY += yIncrement;
+            count += 1;
+        }
+        animate();
+      // });
     },
 
     // removed event param (just to know, it exists as for all callbacks)
@@ -104,14 +277,14 @@ export default {
 
       var ctx = c.getContext("2d");
 
-      // Let's use black by setting RGB values to 0, and 255 alpha (completely opaque)
       var r = 33;
       var g = 171;
       var b = 205;
       var a = 255;
 
       // Select a fill style
-      ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
+      // ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
+      ctx.strokeStyle = "#ff0000";
       // Set the line "cap" style to round, so lines at different angles can join into each other
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
@@ -237,4 +410,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.picture {
+  position: absolute;
+  left: 0px;
+  // border: 3px solid #73AD21;
+}
 </style>

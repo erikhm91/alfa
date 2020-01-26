@@ -29,7 +29,7 @@
       <ul class="row list-group-inline justify-content-center">
         <li
           class="list-group-item rounded-lg col-2 border-primary text-center"
-          :class="computedColor(letter)"        
+          :class="computedColor(letter)"
           v-for="(letter, i) in enabledLetters"
           v-bind:key="i"
           @click="selectLetter(letter)"
@@ -37,23 +37,25 @@
       </ul>
     </div>
 
-
-    <img v-if="animation"
-            id="taskImage"
-            class="clickanimation center"
-            src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
-            alt="bilde"
-            width="200px"
-            height="200px"
-            @animationend="animation = false"
-          />
+    <img
+      v-if="animation"
+      id="taskImage"
+      class="clickanimation center"
+      :src="animationImg"
+      alt="bilde"
+      width="200px"
+      height="200px"
+      @animationend="animation = false"
+    />
   </div>
 </template>
 
 <script>
+// import {cachingUtil} from './utilites/cachingUtil';
 export default {
   data() {
     return {
+      animationImg: null,
       animation: false,
       letterClicked: false,
       selectedLetter: {},
@@ -84,19 +86,28 @@ export default {
       this.letterClicked = true;
       //update store with selected letter, so can easily get it in the letterdetails component. Should really be route/url parameter
       this.$store.commit("SET_ACTIVE_LETTER_BY_OBJ", letter);
-      
+
       //trigger animation and sound
       this.playSound("../../assets/apekatt.mp3");
+
+      if (letter.l === "E") {
+        this.animationImg =
+          "https://i.pinimg.com/564x/7a/5f/17/7a5f17afbb8faf096dde75cd04012e62.jpg";
+      } else {
+        this.animationImg =
+          "https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on";
+      }
       this.animation = true;
-
-      //delay navigation until animation has played and image loaded
-
-      // const imagePath = this.$store.getters.activeLetter.tasks[0].image;
-      console.log("selected letter: " + this.selectedLetter.l);
-      setTimeout(() => { this.$router.push({ name: "trackletter", params: {letter: this.selectedLetter.l}}); }, 2000);
-
-      //navigate to router programmatically:
-      // this.$router.push({ name: "trackletter" });
+      
+      //TODO: delay navigation until animation has played and image loaded.
+      //change to a callback function which notifies when the images have been loaded, so that router push can be called.
+      //with setTimeout the loading is not started before the timeout is completed, which is not what we want.
+      setTimeout(() => {
+        this.$router.push({
+          name: "trackletter",
+          params: { letter: this.selectedLetter.l }
+        });
+      }, 2000);
     },
     playSound(path) {
       this.audio.src = path;
@@ -128,34 +139,30 @@ li {
   background-color: $success;
 }
 
-// letter click animation <<<
+// illustration image animation <<<
 .clickanimation {
-//animations
-animation-duration: 3s;
-animation-name: lettermove;
+  //animations
+  animation: lettermove 3s;
 
-//keyframes
-@keyframes lettermove {
-  from {
-    margin-left: -100%;
-    width: 100%;
-  }
-  to {
-    margin-left: 100%;
-    width: 300%;
+  //keyframes
+  @keyframes lettermove {
+    from {
+      margin-left: -100%;
+      width: 20%;
+    }
+    to {
+      margin-left: 100%;
+      width: 20%;
+    }
   }
 }
-
-}
-// letter click animation >>>
+// illustration image animation >>>
 
 .center {
   position: fixed;
   top: 50%;
   left: 50%;
 }
-
-
 
 //cloud <<<
 

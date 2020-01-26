@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
     state: {
         activeLetter: {},
         letters: Tasks.letters, //read from jsonfile
-        appList: AppList.apps
+        appList: AppList.apps,
+        taskImages: []
     },
     mutations: {
         TOGGLE_ENABLE_LETTER(state, letterObj) {
@@ -35,13 +36,21 @@ export const store = new Vuex.Store({
             // console.log("toggle enable app triggered");
             var index = state.appList.findIndex(obj => obj.id === appId)
             state.appList[index].enabled = !state.appList[index].enabled;
+        },
+        SET_TASK_IMAGES(state, taskImages) {
+            state.taskImages = taskImages;
+        },
+        CLEAR_TASK_IMAGES(state) {
+            state.taskImages = [];
         }
+
     },
     getters: {
         activeLetter : state => state.activeLetter,
         letters : state => state.letters,
         appList : state => state.appList,
-        letterObject : state => letterParam => state.letters.find(obj => obj.l == letterParam)
+        letterObject : state => letterParam => state.letters.find(obj => obj.l == letterParam),
+        taskImages : state => state.taskImages
     }
 
 })

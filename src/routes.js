@@ -7,6 +7,7 @@ import Config from './components/userconfig/Config.vue';
 import WriteWord from './components/WriteWord.vue';
 import AppLibrary from './components/userconfig/AppLibrary.vue';
 import { store } from './store/store.js';
+import { FormSelectPlugin } from 'bootstrap-vue';
 // const Bar = () => import(/* webpackChunkName: "bar" */ './Bar.vue')
 // const Baz = () => import(/* webpackChunkName: "bar" */ './Baz.vue')
 
@@ -32,10 +33,11 @@ export const routes = [/*
     {
         path: '/trackletter/:letter', component: LetterDetails, props: true, name: 'trackletter',
         beforeEnter(to, from, next) {
-            // // loadImage(next);
-            console.log("param:" + to.params.letter);
-            // console.log("navigated to trackletter route, beforeEnter");
+            // console.log("param:" + to.params.letter);
             store.commit("SET_ACTIVE_LETTER", to.params.letter);
+            //preload taskImages
+            const loadedImages = preloadArrayOfImages(store.getters.letterObject(to.params.letter).tasks);
+            store.commit("SET_TASK_IMAGES", loadedImages);
             next();
         },
         beforeUpdate(to, from, next) {
@@ -48,3 +50,23 @@ export const routes = [/*
     { path: '/config/apps', component: AppLibrary, name: 'applibrary' }
 
 ];
+
+function preloadArrayOfImages(images) {
+    let loadedImages = [];
+    images.forEach(element => {
+        console.log(element);
+        loadedImages.push(preloadImage(element.image, element.alt));
+    });
+    return loadedImages;
+}
+
+function preloadImage(url, alt) {
+    var image = new Image();
+    image.onload = function() {
+        console.log("image is now loaded");
+    }
+    image.src = url;
+    image.alt = alt;
+    console.log("image loaded: " + url);
+    return image;
+}

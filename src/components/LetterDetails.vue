@@ -2,19 +2,19 @@
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-12 col-xs-12">
-        <unnr-draw-letter :task="activeLetter.tasks[taskIndex]"></unnr-draw-letter>
+        <unnr-draw-letter :task="tasks[taskIndex]"></unnr-draw-letter>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-md-1"></div>
       <div class="col-md-3 col-4 arrow">
         <span v-show="prevTaskExist" @click="prevTask()" class="clickable">
-          <unnr-arrow-left height="200px" width="200px"></unnr-arrow-left>
+          <unnr-arrow-left height="150px" width="150px"></unnr-arrow-left>
         </span>
       </div>
       <div class="col-md-3 col-4 arrow">
         <span v-show="nextTaskExist" @click="nextTask()" class="clickable">
-          <unnr-arrow-right height="200px" width="200px"></unnr-arrow-right>
+          <unnr-arrow-right height="150px" width="150px"></unnr-arrow-right>
         </span>
       </div>
     </div>
@@ -36,7 +36,7 @@ export default {
       // this.$store.getters['letterObject'](this.letter),
       selectedTask: this.$store.getters.activeLetter.tasks[0],
       // selectedTask: activeLetter.tasks[0],
-
+      tasks : this.$store.getters.taskImages
 
       // 
     };
@@ -88,5 +88,9 @@ export default {
 }
 .outline {
   border: solid black 1px;
+}
+
+div {
+  overflow: hidden;
 }
 </style>
