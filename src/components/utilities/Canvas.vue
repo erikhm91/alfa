@@ -24,7 +24,10 @@
 
 
 <script>
+import CoordinatesMixin from "../mixins/CoordinatesMixin.js";
 export default {
+  mixins : [CoordinatesMixin],
+  
   props: {
     canvasWidth: {
       type: String,
@@ -45,9 +48,6 @@ export default {
     drawImage: {
       type: String
     }
-    // illustration: {
-    //   type: HTMLImageElement
-    // }
   },
 
   data() {
@@ -65,9 +65,21 @@ export default {
       },
       mousePressed: false,
       showImage: true,
-      animationRequestId: null
+      animationRequestId: null,
+      animationDrawingSpeed: 4.2
     };
   },
+  computed: {
+    canvasHeightAsNumber() {
+      return parseInt(this.canvasHeight, 10);
+    },
+
+    coordinates() {
+      return this.$store.getters.letterCoordinatesOfActiveLetter;
+    }
+  },
+  
+
 
   created: function() {
     //initiate eventlistener on window on startup (as window not available in template)
@@ -91,7 +103,7 @@ export default {
       this.clearCanvas();
     },
     drawAnimationTrigger(newVal, oldVal) {
-      this.writeA();
+      this.animateTracing("A");
     }
   },
 
@@ -100,6 +112,32 @@ export default {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    },
+
+    async animateTracing(letter) {
+      //get letter tracing coordinates from store
+      if (this.animationRequestId != null) {
+      }
+      // console.log(coordinateObj);
+      var i;
+      for (i = 0; i < this.coordinates.coordinateList.length; i++) {
+        console.log("entered loop");
+        //deep copy object value to translate scaling (without mutating the vuex state!)
+        let rowObj = JSON.parse(JSON.stringify(this.coordinates.coordinateList[i]));
+
+        console.log("Row obj: " + rowObj);
+        if (rowObj.type === "line") {
+          //translate coordinates to match canvas size:
+          // console.log("startX before translate" + rowObj.data.startX);
+          const translatedCoordinates = this.translateCoordinates(rowObj.data, this.canvasHeightAsNumber);
+          // console.log("startX after translate" + translatedRowObj.startX);
+          await this.animateLine(translatedCoordinates);
+
+        // } else if (rowObj.type === "arc") {
+        //   rowObj.data = this.translateArcCoordinates(rowObj.data, this.canvasHeightAsNumber);
+        //   await this.animateArc(rowObj.data);
+        }
+      }
     },
 
     async writeA() {
@@ -119,6 +157,30 @@ export default {
       }
     },
 
+    async writeO() {
+      if (this.animationRequestId != null) {
+      }
+      let endAngle = 1.5*Math.PI;
+
+      let O = [
+        { centerX: 200, centerY: 300, radius: 50, startAngle: 0, endAngle: endAngle }
+      ];
+      console.log(O[0]);
+
+      this.animateArc(O[0]);
+
+            // let centerX = 200;
+      // let centerY = 300;
+      // let radius = 50;
+      // let startAngle = 0; // in radians, 0 is 3 o'clock
+      // let endAngle = Math.PI; // full circle
+
+      // var i;
+      // for (i = 0; i < O.length; i++) {
+      //   await this.animateArc(O[i]);
+      // }
+    },
+
     animateLine(lineObj) {
       //async function
       return new Promise((resolve, reject) => {
@@ -136,9 +198,9 @@ export default {
         const diffY = Math.abs(endY - startY);
         let iterations = 0;
         if (diffX >= diffY) {
-          iterations = diffX / 4;
+          iterations = diffX / this.animationDrawingSpeed;
         } else {
-          iterations = diffY / 4;
+          iterations = diffY / this.animationDrawingSpeed;
         }
         console.log("iterations: " + iterations);
         let maxCount = Math.round(iterations);
@@ -211,41 +273,19 @@ export default {
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
 
-      let centerX = 200;
-      let centerY = 300;
-      let radius = 50;
-      let startAngle = 0 // in radians, 0 is 3 o'clock
-      let endAngle = 2 * Math.PI // full circle
+      let centerX = arcObj.centerX;
+      let centerY = arcObj.centerY;
+      let radius = arcObj.radius;
+      let startAngle = arcObj.startAngle; // in radians, 0 is 3 o'clock
+      let endAngle = arcObj.endAngle; // full circle 
 
-      angleDiff = endAngle - startAngle
-
+      // let angleDiff = endAngle - startAngle;
 
       let count = 0;
       let requestId;
 
-        function animate() {
-          // ctx.clearRect(0, 0, innerWidth, innerHeight);
-            requestId = requestAnimationFrame(animate);
+      console.log("drawing arc: " + arcObj);
 
-            if (count >= maxCount) {
-              cancelAnimationFrame(requestId);
-              console.log("execution of method complete! requestID: " + requestId);
-              resolve("completed");
-            }
-
-            // console.log(
-            //   "startX: " +
-            //     startX +
-            //     ", endX:" +
-            //     endX +
-            //     ", startY:" +
-            //     startY +
-            //     ", endY" +
-            //     endY
-            // );
-
-            // console.log("iterationnr: " + count + " out of " + maxCount);
-  
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, startAngle, endAngle);
 
@@ -255,13 +295,45 @@ export default {
       ctx.lineWidth = this.cursor.size;
       ctx.stroke();
 
-            startX += xIncrement;
-            endX += xIncrement;
-            startY += yIncrement;
-            endY += yIncrement;
-            count += 1;
+      function animate() {
+        // ctx.clearRect(0, 0, innerWidth, innerHeight);
+        requestId = requestAnimationFrame(animate);
+
+        if (count >= maxCount) {
+          cancelAnimationFrame(requestId);
+          console.log("execution of method complete! requestID: " + requestId);
+          resolve("completed");
         }
-        animate();
+
+        // console.log(
+        //   "startX: " +
+        //     startX +
+        //     ", endX:" +
+        //     endX +
+        //     ", startY:" +
+        //     startY +
+        //     ", endY" +
+        //     endY
+        // );
+
+        // console.log("iterationnr: " + count + " out of " + maxCount);
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+
+        ctx.strokeStyle = "#000";
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.lineWidth = this.cursor.size;
+        ctx.stroke();
+
+        // startX += xIncrement;
+        // endX += xIncrement;
+        // startY += yIncrement;
+        // endY += yIncrement;
+        // count += 1;
+      }
+      // animate();
       // });
     },
 

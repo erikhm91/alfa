@@ -2,16 +2,19 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Tasks from "../components/letterlist.json";
 import AppList from "../components/userconfig/appconfig.json";
+import LetterCoordinates from "../data/letter_coordinates.json";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 
+    strict:true,
     state: {
         activeLetter: {},
         letters: Tasks.letters, //read from jsonfile
         appList: AppList.apps,
-        taskImages: []
+        taskImages: [],
+        letterCoordinates: LetterCoordinates.letters
     },
     mutations: {
         TOGGLE_ENABLE_LETTER(state, letterObj) {
@@ -50,7 +53,10 @@ export const store = new Vuex.Store({
         letters : state => state.letters,
         appList : state => state.appList,
         letterObject : state => letterParam => state.letters.find(obj => obj.l == letterParam),
-        taskImages : state => state.taskImages
+        taskImages : state => state.taskImages,
+        allLetterCoordinates : state => letterCoordinates,
+        letterCoordinates : state => letterParam => state.letterCoordinates.find(obj => obj.l == letterParam),
+        letterCoordinatesOfActiveLetter : state => state.letterCoordinates.find(obj => obj.l == state.activeLetter.l),
     }
 
 })
