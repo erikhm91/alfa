@@ -19,7 +19,25 @@
       width="100px"
       height="100px"
     />
+    <img
+      v-if="traceAnimateActive"
+      class="animationPicture"
+      src="\assets\bil.png"
+      alt="illustration.alt"
+      width="100px"
+      height="100px"
+    />
+
+    <img
+      id="pencilsvg"
+      src="\assets\pencil.svg"
+      alt="pencil"
+      width="50px"
+      height="50px"
+      />
   </div>
+
+
 </template>
 
 
@@ -66,8 +84,11 @@ export default {
       mousePressed: false,
       showImage: true,
       animationRequestId: null,
-      animationDrawingSpeed: 4.2
-      //note: when increasing speed lines become slightly longer!
+      animationDrawingSpeed: 4.2, //note: when increasing speed lines become slightly longer!
+      traceAnimateRelevant: true,
+      traceAnimateActive: false,
+      traceValidationTolerancePx: 10,
+      canvasBack: null
     };
   },
   computed: {
@@ -117,6 +138,9 @@ export default {
       //get letter tracing coordinates from store
       if (this.animationRequestId != null) {
       }
+
+      //make backup of canvasdocument
+      this.canvasBack = document.createElement("canvas");
       // console.log(coordinateObj);
       var i;
       for (i = 0; i < this.coordinates.coordinateList.length; i++) {
@@ -190,7 +214,7 @@ export default {
     animateLine(lineObj) {
       //async function
       return new Promise((resolve, reject) => {
-        console.log("drawing triggered");
+        // console.log("drawing triggered");
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
 
@@ -208,15 +232,15 @@ export default {
         } else {
           iterations = diffY / this.animationDrawingSpeed;
         }
-        console.log("iterations: " + iterations);
+        // console.log("iterations: " + iterations);
         let maxCount = Math.round(iterations);
-        console.log("maxCount: " + maxCount);
+        // console.log("maxCount: " + maxCount);
 
         let xIncrement = (endX - startX) / maxCount;
-        console.log("xIncrement: " + xIncrement);
+        // console.log("xIncrement: " + xIncrement);
 
         let yIncrement = (endY - startY) / maxCount;
-        console.log("yIncrement: " + yIncrement);
+        // console.log("yIncrement: " + yIncrement);
 
         endX = startX + xIncrement;
         endY = startY + yIncrement;
@@ -224,6 +248,15 @@ export default {
         let count = 0;
         let framesPerSecond = 60;
         let requestId;
+        var img = document.getElementById("pencilsvg");
+
+        //make initial canvasbackup
+        var canvasBack = document.createElement("canvas");
+        canvasBack.width = ctx.canvas.width;
+        console.log("width: " + ctx.canvas.width + ", canvasWidth: " + this.canvasHeight);
+        canvasBack.height = ctx.canvas.height;
+        canvasBack.ctx = canvasBack.getContext("2d");
+        canvasBack.ctx.drawImage(canvas,0,0);
 
         function animate() {
           setTimeout(function() {
@@ -234,9 +267,12 @@ export default {
               console.log(
                 "execution of method complete! requestID: " + requestId
               );
+              ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+              ctx.drawImage(canvasBack,0,0);
               resolve("completed");
+              return;
             }
-
+            
             ctx.beginPath();
             ctx.moveTo(startX, startY);
             ctx.lineTo(endX, endY);
@@ -245,7 +281,21 @@ export default {
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
             ctx.strokeStyle = "#000";
+
+            //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.drawImage(canvasBack,0,0);
+
             ctx.stroke();
+
+            //backup canvas again after stroke
+            canvasBack.width = ctx.canvas.width;
+            canvasBack.height = ctx.canvas.height;
+            canvasBack.ctx = canvasBack.getContext("2d");
+            canvasBack.ctx.drawImage(canvas,0,0);
+
+            //add pencil
+            ctx.drawImage(img, endX, endY-45, 50, 50);
 
             startX += xIncrement;
             endX += xIncrement;
@@ -261,80 +311,87 @@ export default {
     animateArc(arcObj) {
       //async function
       return new Promise((resolve, reject) => {
+        console.log("drawing triggered");
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
 
-      console.log("drawing triggered");
-      var canvas = document.getElementById("canvas");
-      var ctx = canvas.getContext("2d");
+        //     "coordinateList": [
+        //      {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 40, "endY": 80 }},
+        //      {"type": "arc", "data": { "centerX": 40, "centerY":35, "radius": 30,
+        //                                "startAngleDeg": 90, "endAngleDeg": 270, "counterClockwise": false }}
+        // ]
 
-      //     "coordinateList": [
-      //      {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 40, "endY": 80 }},
-      //      {"type": "arc", "data": { "centerX": 40, "centerY":35, "radius": 30,
-      //                                "startAngleDeg": 90, "endAngleDeg": 270, "counterClockwise": false }}
-      // ]
+        let centerX = arcObj.centerX;
+        let centerY = arcObj.centerY;
+        let radius = arcObj.radius;
+        let startAngle = arcObj.startAngleDeg * 0.01745329252; // convert to radians
+        let endAngle = arcObj.endAngleDeg * 0.01745329252;
+        let counterClockwise = arcObj.counterClockwise;
+        // arcObj.counterClockwise;
 
-      let centerX = arcObj.centerX;
-      let centerY = arcObj.centerY;
-      let radius = arcObj.radius;
-      let startAngle = arcObj.startAngleDeg * 0.01745329252; // convert to radians
-      let endAngle = arcObj.endAngleDeg * 0.01745329252; // full circle
-      let counterClockwise = false;
-      // arcObj.counterClockwise;
+        console.log("drawing arc: " + arcObj);
 
-      console.log("drawing arc: " + arcObj);
-
-      //calculate number of iterations for drawing loop
-      const diffAngles = Math.abs(endAngle - startAngle);
-
-      let iterations = diffAngles;
-
-      // console.log("iterations: " + iterations);
-      let maxCount = 50;
-      const angleIncrement = diffAngles / maxCount;
-
-      let count = 0;
-      let framesPerSecond = 60;
-      let requestId;
-
-      endAngle = startAngle + angleIncrement;
-
-      function animate() {
-        requestId = requestAnimationFrame(animate);
-
-        if (count >= maxCount) {
-          cancelAnimationFrame(requestId);
-          console.log("execution of method complete! requestID: " + requestId);
-          resolve("completed");
+        let diffAngles;
+        //calculate number of iterations for drawing loop
+        if (counterClockwise === false) {
+          diffAngles = Math.abs(endAngle - startAngle);
+        } else {
+          //negative number
+          diffAngles = -Math.abs(endAngle - startAngle);
         }
 
-        ctx.beginPath();
-        ctx.arc(
-          centerX,
-          centerY,
-          radius,
-          startAngle,
-          endAngle,
-          counterClockwise
-        );
+        let iterations = diffAngles;
 
-        ctx.strokeStyle = "#000";
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.lineWidth = 12;
-        ctx.stroke();
+        // console.log("iterations: " + iterations);
+        let maxCount = 50;
+        const angleIncrement = diffAngles / maxCount;
 
-        startAngle += angleIncrement;
-        endAngle += angleIncrement;
-        count += 1;
+        let count = 0;
+        let framesPerSecond = 60;
+        let requestId;
 
-        // startX += xIncrement;
-        // endX += xIncrement;
-        // startY += yIncrement;
-        // endY += yIncrement;
-        // count += 1;
-      }
+        endAngle = startAngle + angleIncrement;
 
-      animate();
-      })
+        function animate() {
+          requestId = requestAnimationFrame(animate);
+
+          if (count >= maxCount) {
+            cancelAnimationFrame(requestId);
+            console.log(
+              "execution of method complete! requestID: " + requestId
+            );
+            resolve("completed");
+          }
+
+          ctx.beginPath();
+          ctx.arc(
+            centerX,
+            centerY,
+            radius,
+            startAngle,
+            endAngle,
+            counterClockwise
+          );
+
+          ctx.strokeStyle = "#000";
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.lineWidth = 12;
+          ctx.stroke();
+
+          startAngle += angleIncrement;
+          endAngle += angleIncrement;
+          count += 1;
+
+          // startX += xIncrement;
+          // endX += xIncrement;
+          // startY += yIncrement;
+          // endY += yIncrement;
+          // count += 1;
+        }
+
+        animate();
+      });
     },
 
     // removed event param (just to know, it exists as for all callbacks)
@@ -379,7 +436,43 @@ export default {
       this.mousePressed = true;
       this.setCurrentMousePosition(event);
       this.drawLine(event);
+      this.validatePosition(event);
     },
+    validatePosition(event) {
+      //check if position is correct starting point
+      if (this.traceAnimateRelevant) {
+        //get starting coordinates
+        let rowObj = JSON.parse(
+          JSON.stringify(this.coordinates.coordinateList[0])
+        );
+        const translatedCoordinates = this.translateCoordinates(
+          rowObj.data,
+          rowObj.type,
+          this.canvasHeightAsNumber
+        );
+
+        //compare to mouse position
+        console.log("target x y: (" + translatedCoordinates.startX + "," + translatedCoordinates.startY + ")");
+        console.log("actual x y: (" + this.cursor.current.x + "," + this.cursor.current.y + ")");
+
+
+        //define tolerance limits for starting point:
+        const lowerX = translatedCoordinates.startX - this.traceValidationTolerancePx;
+        const upperX = translatedCoordinates.startX + this.traceValidationTolerancePx;
+        const lowerY = translatedCoordinates.startY - this.traceValidationTolerancePx;
+        const upperY = translatedCoordinates.startY + this.traceValidationTolerancePx;
+
+        if (
+          this.cursor.current.x > lowerX &&
+          this.cursor.current.x < upperX &&
+          this.cursor.current.y > lowerY &&
+          this.cursor.current.y < upperY
+          ) {
+          this.traceAnimateActive = true;
+        }
+      }
+    },
+
     handleMouseUp: function() {
       this.mousePressed = false;
 
@@ -486,5 +579,9 @@ export default {
   position: absolute;
   left: 0px;
   // border: 3px solid #73AD21;
+}
+.animationPicture {
+  position: absolute;
+  left: 300px;
 }
 </style>

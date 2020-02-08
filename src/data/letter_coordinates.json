@@ -9,11 +9,79 @@
   ]
 },
 
+{"l": "B",
+  "coordinateList": [
+       {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 40, "endY": 80 }},
+       {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 50, "endY": 20 }},
+       {"type": "arc", "data": { "centerX": 50, "centerY":34, "radius": 28, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
+       {"type": "line", "data": { "startX": 50, "startY": 48, "endX": 41, "endY": 48 }},
+       {"type": "line", "data": { "startX": 41, "startY": 48, "endX": 55, "endY": 48 }},
+       {"type": "arc", "data": { "centerX": 55, "centerY":64, "radius": 32, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
+       {"type": "line", "data": { "startX": 55, "startY": 80, "endX": 41, "endY": 80 }}
+  ]
+},
+
+{
+  "l": "a",
+   "coordinateList": [
+       {"type": "line", "data": { "startX": 20, "startY": 100, "endX": 50, "endY": 20 }},
+       {"type": "line", "data": { "startX": 50, "startY": 20, "endX": 80, "endY": 80 }},
+      {"type": "line", "data": { "startX": 30, "startY": 60, "endX": 68, "endY": 60 }}
+  ]
+},
+
+{
+  "l": "H",
+   "coordinateList": [
+       {"type": "line", "data": { "startX": 35, "startY": 20, "endX": 35, "endY": 80 }},
+       {"type": "line", "data": { "startX": 65, "startY": 20, "endX": 65, "endY": 80 }},
+      {"type": "line", "data": { "startX": 35, "startY": 50, "endX": 63, "endY": 50 }}
+  ]
+},
+
+{
+  "l": "M",
+   "coordinateList": [
+       {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 30, "endY": 80 }},
+       {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 49, "endY": 50 }},
+       {"type": "line", "data": { "startX": 50, "startY": 50, "endX": 69, "endY": 20 }},
+      {"type": "line", "data": { "startX": 70, "startY": 20, "endX": 70, "endY": 80 }}
+  ]
+},
+
+{
+  "l": "N",
+   "coordinateList": [
+       {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 30, "endY": 80 }},
+       {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 70, "endY": 80 }},
+      {"type": "line", "data": { "startX": 71, "startY": 80, "endX": 71, "endY": 20 }}
+  ]
+},
+
+
+
+{"l": "O",
+  "coordinateList": [
+       {"type": "arc", "data": { "centerX": 50, "centerY":50, "radius": 40, "startAngleDeg": -90, "endAngleDeg": 270, "counterClockwise": true }}
+  ]
+},
+
+{"l": "Q",
+  "coordinateList": [
+       {"type": "arc", "data": { "centerX": 50, "centerY":50, "radius": 40, "startAngleDeg": -90, "endAngleDeg": 270, "counterClockwise": true }},
+       {"type": "line", "data": { "startX": 55, "startY": 55, "endX": 70, "endY": 70 }}
+  ]
+},
+
+
+
+
 {"l": "P",
   "coordinateList": [
        {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 40, "endY": 80 }},
        {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 50, "endY": 20 }},
-       {"type": "arc", "data": { "centerX": 50, "centerY":37, "radius": 35, "startAngleDeg": 90, "endAngleDeg": 270, "counterClockwise": true }}
+       {"type": "arc", "data": { "centerX": 50, "centerY":37, "radius": 34, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
+       {"type": "line", "data": { "startX": 50, "startY": 54, "endX": 41, "endY": 54 }}
   ]
 }
 

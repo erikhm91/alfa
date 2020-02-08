@@ -80,14 +80,38 @@ export default {
     };
   },
   computed: {
-    canvasHeight() {
+    canvasHeightOrWidthRule() {
+      if (window.innerWidth / window.innerHeight < 1.5) {
+        return "width";
+      } else {
+        return "height";
+      }
+    },
+    maxCanvasHeight() {
       var reduction = window.innerHeight / 2.5;
       var height = window.innerHeight - reduction;
+      console.log("Height: " + height);
+      return height;
+    },
+    maxCanvasWidth() {
+      var reduction = window.innerWidth / 3.7;
+      var width = window.innerWidth - reduction;
+      return width;
+    },
+
+    canvasHeight() {
+      if (this.canvasHeightOrWidthRule === "height") {
+        return this.maxCanvasHeight + "px";
+      }
+      let height = this.maxCanvasWidth / 2;
       return height + "px";
     },
+
     canvasWidth() {
-      var reduction = window.innerWidth / 3;
-      var width = window.innerWidth - reduction;
+      if (this.canvasHeightOrWidthRule === "width") {
+        return this.maxCanvasWidth + "px";
+      }
+      let width = this.maxCanvasHeight * 2;
       return width + "px";
     }
   },
