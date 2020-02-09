@@ -38,7 +38,10 @@ export const routes = [/*
             //preload taskImages
             const loadedImages = preloadArrayOfImages(store.getters.letterObject(to.params.letter).tasks);
             store.commit("SET_TASK_IMAGES", loadedImages);
-            next();
+            setTimeout(() => {
+                next();
+            }, 2000);
+            
         },
         beforeUpdate(to, from, next) {
             store.commit("SET_ACTIVE_LETTER", to.params.letter);

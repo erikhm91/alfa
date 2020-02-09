@@ -52,9 +52,9 @@
 {
   "l": "N",
    "coordinateList": [
-       {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 30, "endY": 80 }},
-       {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 70, "endY": 80 }},
-      {"type": "line", "data": { "startX": 71, "startY": 80, "endX": 71, "endY": 20 }}
+       {"type": "line", "data": { "startX": 58, "startY": 18, "endX": 58, "endY": 83 }},
+       {"type": "line", "data": { "startX": 58, "startY": 18, "endX": 115, "endY": 83 }},
+      {"type": "line", "data": { "startX": 115, "startY": 83, "endX": 115, "endY": 17 }}
   ]
 },
 

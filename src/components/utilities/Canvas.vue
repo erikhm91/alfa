@@ -28,16 +28,8 @@
       height="100px"
     />
 
-    <img
-      id="pencilsvg"
-      src="\assets\pencil.svg"
-      alt="pencil"
-      width="50px"
-      height="50px"
-      />
+    <img hidden id="pencilsvg" src="\assets\pencil.svg" alt="pencil" width="50px" height="50px" />
   </div>
-
-
 </template>
 
 
@@ -164,65 +156,28 @@ export default {
       }
     },
 
-    async writeA() {
-      if (this.animationRequestId != null) {
-      }
-      let A = [
-        { startX: 200, startY: 300, endX: 300, endY: 100 },
-
-        { startX: 300, startY: 100, endX: 400, endY: 300 },
-
-        { startX: 250, startY: 200, endX: 350, endY: 200 }
-      ];
-
-      var i;
-      for (i = 0; i < A.length; i++) {
-        await this.animateLine(A[i]);
-      }
-    },
-
-    async writeO() {
-      if (this.animationRequestId != null) {
-      }
-      let endAngle = 1.5 * Math.PI;
-
-      let O = [
-        {
-          centerX: 200,
-          centerY: 300,
-          radius: 50,
-          startAngle: 0,
-          endAngle: endAngle
-        }
-      ];
-      console.log(O[0]);
-
-      this.animateArc(O[0]);
-
-      // let centerX = 200;
-      // let centerY = 300;
-      // let radius = 50;
-      // let startAngle = 0; // in radians, 0 is 3 o'clock
-      // let endAngle = Math.PI; // full circle
-
-      // var i;
-      // for (i = 0; i < O.length; i++) {
-      //   await this.animateArc(O[i]);
-      // }
-    },
-
     animateLine(lineObj) {
-      //async function
+      //async function, return Promise
       return new Promise((resolve, reject) => {
         // console.log("drawing triggered");
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-
         let startX = lineObj.startX;
         let startY = lineObj.startY;
         let endX = lineObj.endX;
         let endY = lineObj.endY;
 
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        //make initial canvasbackup and draw first pencil
+        var canvasBack = document.createElement("canvas");
+        canvasBack.width = ctx.canvas.width;
+        // console.log("width: " + ctx.canvas.width + ", canvasWidth: " + this.canvasHeight);
+        canvasBack.height = ctx.canvas.height;
+        canvasBack.ctx = canvasBack.getContext("2d");
+        canvasBack.ctx.drawImage(canvas, 0, 0);
+        var img = document.getElementById("pencilsvg");
+        ctx.drawImage(img, startX, startY - 45, 50, 50);
+      
         //calculate number of iterations for drawing loop
         const diffX = Math.abs(endX - startX);
         const diffY = Math.abs(endY - startY);
@@ -235,10 +190,8 @@ export default {
         // console.log("iterations: " + iterations);
         let maxCount = Math.round(iterations);
         // console.log("maxCount: " + maxCount);
-
         let xIncrement = (endX - startX) / maxCount;
         // console.log("xIncrement: " + xIncrement);
-
         let yIncrement = (endY - startY) / maxCount;
         // console.log("yIncrement: " + yIncrement);
 
@@ -248,15 +201,7 @@ export default {
         let count = 0;
         let framesPerSecond = 60;
         let requestId;
-        var img = document.getElementById("pencilsvg");
-
-        //make initial canvasbackup
-        var canvasBack = document.createElement("canvas");
-        canvasBack.width = ctx.canvas.width;
-        console.log("width: " + ctx.canvas.width + ", canvasWidth: " + this.canvasHeight);
-        canvasBack.height = ctx.canvas.height;
-        canvasBack.ctx = canvasBack.getContext("2d");
-        canvasBack.ctx.drawImage(canvas,0,0);
+        
 
         function animate() {
           setTimeout(function() {
@@ -264,15 +209,15 @@ export default {
 
             if (count >= maxCount) {
               cancelAnimationFrame(requestId);
-              console.log(
-                "execution of method complete! requestID: " + requestId
-              );
+              // console.log(
+              //   "execution of method complete! requestID: " + requestId
+              // );
               ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-              ctx.drawImage(canvasBack,0,0);
+              ctx.drawImage(canvasBack, 0, 0);
               resolve("completed");
               return;
             }
-            
+
             ctx.beginPath();
             ctx.moveTo(startX, startY);
             ctx.lineTo(endX, endY);
@@ -284,7 +229,7 @@ export default {
 
             //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            ctx.drawImage(canvasBack,0,0);
+            ctx.drawImage(canvasBack, 0, 0);
 
             ctx.stroke();
 
@@ -292,10 +237,10 @@ export default {
             canvasBack.width = ctx.canvas.width;
             canvasBack.height = ctx.canvas.height;
             canvasBack.ctx = canvasBack.getContext("2d");
-            canvasBack.ctx.drawImage(canvas,0,0);
+            canvasBack.ctx.drawImage(canvas, 0, 0);
 
             //add pencil
-            ctx.drawImage(img, endX, endY-45, 50, 50);
+            ctx.drawImage(img, endX, endY - 45, 50, 50);
 
             startX += xIncrement;
             endX += xIncrement;
@@ -352,16 +297,41 @@ export default {
 
         endAngle = startAngle + angleIncrement;
 
+        var img = document.getElementById("pencilsvg");
+        let pencilCoordinates;
+
+        //assign vue instance to const in order to access from callback function:
+        const vm = this;
+
+        //make initial canvasbackup
+        var canvasBack = document.createElement("canvas");
+        canvasBack.width = ctx.canvas.width;
+        // console.log("width: " + ctx.canvas.width + ", canvasWidth: " + this.canvasHeight);
+        canvasBack.height = ctx.canvas.height;
+        canvasBack.ctx = canvasBack.getContext("2d");
+        canvasBack.ctx.drawImage(canvas, 0, 0);
+
         function animate() {
           requestId = requestAnimationFrame(animate);
 
           if (count >= maxCount) {
             cancelAnimationFrame(requestId);
-            console.log(
-              "execution of method complete! requestID: " + requestId
-            );
+            // console.log(
+            //   "execution of method complete! requestID: " + requestId
+            // );
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.drawImage(canvasBack, 0, 0);
             resolve("completed");
+            return;
           }
+
+          //prepare coordinates for drawing the pencil:
+          pencilCoordinates = vm.getCoordinatesOfArc(
+            centerX,
+            centerY,
+            radius,
+            endAngle
+          );
 
           ctx.beginPath();
           ctx.arc(
@@ -377,7 +347,27 @@ export default {
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
           ctx.lineWidth = 12;
+
+          //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
+          ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+          ctx.drawImage(canvasBack, 0, 0);
+
           ctx.stroke();
+
+          //backup canvas again after stroke
+          canvasBack.width = ctx.canvas.width;
+          canvasBack.height = ctx.canvas.height;
+          canvasBack.ctx = canvasBack.getContext("2d");
+          canvasBack.ctx.drawImage(canvas, 0, 0);
+
+          //add pencil
+          ctx.drawImage(
+            img,
+            pencilCoordinates[0],
+            pencilCoordinates[1] - 45,
+            50,
+            50
+          );
 
           startAngle += angleIncrement;
           endAngle += angleIncrement;
@@ -452,22 +442,37 @@ export default {
         );
 
         //compare to mouse position
-        console.log("target x y: (" + translatedCoordinates.startX + "," + translatedCoordinates.startY + ")");
-        console.log("actual x y: (" + this.cursor.current.x + "," + this.cursor.current.y + ")");
-
+        console.log(
+          "target x y: (" +
+            translatedCoordinates.startX +
+            "," +
+            translatedCoordinates.startY +
+            ")"
+        );
+        console.log(
+          "actual x y: (" +
+            this.cursor.current.x +
+            "," +
+            this.cursor.current.y +
+            ")"
+        );
 
         //define tolerance limits for starting point:
-        const lowerX = translatedCoordinates.startX - this.traceValidationTolerancePx;
-        const upperX = translatedCoordinates.startX + this.traceValidationTolerancePx;
-        const lowerY = translatedCoordinates.startY - this.traceValidationTolerancePx;
-        const upperY = translatedCoordinates.startY + this.traceValidationTolerancePx;
+        const lowerX =
+          translatedCoordinates.startX - this.traceValidationTolerancePx;
+        const upperX =
+          translatedCoordinates.startX + this.traceValidationTolerancePx;
+        const lowerY =
+          translatedCoordinates.startY - this.traceValidationTolerancePx;
+        const upperY =
+          translatedCoordinates.startY + this.traceValidationTolerancePx;
 
         if (
           this.cursor.current.x > lowerX &&
           this.cursor.current.x < upperX &&
           this.cursor.current.y > lowerY &&
           this.cursor.current.y < upperY
-          ) {
+        ) {
           this.traceAnimateActive = true;
         }
       }

@@ -11,6 +11,10 @@ var coordinatesMixin = {
                 output = translateArcCoordinates(coordinateObj, height);
             }
             return output;
+        },
+        
+        getCoordinatesOfArc(centerX,centerY,radius,angle){
+            return [centerX + Math.cos(angle) * radius, centerY + Math.sin(angle) * radius];
         }
     }
 }

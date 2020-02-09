@@ -98,17 +98,14 @@ export default {
           "https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on";
       }
       this.animation = true;
-      
-      //TODO: delay navigation until animation has played and image loaded.
-      //change to a callback function which notifies when the images have been loaded, so that router push can be called.
-      //with setTimeout the loading is not started before the timeout is completed, which is not what we want.
-      setTimeout(() => {
-        this.$router.push({
-          name: "trackletter",
-          params: { letter: this.selectedLetter.l }
-        });
-      }, 2000);
+
+      //image is preloaded within router guard with timeout set to 2 seconds (while animation plays)
+      this.$router.push({
+        name: "trackletter",
+        params: { letter: this.selectedLetter.l }
+      });
     },
+    
     playSound(path) {
       this.audio.src = path;
       this.audio.play();
