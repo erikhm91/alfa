@@ -19,14 +19,17 @@
       width="100px"
       height="100px"
     />
-    <img
-      v-if="traceAnimateActive"
-      class="animationPicture"
-      src="\assets\bil.png"
-      alt="illustration.alt"
-      width="100px"
-      height="100px"
-    />
+
+    <transition name="validation">
+      <img
+        v-if="traceAnimateActive"
+        class="animationPicture"
+        src="\assets\fleeting-star.svg"
+        alt="illustration.alt"
+        width="70px"
+        height="70px"
+      />
+    </transition>
 
     <img hidden id="pencilsvg" src="\assets\pencil.svg" alt="pencil" width="50px" height="50px" />
   </div>
@@ -79,7 +82,7 @@ export default {
       animationDrawingSpeed: 4.2, //note: when increasing speed lines become slightly longer!
       traceAnimateRelevant: true,
       traceAnimateActive: false,
-      traceValidationTolerancePx: 10,
+      traceValidationTolerancePx: 20,
       canvasBack: null
     };
   },
@@ -96,14 +99,6 @@ export default {
   created: function() {
     //initiate eventlistener on window on startup (as window not available in template)
     window.addEventListener("mouseup", this.handleMouseUp);
-  },
-
-  mounted() {
-    // var canvas = document.getElementById("canvas");
-    // var context = canvas.getContext("2d");
-    // var image = document.getElementById("taskImage");
-    // console.log(this.canvasWidth + this.canvasHeight);
-    // context.drawImage(image, 0, 0, 100, 100);
   },
 
   destroyed: function() {
@@ -124,8 +119,10 @@ export default {
       var c = document.getElementById("canvas");
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      this.traceAnimateRelevant = true;
     },
 
+    //letter animation methods
     async animateTracing(letter) {
       //get letter tracing coordinates from store
       if (this.animationRequestId != null) {
@@ -177,7 +174,7 @@ export default {
         canvasBack.ctx.drawImage(canvas, 0, 0);
         var img = document.getElementById("pencilsvg");
         ctx.drawImage(img, startX, startY - 45, 50, 50);
-      
+
         //calculate number of iterations for drawing loop
         const diffX = Math.abs(endX - startX);
         const diffY = Math.abs(endY - startY);
@@ -201,7 +198,6 @@ export default {
         let count = 0;
         let framesPerSecond = 60;
         let requestId;
-        
 
         function animate() {
           setTimeout(function() {
@@ -383,6 +379,7 @@ export default {
         animate();
       });
     },
+    //end letter animation methods
 
     // removed event param (just to know, it exists as for all callbacks)
     drawLine() {
@@ -431,7 +428,7 @@ export default {
     validatePosition(event) {
       //check if position is correct starting point
       if (this.traceAnimateRelevant) {
-        //get starting coordinates
+        //get the coordinate data for comparison
         let rowObj = JSON.parse(
           JSON.stringify(this.coordinates.coordinateList[0])
         );
@@ -441,23 +438,7 @@ export default {
           this.canvasHeightAsNumber
         );
 
-        //compare to mouse position
-        console.log(
-          "target x y: (" +
-            translatedCoordinates.startX +
-            "," +
-            translatedCoordinates.startY +
-            ")"
-        );
-        console.log(
-          "actual x y: (" +
-            this.cursor.current.x +
-            "," +
-            this.cursor.current.y +
-            ")"
-        );
-
-        //define tolerance limits for starting point:
+        //set tolerances for comparison - always require first object to be a line (for easy mapping to coordinates)
         const lowerX =
           translatedCoordinates.startX - this.traceValidationTolerancePx;
         const upperX =
@@ -467,13 +448,18 @@ export default {
         const upperY =
           translatedCoordinates.startY + this.traceValidationTolerancePx;
 
+        //compare to mouse position
         if (
           this.cursor.current.x > lowerX &&
           this.cursor.current.x < upperX &&
           this.cursor.current.y > lowerY &&
           this.cursor.current.y < upperY
         ) {
+          this.traceAnimateRelevant = false; //disable new animation until clear canvas
           this.traceAnimateActive = true;
+          setTimeout(() => {
+            this.traceAnimateActive = false;
+          }, 100);
         }
       }
     },
@@ -503,6 +489,7 @@ export default {
           x: event.offsetX,
           y: event.offsetY
         };
+        // console.log('cursor: ('+event.offsetX+','+event.offsetY+')');
       }
       // to support firefox, but not perfect i think. Be wary..
       else if (event.layerX) {
@@ -583,10 +570,43 @@ export default {
 .picture {
   position: absolute;
   left: 0px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   // border: 3px solid #73AD21;
 }
 .animationPicture {
   position: absolute;
-  left: 300px;
+  left: 30%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+//validation animation
+.validation-enter {
+  opacity: 0;
+}
+
+.validation-enter-active {
+  transition: opacity 0.1s;
+}
+
+.validation-leave {
+}
+
+.validation-leave-active {
+  transition: opacity 0.7s;
+  animation: slide 0.7s;
+  opacity: 0;
+}
+
+@keyframes slide {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(10%, -10%);
+  }
 }
 </style>

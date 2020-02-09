@@ -62,7 +62,8 @@
 
 {"l": "O",
   "coordinateList": [
-       {"type": "arc", "data": { "centerX": 50, "centerY":50, "radius": 40, "startAngleDeg": -90, "endAngleDeg": 270, "counterClockwise": true }}
+    {"type": "line", "data": { "startX": 102, "startY": 16, "endX": 102, "endY": 16 }},
+    {"type": "arc", "data": { "centerX": 86, "centerY":47, "radius": 71, "startAngleDeg": -65, "endAngleDeg": 300, "counterClockwise": true }}
   ]
 },
 
