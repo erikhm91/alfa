@@ -117,8 +117,8 @@ export default {
     },
 
     playSound(path) {
-      this.audio.src = path;
-      this.audio.play();
+      // this.audio.src = path;
+      // this.audio.play();
     }
   }
 };

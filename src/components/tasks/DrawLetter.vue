@@ -134,8 +134,8 @@ export default {
   },
   methods: {
     playSound() {
-      this.audio.src = "../../assets/apekatt.mp3";
-      this.audio.play();
+      // this.audio.src = "../../assets/apekatt.mp3";
+      // this.audio.play();
     },
 
     clearCanvas() {
