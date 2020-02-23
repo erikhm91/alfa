@@ -22,7 +22,13 @@
     <div class="col-lg-8 col-md-8 col-xs-9">
       <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
         <!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
-
+        <div class="illustrationImage">
+          <unnrLetterImage
+          :capitalLetter="imagekey"
+          width="150px"
+          height="150px"
+        ></unnrLetterImage>
+        </div>
         <unnrCanvas
           class="canvas"
           :canvasHeight="canvasHeight"
@@ -52,6 +58,7 @@ import Speaker from "../icons/Speaker.vue";
 import Eraser from "../icons/Eraser.vue";
 import Question from "../icons/Question.vue";
 import Canvas from "../utilities/Canvas.vue";
+import letterImage from "../icons/illustrations/LetterImage.vue";
 
 export default {
   // props: {
@@ -59,12 +66,13 @@ export default {
   //     type: HTMLImageElement
   //   }
   // },
-  props: ["task"],
+  props: ["task", "imagekey"],
   components: {
     unnrSpeaker: Speaker,
     unnrEraser: Eraser,
     unnrQuestion: Question,
-    unnrCanvas: Canvas
+    unnrCanvas: Canvas,
+    unnrLetterImage: letterImage
   },
 
   data: function() {
@@ -90,7 +98,7 @@ export default {
     maxCanvasHeight() {
       var reduction = window.innerHeight / 2.5;
       var height = window.innerHeight - reduction;
-      console.log("Height: " + height);
+      // console.log("Height: " + height);
       return height;
     },
     maxCanvasWidth() {
@@ -144,6 +152,13 @@ export default {
 
 <style scoped lang="scss">
 @import "@/styles/_variables.scss";
+
+.illustrationImage {
+  z-index: 100;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
 
 .canvas {
   position: absolute;

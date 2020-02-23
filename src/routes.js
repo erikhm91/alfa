@@ -40,7 +40,7 @@ export const routes = [/*
             store.commit("SET_TASK_IMAGES", loadedImages);
             setTimeout(() => {
                 next();
-            }, 2000);
+            }, 2500);
             
         },
         beforeUpdate(to, from, next) {

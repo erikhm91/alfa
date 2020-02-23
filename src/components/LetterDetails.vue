@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-12 col-xs-12">
-        <unnr-draw-letter :task="tasks[taskIndex]"></unnr-draw-letter>
+        <unnr-draw-letter :task="tasks[taskIndex]" :imagekey="activeLetter.imagekey"></unnr-draw-letter>
       </div>
     </div>
     <div class="row justify-content-center">

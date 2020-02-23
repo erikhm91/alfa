@@ -11,14 +11,14 @@
       :height="canvasHeight"
     ></canvas>
 
-    <img
+    <!-- <img
       class="picture"
       id="taskImage"
       src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
       alt="illustration.alt"
       width="100px"
       height="100px"
-    />
+    /> -->
 
     <transition name="validation">
       <img

@@ -37,21 +37,24 @@
       </ul>
     </div>
 
-    <img
-      v-if="animation"
-      id="taskImage"
-      class="clickanimation center"
-      :src="animationImg"
-      alt="bilde"
-      width="200px"
-      height="200px"
-      @animationend="animation = false"
-    />
+    <transition name="clickletter">
+      <unnr-letter-image
+       v-if="animation"
+        id="taskImage"
+        class="center"
+        :capitalLetter="selectedLetter.imagekey"
+        :height="letterIllustrationSize"
+        :width="letterIllustrationSize"
+      ></unnr-letter-image>
+    </transition>
+
   </div>
 </template>
 
 <script>
 // import {cachingUtil} from './utilites/cachingUtil';
+import letterImage from "./icons/illustrations/LetterImage.vue";
+import letterImageA from "./icons/illustrations/A.vue";
 export default {
   data() {
     return {
@@ -59,11 +62,17 @@ export default {
       animation: false,
       letterClicked: false,
       selectedLetter: {},
-      letters: this.$store.getters.letters
+      letters: this.$store.getters.letters,
+      letterIllustrationSize: "300px"
     };
   },
   mounted() {
     this.audio = new Audio();
+  },
+
+  components: {
+    unnrLetterImage: letterImage,
+    unnrLetterImageA: letterImageA
   },
 
   computed: {
@@ -83,6 +92,7 @@ export default {
     },
     selectLetter(letter) {
       this.selectedLetter = letter;
+      console.log("selectLetter: " + letter);
       this.letterClicked = true;
       //update store with selected letter, so can easily get it in the letterdetails component. Should really be route/url parameter
       this.$store.commit("SET_ACTIVE_LETTER_BY_OBJ", letter);
@@ -105,7 +115,7 @@ export default {
         params: { letter: this.selectedLetter.l }
       });
     },
-    
+
     playSound(path) {
       this.audio.src = path;
       this.audio.play();
@@ -137,28 +147,47 @@ li {
 }
 
 // illustration image animation <<<
-.clickanimation {
-  //animations
-  animation: lettermove 3s;
 
-  //keyframes
-  @keyframes lettermove {
-    from {
-      margin-left: -100%;
-      width: 20%;
-    }
-    to {
-      margin-left: 100%;
-      width: 20%;
-    }
-  }
+.clickletter-enter {
+  opacity: 0;
 }
+
+.clickletter-enter-active {
+  transition: opacity 1.5s;
+}
+
+// .clickletter-leave {
+// }
+
+// .clickletter-leave-active {
+//   transition: opacity 0.7s;
+//   animation: slide 0.7s;
+//   opacity: 0;
+// }
+
+// .clickanimation {
+//   //animations
+//   animation: lettermove 3s;
+
+//   //keyframes
+//   @keyframes lettermove {
+//     from {
+//       margin-left: -100%;
+//       width: 20%;
+//     }
+//     to {
+//       margin-left: 100%;
+//       width: 20%;
+//     }
+//   }
+// }
 // illustration image animation >>>
 
 .center {
+  z-index: 100;
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 30%;
+  left: 40%;
 }
 
 //cloud <<<
