@@ -11,15 +11,6 @@
       :height="canvasHeight"
     ></canvas>
 
-    <!-- <img
-      class="picture"
-      id="taskImage"
-      src="https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on"
-      alt="illustration.alt"
-      width="100px"
-      height="100px"
-    /> -->
-
     <transition name="validation">
       <img
         v-if="traceAnimateActive"
@@ -60,6 +51,10 @@ export default {
     },
     drawImage: {
       type: String
+    },
+    taskIndex: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -110,7 +105,7 @@ export default {
       this.clearCanvas();
     },
     drawAnimationTrigger(newVal, oldVal) {
-      this.animateTracing("A");
+      this.animateTracing();
     }
   },
 
@@ -123,7 +118,7 @@ export default {
     },
 
     //letter animation methods
-    async animateTracing(letter) {
+    async animateTracing() {
       //get letter tracing coordinates from store
       if (this.animationRequestId != null) {
       }
@@ -131,12 +126,19 @@ export default {
       //make backup of canvasdocument
       this.canvasBack = document.createElement("canvas");
       // console.log(coordinateObj);
+      let coordinateList;
+      if (this.$store.getters.lowerCaseLetter === true) {
+        coordinateList = this.coordinates.coordinateListLower;
+      } else {
+        coordinateList = this.coordinates.coordinateListUpper;
+      }
+
       var i;
-      for (i = 0; i < this.coordinates.coordinateList.length; i++) {
+      for (i = 0; i < coordinateList.length; i++) {
         console.log("entered loop");
         //deep copy object value to translate scaling (without mutating the vuex state!)
         let rowObj = JSON.parse(
-          JSON.stringify(this.coordinates.coordinateList[i])
+          JSON.stringify(coordinateList[i])
         );
         const translatedCoordinates = this.translateCoordinates(
           rowObj.data,

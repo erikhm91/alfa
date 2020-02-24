@@ -63,6 +63,18 @@ export default {
       }
     }
   },
+
+  watch: {
+    taskIndex() {
+      let bool;
+      if (this.taskIndex === 1) {
+        bool = true;
+      } else {
+        bool = false;
+      }
+      this.$store.commit("SET_LOWER_CASE_LETTER", bool);
+    }
+  },
   methods: {
     //**********************************//can remove these checks as button disappears if not valid************************ */
     prevTask() {

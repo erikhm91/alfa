@@ -14,7 +14,9 @@ export const store = new Vuex.Store({
         letters: Tasks.letters, //read from jsonfile
         appList: AppList.apps,
         taskImages: [],
-        letterCoordinates: LetterCoordinates.letters
+        letterCoordinates: LetterCoordinates.letters,
+        lowerCaseLetter: false
+
     },
     mutations: {
         TOGGLE_ENABLE_LETTER(state, letterObj) {
@@ -45,6 +47,9 @@ export const store = new Vuex.Store({
         },
         CLEAR_TASK_IMAGES(state) {
             state.taskImages = [];
+        },
+        SET_LOWER_CASE_LETTER(state, bool) {
+            state.lowerCaseLetter = bool;
         }
 
     },
@@ -57,6 +62,7 @@ export const store = new Vuex.Store({
         allLetterCoordinates : state => letterCoordinates,
         letterCoordinates : state => letterParam => state.letterCoordinates.find(obj => obj.l == letterParam),
         letterCoordinatesOfActiveLetter : state => state.letterCoordinates.find(obj => obj.l == state.activeLetter.l),
+        lowerCaseLetter : state => state.lowerCaseLetter
     }
 
 })

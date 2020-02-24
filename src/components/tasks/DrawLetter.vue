@@ -169,6 +169,9 @@ export default {
 .img {
   position: absolute;
   z-index: 10;
+  -moz-user-select: none;
+-webkit-user-select: none;
+user-select: none;
 }
 
 .drawcontainer {
