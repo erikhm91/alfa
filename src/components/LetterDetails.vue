@@ -46,6 +46,9 @@ export default {
     unnrArrowLeft: ArrowLeft,
     unnrArrowRight: ArrowRight
   },
+  created() {
+    this.$store.commit("SET_LOWER_CASE_LETTER", false);
+  },
 
   computed: {
     nextTaskExist() {

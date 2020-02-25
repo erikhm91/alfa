@@ -188,6 +188,11 @@ export default {
         }
         // console.log("iterations: " + iterations);
         let maxCount = Math.round(iterations);
+
+        //TO BE REMOVED, avoid waiting on animation
+        // maxCount = 1;
+
+
         // console.log("maxCount: " + maxCount);
         let xIncrement = (endX - startX) / maxCount;
         // console.log("xIncrement: " + xIncrement);
@@ -220,16 +225,20 @@ export default {
             ctx.moveTo(startX, startY);
             ctx.lineTo(endX, endY);
 
-            ctx.lineWidth = 12;
+            ctx.lineWidth = 5;
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
             ctx.strokeStyle = "#000";
+            
 
             //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.globalAlpha = 0.997;
             ctx.drawImage(canvasBack, 0, 0);
 
+            // ctx.globalAlpha = 0.50;
             ctx.stroke();
+            
 
             //backup canvas again after stroke
             canvasBack.width = ctx.canvas.width;
@@ -237,6 +246,7 @@ export default {
             canvasBack.ctx = canvasBack.getContext("2d");
             canvasBack.ctx.drawImage(canvas, 0, 0);
 
+            ctx.globalAlpha = 1;
             //add pencil
             ctx.drawImage(img, endX, endY - 45, 50, 50);
 
@@ -287,6 +297,7 @@ export default {
 
         // console.log("iterations: " + iterations);
         let maxCount = 50;
+        // maxCount = 1;
         const angleIncrement = diffAngles / maxCount;
 
         let count = 0;
@@ -344,7 +355,7 @@ export default {
           ctx.strokeStyle = "#000";
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
-          ctx.lineWidth = 12;
+          ctx.lineWidth = 5;
 
           //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
           ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);

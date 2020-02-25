@@ -3,51 +3,91 @@
   {
   "l": "A",
    "coordinateListUpper": [
-       {"type": "line", "data": { "startX": 20, "startY": 80, "endX": 50, "endY": 20 }},
-       {"type": "line", "data": { "startX": 50, "startY": 20, "endX": 80, "endY": 80 }},
-      {"type": "line", "data": { "startX": 30, "startY": 60, "endX": 68, "endY": 60 }}
+       {"type": "line", "data": { "startX": 59, "startY": 79, "endX": 93, "endY": 14 }},
+       {"type": "line", "data": { "startX": 93, "startY": 14, "endX": 128, "endY": 79 }},
+      {"type": "line", "data": { "startX": 69, "startY": 60, "endX": 116, "endY": 60 }}
   ],
   "coordinateListLower": [
-    {"type": "line", "data": { "startX": 111, "startY": 39, "endX": 98, "endY": 35 }},
-    {"type": "arc", "data": { "centerX": 93, "centerY":55, "radius": 44, "startAngleDeg": -80, "endAngleDeg": 133, "counterClockwise": true }},
-    {"type": "line", "data": { "startX": 105, "startY": 75, "endX": 111, "endY": 39 }},
-    {"type": "line", "data": { "startX": 111, "startY": 39, "endX": 111, "endY": 73 }}
+    {"type": "line", "data": { "startX": 111, "startY": 39, "endX": 98, "endY": 33.5 }},
+    {"type": "arc", "data": { "centerX": 93, "centerY":55, "radius": 44, "startAngleDeg": -80, "endAngleDeg": 136, "counterClockwise": true }},
+    {"type": "arc", "data": { "centerX": 90, "centerY":58.5, "radius": 42, "startAngleDeg": -312, "endAngleDeg": -360, "counterClockwise": true }},
+    {"type": "line", "data": { "startX": 112, "startY": 60, "endX": 111, "endY": 39 }},
+    {"type": "line", "data": { "startX": 111, "startY": 39, "endX": 112, "endY": 60 }},
+    {"type": "arc", "data": { "centerX": 133, "centerY":60, "radius": 42, "startAngleDeg": -180, "endAngleDeg": -230, "counterClockwise": true }}
 ]
 },
 
 {"l": "B",
   "coordinateListUpper": [
-       {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 40, "endY": 80 }},
-       {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 50, "endY": 20 }},
-       {"type": "arc", "data": { "centerX": 50, "centerY":34, "radius": 28, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
-       {"type": "line", "data": { "startX": 50, "startY": 48, "endX": 41, "endY": 48 }},
-       {"type": "line", "data": { "startX": 41, "startY": 48, "endX": 55, "endY": 48 }},
-       {"type": "arc", "data": { "centerX": 55, "centerY":64, "radius": 32, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
-       {"type": "line", "data": { "startX": 55, "startY": 80, "endX": 41, "endY": 80 }}
+       {"type": "line", "data": { "startX": 60, "startY": 18, "endX": 60, "endY": 85 }},
+       {"type": "line", "data": { "startX": 60, "startY": 18, "endX": 99, "endY": 18 }},
+       {"type": "arc", "data": { "centerX": 100, "centerY":33.5, "radius": 30.5, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
+       {"type": "line", "data": { "startX": 99, "startY": 49, "endX": 60, "endY": 49 }},
+       {"type": "line", "data": { "startX": 60, "startY": 49, "endX": 99, "endY": 49 }},
+       {"type": "arc", "data": { "centerX": 99, "centerY":67, "radius": 36, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
+       {"type": "line", "data": { "startX": 99, "startY": 85, "endX": 60, "endY": 85 }}
   ]
 },
 
-{
-  "l": "a",
-   "coordinateList": [
-       {"type": "line", "data": { "startX": 20, "startY": 100, "endX": 50, "endY": 20 }},
-       {"type": "line", "data": { "startX": 50, "startY": 20, "endX": 80, "endY": 80 }},
-      {"type": "line", "data": { "startX": 30, "startY": 60, "endX": 68, "endY": 60 }}
+{"l": "C",
+  "coordinateListUpper": [
+    {"type": "line", "data": { "startX": 102, "startY": 16, "endX": 102, "endY": 16 }},
+    {"type": "arc", "data": { "centerX": 95, "centerY":47.5, "radius": 64.5, "startAngleDeg": -55, "endAngleDeg": 195, "counterClockwise": true }}
+    
   ]
 },
+
+{"l": "D",
+  "coordinateListUpper": [
+    {"type": "line", "data": { "startX": 60, "startY": 18, "endX": 60, "endY": 82 }},
+    {"type": "line", "data": { "startX": 60, "startY": 18, "endX": 89, "endY": 18 }},
+    {"type": "arc", "data": { "centerX": 89, "centerY":50, "radius": 64, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
+    {"type": "line", "data": { "startX": 89, "startY": 82, "endX": 60, "endY": 82 }}
+  ]
+},
+
+{"l": "E",
+  "coordinateListUpper": [
+    {"type": "line", "data": { "startX": 62.5, "startY": 13, "endX": 62.5, "endY": 81 }},
+    {"type": "line", "data": { "startX": 62.5, "startY": 81, "endX": 111, "endY": 81 }},
+    {"type": "line", "data": { "startX": 62.5, "startY": 13, "endX": 111, "endY": 13 }},
+    {"type": "line", "data": { "startX": 62.5, "startY": 47, "endX": 111, "endY": 47 }}
+    
+  ]
+},
+
+{"l": "F",
+  "coordinateListUpper": [
+    {"type": "line", "data": { "startX": 71, "startY": 15, "endX": 71, "endY": 87 }},
+    {"type": "line", "data": { "startX": 71, "startY": 15, "endX": 115, "endY": 15 }},
+    {"type": "line", "data": { "startX": 71, "startY": 50, "endX": 115, "endY": 50 }}
+    
+  ]
+},
+
+{"l": "G",
+  "coordinateListUpper": [
+    {"type": "line", "data": { "startX": 105, "startY": 21, "endX": 105, "endY": 21 }},
+    {"type": "arc", "data": { "centerX": 87, "centerY":46, "radius": 62, "startAngleDeg": -56, "endAngleDeg": -307, "counterClockwise": true }},
+    {"type": "line", "data": { "startX": 107, "startY": 70, "endX": 107, "endY": 48 }},
+    {"type": "line", "data": { "startX": 107, "startY": 48, "endX": 90, "endY": 48 }}
+    
+  ]
+},
+
 
 {
   "l": "H",
-   "coordinateList": [
-       {"type": "line", "data": { "startX": 35, "startY": 20, "endX": 35, "endY": 80 }},
-       {"type": "line", "data": { "startX": 65, "startY": 20, "endX": 65, "endY": 80 }},
-      {"type": "line", "data": { "startX": 35, "startY": 50, "endX": 63, "endY": 50 }}
+   "coordinateListUpper": [
+       {"type": "line", "data": { "startX": 59, "startY": 15, "endX": 59, "endY": 79 }},
+       {"type": "line", "data": { "startX": 112, "startY": 15, "endX": 112, "endY": 79 }},
+      {"type": "line", "data": { "startX": 59, "startY": 46, "endX": 112, "endY": 46 }}
   ]
 },
 
 {
   "l": "M",
-   "coordinateList": [
+   "coordinateListUpper": [
        {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 30, "endY": 80 }},
        {"type": "line", "data": { "startX": 30, "startY": 20, "endX": 49, "endY": 50 }},
        {"type": "line", "data": { "startX": 50, "startY": 50, "endX": 69, "endY": 20 }},
@@ -57,7 +97,7 @@
 
 {
   "l": "N",
-   "coordinateList": [
+   "coordinateListUpper": [
        {"type": "line", "data": { "startX": 58, "startY": 18, "endX": 58, "endY": 83 }},
        {"type": "line", "data": { "startX": 58, "startY": 18, "endX": 115, "endY": 83 }},
       {"type": "line", "data": { "startX": 115, "startY": 83, "endX": 115, "endY": 17 }}
@@ -67,14 +107,14 @@
 
 
 {"l": "O",
-  "coordinateList": [
+  "coordinateListUpper": [
     {"type": "line", "data": { "startX": 102, "startY": 16, "endX": 102, "endY": 16 }},
     {"type": "arc", "data": { "centerX": 86, "centerY":47, "radius": 71, "startAngleDeg": -65, "endAngleDeg": 300, "counterClockwise": true }}
   ]
 },
 
 {"l": "Q",
-  "coordinateList": [
+  "coordinateListUpper": [
        {"type": "arc", "data": { "centerX": 50, "centerY":50, "radius": 40, "startAngleDeg": -90, "endAngleDeg": 270, "counterClockwise": true }},
        {"type": "line", "data": { "startX": 55, "startY": 55, "endX": 70, "endY": 70 }}
   ]
@@ -84,7 +124,7 @@
 
 
 {"l": "P",
-  "coordinateList": [
+  "coordinateListUpper": [
        {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 40, "endY": 80 }},
        {"type": "line", "data": { "startX": 40, "startY": 20, "endX": 50, "endY": 20 }},
        {"type": "arc", "data": { "centerX": 50, "centerY":37, "radius": 34, "startAngleDeg": -90, "endAngleDeg": 90, "counterClockwise": false }},
