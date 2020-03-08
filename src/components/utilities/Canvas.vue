@@ -24,7 +24,7 @@
 
     <img hidden id="pencilsvg" src="\assets\pencil.svg" alt="pencil" width="50px" height="50px" />
     
-    <button hidden class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
+    <button class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
 
 
   </div>
