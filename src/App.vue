@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on:touchmove="preventTouchMove">
     <!-- header. navbar etc -->
 
     <!-- hero section - Title, logo, landing page etc. For now named Header-->
@@ -40,6 +40,14 @@ export default {
     },
     letterUpper(param) {
       return param.toUpperCase();
+    },
+    preventTouchMove(event) {
+      
+      if (event.touches.length > 1){
+        //the event is multi-touch
+        //you can then prevent the behavior
+        event.preventDefault()
+      }
     }
   }
 };
