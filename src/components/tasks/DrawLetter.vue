@@ -111,7 +111,7 @@ export default {
       if (this.canvasHeightOrWidthRule === "height") {
         return this.maxCanvasHeight + "px";
       }
-      let height = this.maxCanvasWidth / 2;
+      let height = this.maxCanvasWidth / 1.7;
       return height + "px";
     },
 
@@ -119,7 +119,7 @@ export default {
       if (this.canvasHeightOrWidthRule === "width") {
         return this.maxCanvasWidth + "px";
       }
-      let width = this.maxCanvasHeight * 2;
+      let width = this.maxCanvasHeight * 1.7;
       return width + "px";
     }
   },

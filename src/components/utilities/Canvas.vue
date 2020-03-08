@@ -23,6 +23,10 @@
     </transition>
 
     <img hidden id="pencilsvg" src="\assets\pencil.svg" alt="pencil" width="50px" height="50px" />
+    
+    <button hidden class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
+
+
   </div>
 </template>
 
@@ -78,7 +82,11 @@ export default {
       traceAnimateRelevant: true,
       traceAnimateActive: false,
       traceValidationTolerancePx: 20,
-      canvasBack: null
+      canvasBack: null,
+      animationRecording: [],
+      animationBuildLine: {},
+      animationBuildCounter: 0,
+      animationBuildStep: 2
     };
   },
   computed: {
@@ -115,6 +123,12 @@ export default {
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       this.traceAnimateRelevant = true;
+      this.animationRecording = [];
+      this.animationBuildLine = {},
+      this.animationBuildCounter = 0;
+
+      this.cursor.previous.x = -1;
+      this.cursor.previous.y = -1;
     },
 
     //letter animation methods
@@ -163,6 +177,7 @@ export default {
         let startY = lineObj.startY;
         let endX = lineObj.endX;
         let endY = lineObj.endY;
+        console.log("drawing: startx: " + startX + " startY: "+ startY + " endX: "+ endX+ " endY: "+ endY);
 
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
@@ -188,6 +203,7 @@ export default {
         }
         // console.log("iterations: " + iterations);
         let maxCount = Math.round(iterations);
+        if (maxCount === 0) { maxCount = 1 };
 
         //TO BE REMOVED, avoid waiting on animation
         // maxCount = 1;
@@ -233,7 +249,7 @@ export default {
 
             //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            ctx.globalAlpha = 0.997;
+            // ctx.globalAlpha = 0.997;
             ctx.drawImage(canvasBack, 0, 0);
 
             // ctx.globalAlpha = 0.50;
@@ -246,7 +262,7 @@ export default {
             canvasBack.ctx = canvasBack.getContext("2d");
             canvasBack.ctx.drawImage(canvas, 0, 0);
 
-            ctx.globalAlpha = 1;
+            // ctx.globalAlpha = 1;
             //add pencil
             ctx.drawImage(img, endX, endY - 45, 50, 50);
 
@@ -355,7 +371,7 @@ export default {
           ctx.strokeStyle = "#000";
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
-          ctx.lineWidth = 5;
+          ctx.lineWidth = 7;
 
           //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
           ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -401,11 +417,13 @@ export default {
         this.cursor.previous.x = this.cursor.current.x;
         this.cursor.previous.y = this.cursor.current.y;
       }
+      
+      //record for letter animation
+      this.recordAnimateCoordinates(false);
+
 
       var c = document.getElementById("canvas");
-
       var ctx = c.getContext("2d");
-
       var r = 33;
       var g = 171;
       var b = 205;
@@ -431,19 +449,91 @@ export default {
       // Update the last position to reference the current position
       this.cursor.previous.x = this.cursor.current.x;
       this.cursor.previous.y = this.cursor.current.y;
+      
     },
     mouseDown: function(event) {
       this.mousePressed = true;
       this.setCurrentMousePosition(event);
+      
+      //helper method for drawing coordinates
+      this.printCoordinates();
+      
       this.drawLine(event);
       this.validatePosition(event);
     },
+    printCoordinates() {
+      //calculate ratio with 1/1.7 height/width
+      let ratio = this.canvasHeightAsNumber / 100;
+
+      let y = this.cursor.current.y / ratio;
+      let x = this.cursor.current.x / ratio;
+      
+      console.log('('+ x +','+ y +')');
+    },
+    recordAnimateCoordinates(isMouseup) {
+      let ratio = this.canvasHeightAsNumber / 100;
+
+      let startX;
+      let startY;
+      if (this.cursor.previous.x != -1 && this.cursor.previous.y != -1 ) {
+        startX = this.cursor.previous.x / ratio;    
+        startY = this.cursor.previous.y / ratio;
+      } else {
+        startX = this.cursor.current.x / ratio;
+        startY = this.cursor.current.y / ratio;
+      }
+      
+      let endX = this.cursor.current.x / ratio;
+      let endY = this.cursor.current.y / ratio;
+      
+      console.log('('+ endX +','+ endY +')');
+
+      //       animationRecording: [],
+      // animationBuildLine: {},
+      // animationBuildCounter: 0;
+      // animationBuildStep: 3
+
+      if (this.animationBuildCounter === 0) {        
+
+          this.animationBuildLine = { type : "line",
+                        data : { 
+                          startX: startX,
+                          startY: startY,
+                          endX: endX,
+                          endY: endY
+                        }};
+
+                        console.log("adding data : " + this.animationBuildLine.data);
+      }
+
+      if ( (this.animationBuildCounter >= this.animationBuildStep) || (isMouseup === true) ) {
+          this.animationBuildLine.data.endX = endX;
+          this.animationBuildLine.data.endY = endY;
+          
+          this.animationRecording.push(JSON.stringify(this.animationBuildLine));
+          console.log("line pushed");
+          
+          this.animationBuildLine = {};
+          this.animationBuildCounter = 0;
+      } else {
+        this.animationBuildCounter += 1;
+      }
+
+      // let line = '{"type": "line", "data": { "startX": '+x+', "startY": '+y+', "endX": '+x+', "endY": '+y+'}}';
+
+
+
+    },
+    outputAnimationRecording() {
+      console.log(document.write(this.animationRecording));
+    },
+
     validatePosition(event) {
       //check if position is correct starting point
       if (this.traceAnimateRelevant) {
         //get the coordinate data for comparison
         let rowObj = JSON.parse(
-          JSON.stringify(this.coordinates.coordinateList[0])
+          JSON.stringify(this.coordinates.coordinateListUpper[0])
         );
         const translatedCoordinates = this.translateCoordinates(
           rowObj.data,
@@ -483,6 +573,9 @@ export default {
       //for drawline method, reset tracking when mouse released
       this.cursor.previous.x = -1;
       this.cursor.previous.y = -1;
+
+      //end recording
+      this.recordAnimateCoordinates(true);
     },
 
     mouseMove(event) {
@@ -522,6 +615,9 @@ export default {
 
       this.drawLine();
 
+      //always record the touch start:
+      this.recordAnimateCoordinates(true);
+
       // Prevents an additional mousedown event being triggered
       event.preventDefault();
     },
@@ -530,6 +626,9 @@ export default {
       // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
       this.cursor.previous.x = -1;
       this.cursor.previous.y = -1;
+
+      //end recording
+      this.recordAnimateCoordinates(true);
     },
 
     // Draw something and prevent the default scrolling when touch movement is detected
