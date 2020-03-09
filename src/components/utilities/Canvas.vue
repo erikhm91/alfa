@@ -24,7 +24,7 @@
 
     <img hidden id="pencilsvg" src="\assets\pencil.svg" alt="pencil" width="50px" height="50px" />
     
-    <button class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
+    <button hidden class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
 
 
   </div>
@@ -195,15 +195,18 @@ export default {
         //calculate number of iterations for drawing loop
         const diffX = Math.abs(endX - startX);
         const diffY = Math.abs(endY - startY);
+
+        //test - hardcode maxcount to 1.
         let iterations = 0;
-        if (diffX >= diffY) {
-          iterations = diffX / this.animationDrawingSpeed;
-        } else {
-          iterations = diffY / this.animationDrawingSpeed;
-        }
-        // console.log("iterations: " + iterations);
-        let maxCount = Math.round(iterations);
-        if (maxCount === 0) { maxCount = 1 };
+        // if (diffX >= diffY) {
+        //   iterations = diffX / this.animationDrawingSpeed;
+        // } else {
+        //   iterations = diffY / this.animationDrawingSpeed;
+        // }
+        // // console.log("iterations: " + iterations);
+        // let maxCount = Math.round(iterations);
+        // if (maxCount === 0) { maxCount = 1 };
+        let maxCount = 1;
 
         //TO BE REMOVED, avoid waiting on animation
         // maxCount = 1;
@@ -532,9 +535,16 @@ export default {
       //check if position is correct starting point
       if (this.traceAnimateRelevant) {
         //get the coordinate data for comparison
+        if (this.$store.getters.lowerCaseLetter === true) {
+          let rowObj = JSON.parse(
+          JSON.stringify(this.coordinates.coordinateListLower[0])
+          );
+        } else {
         let rowObj = JSON.parse(
           JSON.stringify(this.coordinates.coordinateListUpper[0])
-        );
+          );
+        }
+
         const translatedCoordinates = this.translateCoordinates(
           rowObj.data,
           rowObj.type,
@@ -614,6 +624,7 @@ export default {
       this.getTouchPos(event);
 
       this.drawLine();
+      this.validatePosition(event);
 
       //always record the touch start:
       this.recordAnimateCoordinates(true);
