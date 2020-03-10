@@ -5,6 +5,7 @@
 "imagekey": "A",
 "enabled": true,
 "visit": false,
+"audio": "apekatt.mp3",
 "tasks": [
 {
 "image": "/assets/tracing_images/A.jpg",
@@ -26,6 +27,7 @@
 "imagekey": "B",
 "enabled": true,
 "visit": false,
+"audio": "bsang.mp3",
 "tasks": [
 {
 "image": "/assets/tracing_images/B.jpg",

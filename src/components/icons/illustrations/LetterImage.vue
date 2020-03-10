@@ -1,20 +1,7 @@
 <template>
 <div>
-  <!-- <svg
-    xmlns="http://www.w3.org/2000/svg"
-    :width="width"
-    :height="height"
-    viewBox="0 0 18 18"
-    :aria-labelledby="capitalLetter"
-    role="presentation"
-  >
-    <title :id="capitalLetter" lang="en">{{ capitalLetter }} icon</title>
-       <component :is="capitalLetter"></component>
-  </svg> -->
       <component :is="'unnr-'+capitalLetter" :height="height" :width="width"></component>
-
 </div>
-
 </template>
 
 <script>
@@ -63,35 +50,36 @@ export default {
     },
   },
   components: {
-    unnrA : A,
-    unnrB : B,
-    unnrC : C,
-    unnrD: D,
-    unnrE: E,
-    unnrF: F,
-    unnrG : G,
-    unnrH: H,
-    unnrI: I,
-    unnrJ: J,
-    unnrK: K,
-    unnrL: L,
-    unnrM: M,
-    unnrN: N,
-    unnrO: O,
-    unnrP: P,
-    unnrQ: Q,
-    unnrR: R,
-    unnrS: S,
-    unnrT: T,
-    unnrU: U,
-    unnrV: V,
-    unnrW: W,
-    unnrX: X,
-    unnrY: Y,
-    unnrZ: Z,
-    unnrAE: AE,
-    unnrOE: OE,
-    unnrAA: AA
+
+    unnrA : () => import("./A.vue"),
+    unnrB : () => import("./B.vue"),
+    unnrC : () => import("./C.vue"),
+    unnrD: () => import("./D.vue"),
+    unnrE: () => import("./E.vue"),
+    unnrF: () => import("./F.vue"),
+    unnrG : () => import("./G.vue"),
+    unnrH: () => import("./H.vue"),
+    unnrI: () => import("./I.vue"),
+    unnrJ: () => import("./J.vue"),
+    unnrK: () => import("./K.vue"),
+    unnrL: () => import("./L.vue"),
+    unnrM: () => import("./M.vue"),
+    unnrN: () => import("./N.vue"),
+    unnrO: () => import("./O.vue"),
+    unnrP: () => import("./P.vue"),
+    unnrQ: () => import("./Q.vue"),
+    unnrR: () => import("./R.vue"),
+    unnrS: () => import("./S.vue"),
+    unnrT: () => import("./T.vue"),
+    unnrU: () => import("./U.vue"),
+    unnrV: () => import("./V.vue"),
+    unnrW: () => import("./W.vue"),
+    unnrX: () => import("./X.vue"),
+    unnrY: () => import("./Y.vue"),
+    unnrZ: () => import("./Z.vue"),
+    unnrAE: () => import("./AE.vue"),
+    unnrOE: () => import("./OE.vue"),
+    unnrAA: () => import("./AA.vue"),
   }
 };
 </script>

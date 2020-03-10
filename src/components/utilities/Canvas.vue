@@ -24,7 +24,7 @@
 
     <img hidden id="pencilsvg" src="\assets\pencil.svg" alt="pencil" width="50px" height="50px" />
     
-    <button hidden class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
+    <button class="animationPicture" @click="outputAnimationRecording()">output tegnerecording</button>
 
 
   </div>
@@ -535,12 +535,13 @@ export default {
       //check if position is correct starting point
       if (this.traceAnimateRelevant) {
         //get the coordinate data for comparison
+        let rowObj;
         if (this.$store.getters.lowerCaseLetter === true) {
-          let rowObj = JSON.parse(
+          rowObj = JSON.parse(
           JSON.stringify(this.coordinates.coordinateListLower[0])
           );
         } else {
-        let rowObj = JSON.parse(
+          rowObj = JSON.parse(
           JSON.stringify(this.coordinates.coordinateListUpper[0])
           );
         }

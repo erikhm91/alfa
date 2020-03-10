@@ -61,7 +61,7 @@ export const store = new Vuex.Store({
         taskImages : state => state.taskImages,
         allLetterCoordinates : state => letterCoordinates,
         letterCoordinates : state => letterParam => state.letterCoordinates.find(obj => obj.l == letterParam),
-        letterCoordinatesOfActiveLetter : state => state.letterCoordinates.find(obj => obj.l == state.activeLetter.l),
+        letterCoordinatesOfActiveLetter : state => state.letterCoordinates.find(obj => obj.l == state.activeLetter.imagekey),
         lowerCaseLetter : state => state.lowerCaseLetter
     }
 

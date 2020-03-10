@@ -24,7 +24,7 @@
         <!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
         <div class="illustrationImage">
           <unnrLetterImage
-          :capitalLetter="imagekey"
+          :capitalLetter="activeLetter.imagekey"
           width="150px"
           height="150px"
         ></unnrLetterImage>
@@ -66,7 +66,7 @@ export default {
   //     type: HTMLImageElement
   //   }
   // },
-  props: ["task", "imagekey"],
+  props: ["task", "activeLetter"],
   components: {
     unnrSpeaker: Speaker,
     unnrEraser: Eraser,
@@ -125,6 +125,7 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
+    this.audio.src = '../../../assets/' + this.activeLetter.audio;
     console.log("task.src: " + this.task.src);
   },
   watch: {
@@ -134,8 +135,7 @@ export default {
   },
   methods: {
     playSound() {
-      // this.audio.src = "../../assets/apekatt.mp3";
-      // this.audio.play();
+      this.audio.play();
     },
 
     clearCanvas() {

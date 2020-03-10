@@ -24,7 +24,9 @@
     </div>
 
     <!-- clouds test end Html -->
-
+    <!-- <div>
+      <unnrAudioFactory></unnrAudioFactory>
+    </div> -->
     <div class="container">
       <ul class="row list-group-inline justify-content-center">
         <li
@@ -54,7 +56,8 @@
 <script>
 // import {cachingUtil} from './utilites/cachingUtil';
 import letterImage from "./icons/illustrations/LetterImage.vue";
-import letterImageA from "./icons/illustrations/A.vue";
+import audioFactory from "./audio/AudioFactory.vue";
+import Amp3 from '../assets/A.mp3';
 export default {
   data() {
     return {
@@ -68,11 +71,17 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
+    this.audio1 = new Audio();
+    this.audio1.src = '../../assets/apekatt.mp3';
+    this.audio2 = new Audio();
+    this.audio2.src = '../../assets/bsang.mp3';
+
+    this.audio3 = new Audio(Amp3);
   },
 
   components: {
     unnrLetterImage: letterImage,
-    unnrLetterImageA: letterImageA
+    unnrAudioFactory: audioFactory
   },
 
   computed: {
@@ -98,15 +107,16 @@ export default {
       this.$store.commit("SET_ACTIVE_LETTER_BY_OBJ", letter);
 
       //trigger animation and sound
-      this.playSound("../../assets/apekatt.mp3");
 
-      if (letter.l === "E") {
-        this.animationImg =
-          "https://i.pinimg.com/564x/7a/5f/17/7a5f17afbb8faf096dde75cd04012e62.jpg";
-      } else {
-        this.animationImg =
-          "https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on";
-      }
+      this.playSound(letter.audio);
+
+      // if (letter.l === "E") {
+      //   this.animationImg =
+      //     "https://i.pinimg.com/564x/7a/5f/17/7a5f17afbb8faf096dde75cd04012e62.jpg";
+      // } else {
+      //   this.animationImg =
+      //     "https://cdn11.bigcommerce.com/s-in5je/images/stencil/1280x1280/products/6729/21035/banana-sticker__91685.1564864025.jpg?c=2&imbypass=on";
+      // }
       this.animation = true;
 
       //image is preloaded within router guard with timeout set to 2 seconds (while animation plays)
@@ -116,9 +126,9 @@ export default {
       });
     },
 
-    playSound(path) {
-      // this.audio.src = path;
-      // this.audio.play();
+    playSound(filename) {
+      this.audio.src = '../../assets/' + filename ;
+      this.audio.play();
     }
   }
 };
