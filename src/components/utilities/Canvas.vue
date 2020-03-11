@@ -11,14 +11,60 @@
       :height="canvasHeight"
     ></canvas>
 
-    <transition name="validation">
-      <img
-        v-if="traceAnimateActive"
-        class="animationPicture"
+      <!-- <img
+        class="animationPicture animpic1"
         src="\assets\fleeting-star.svg"
         alt="illustration.alt"
         width="70px"
         height="70px"
+      />
+
+           <img
+        class="animationPicture animpic2"
+        src="\assets\fleeting-star.svg"
+        alt="illustration.alt"
+        width="70px"
+        height="70px"
+      /> -->
+
+    <transition name="validation1">
+      <img
+        v-if="traceAnimateActive"
+        class="animationPicture animpic1"
+        src="\assets\fleeting-star.svg"
+        alt="illustration.alt"
+        width="100px"
+        height="100px"
+      />
+    </transition>
+       <transition name="validation1">
+      <img
+        v-if="traceAnimateActive"
+        class="animationPicture animpic2"
+        src="\assets\fleeting-star.svg"
+        alt="illustration.alt"
+        width="80px"
+        height="80px"
+      />
+    </transition>
+    <transition name="validation2">
+      <img
+        v-if="traceAnimateActive"
+        class="animationPicture animpic3"
+        src="\assets\fleeting-star.svg"
+        alt="illustration.alt"
+        width="70px"
+        height="70px"
+      />
+    </transition>
+    <transition name="validation2">
+      <img
+        v-if="traceAnimateActive"
+        class="animationPicture animpic4"
+        src="\assets\fleeting-star.svg"
+        alt="illustration.alt"
+        width="95px"
+        height="95px"
       />
     </transition>
 
@@ -701,36 +747,81 @@ export default {
 }
 .animationPicture {
   position: absolute;
-  left: 30%;
+  // left: 150;
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
 }
 
+.animpic1 {
+  left: 93%;
+}
+
+.animpic2 {
+  left: 85%; 
+  top: 40%;
+}
+
+.animpic3 {
+  top: 40%;
+  left: 2%;
+}
+
+.animpic4 {
+  left: 5%; 
+  top: 80%;
+}
+
 //validation animation
-.validation-enter {
+.validation1-enter {
+  opacity: 1;
+}
+
+.validation1-enter-active {
+  transition: opacity 0.3s;
+}
+
+.validation1-leave {
+}
+
+.validation1-leave-active {
+  transition: opacity 1s;
+  animation: slide1 1s;
   opacity: 0;
 }
 
-.validation-enter-active {
-  transition: opacity 0.1s;
-}
-
-.validation-leave {
-}
-
-.validation-leave-active {
-  transition: opacity 0.7s;
-  animation: slide 0.7s;
-  opacity: 0;
-}
-
-@keyframes slide {
+@keyframes slide1 {
   from {
     transform: translate(0, 0);
   }
   to {
     transform: translate(10%, -10%);
+  }
+}
+
+.validation2-enter {
+  opacity: 0;
+}
+
+.validation2-enter-active {
+  transition: opacity 0.1s;
+}
+
+.validation2-leave {
+}
+
+.validation2-leave-active {
+  transition: opacity 0.7s;
+  animation: slide2 0.7s;
+  opacity: 0;
+}
+
+@keyframes slide2 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-10%, -8%);
   }
 }
 </style>
