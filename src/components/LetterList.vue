@@ -100,15 +100,12 @@ export default {
       }
     },
     selectLetter(letter) {
+      this.playSound(letter.audio);
       this.selectedLetter = letter;
       console.log("selectLetter: " + letter);
       this.letterClicked = true;
       //update store with selected letter, so can easily get it in the letterdetails component. Should really be route/url parameter
       this.$store.commit("SET_ACTIVE_LETTER_BY_OBJ", letter);
-
-      //trigger animation and sound
-
-      this.playSound(letter.audio);
 
       // if (letter.l === "E") {
       //   this.animationImg =
@@ -127,7 +124,7 @@ export default {
     },
 
     playSound(filename) {
-      this.audio.src = '../../assets/' + filename ;
+      this.audio.src = '../../assets/audio/' + filename ;
       this.audio.play();
     }
   }

@@ -5,7 +5,7 @@
 "imagekey": "A",
 "enabled": true,
 "visit": false,
-"audio": "apekatt.mp3",
+"audio": "A.wav",
 "tasks": [
 {
 "image": "/assets/tracing_images/A.jpg",
@@ -27,7 +27,7 @@
 "imagekey": "B",
 "enabled": true,
 "visit": false,
-"audio": "bsang.mp3",
+"audio": "B.wav",
 "tasks": [
 {
 "image": "/assets/tracing_images/B.jpg",
@@ -49,6 +49,7 @@
 "imagekey": "C",
 "enabled": true,
 "visit": false,
+"audio": "C.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/C.jpg",
@@ -70,6 +71,7 @@
 "imagekey": "D",
 "enabled": true,
 "visit": false,
+"audio": "D.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/D.jpg",
@@ -92,6 +94,7 @@
 "enabled": true,
 "visit": false,
 "illustration": "https://i.pinimg.com/564x/7a/5f/17/7a5f17afbb8faf096dde75cd04012e62.jpg",
+"audio": "E.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/E.jpg",
@@ -113,6 +116,7 @@
 "imagekey": "F",
 "enabled": true,
 "visit": false,
+"audio": "F.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/F.jpg",
@@ -134,6 +138,7 @@
 "imagekey": "G",
 "enabled": true,
 "visit": false,
+"audio": "G.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/G.jpg",
@@ -155,6 +160,7 @@
 "imagekey": "H",
 "enabled": true,
 "visit": false,
+"audio": "H.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/H.jpg",
@@ -176,6 +182,7 @@
 "imagekey": "I",
 "enabled": true,
 "visit": false,
+"audio": "I.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/I.jpg",
@@ -197,6 +204,7 @@
 "imagekey": "J",
 "enabled": true,
 "visit": false,
+"audio": "J.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/J.jpg",
@@ -218,6 +226,7 @@
 "imagekey": "K",
 "enabled": true,
 "visit": false,
+"audio": "K.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/K.jpg",
@@ -239,6 +248,7 @@
 "imagekey": "L",
 "enabled": true,
 "visit": false,
+"audio": "L.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/L.jpg",
@@ -260,6 +270,7 @@
 "imagekey": "M",
 "enabled": true,
 "visit": false,
+"audio": "M.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/M.jpg",
@@ -281,6 +292,7 @@
 "imagekey": "N",
 "enabled": true,
 "visit": false,
+"audio": "N.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/N.jpg",
@@ -302,6 +314,7 @@
 "imagekey": "O",
 "enabled": true,
 "visit": false,
+"audio": "O.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/O.jpg",
@@ -323,6 +336,7 @@
 "imagekey": "P",
 "enabled": true,
 "visit": false,
+"audio": "P.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/P.jpg",
@@ -344,6 +358,7 @@
 "imagekey": "Q",
 "enabled": true,
 "visit": false,
+"audio": "Q.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/Q.jpg",
@@ -365,6 +380,7 @@
 "imagekey": "R",
 "enabled": true,
 "visit": false,
+"audio": "R.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/R.jpg",
@@ -386,6 +402,7 @@
 "imagekey": "S",
 "enabled": true,
 "visit": false,
+"audio": "S.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/S.jpg",
@@ -407,6 +424,7 @@
 "imagekey": "T",
 "enabled": true,
 "visit": false,
+"audio": "T.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/T.jpg",
@@ -428,6 +446,7 @@
 "imagekey": "U",
 "enabled": true,
 "visit": false,
+"audio": "U.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/U.jpg",
@@ -449,6 +468,7 @@
 "imagekey": "V",
 "enabled": true,
 "visit": false,
+"audio": "V.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/V.jpg",
@@ -470,6 +490,7 @@
 "imagekey": "W",
 "enabled": true,
 "visit": false,
+"audio": "W.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/W.jpg",
@@ -491,6 +512,7 @@
 "imagekey": "X",
 "enabled": true,
 "visit": false,
+"audio": "X.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/X.jpg",
@@ -512,6 +534,7 @@
 "imagekey": "Y",
 "enabled": true,
 "visit": false,
+"audio": "Y.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/Y.jpg",
@@ -532,7 +555,7 @@
 "l": "Z",
 "imagekey": "Z",
 "enabled": true,
-"visit": false,
+"visit": false, 
 "tasks": [
 {
 "image": "/assets/tracing_images/Z.jpg",
@@ -554,6 +577,7 @@
 "imagekey": "AE",
 "enabled": true,
 "visit": false,
+"audio": "AE.wav", 
 "tasks": [
 {
 "image": "/assets/tracing_images/Æ.jpg",
@@ -575,6 +599,7 @@
 "imagekey": "OE",
 "enabled": true,
 "visit": false,
+"audio": "OE.wav",
 "tasks": [
 {
 "image": "/assets/tracing_images/Ø.jpg",
@@ -596,6 +621,7 @@
 "imagekey": "AA",
 "enabled": true,
 "visit": false,
+"audio": "AA.wav",
 "tasks": [
 {
 "image": "/assets/tracing_images/Å.jpg",

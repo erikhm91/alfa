@@ -125,7 +125,7 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
-    this.audio.src = '../../../assets/' + this.activeLetter.audio;
+    this.audio.src = '../../../assets/audio/' + this.activeLetter.audio;
     console.log("task.src: " + this.task.src);
   },
   watch: {
