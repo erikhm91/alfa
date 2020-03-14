@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div hidden aria-hidden>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    <div hidden aria-hidden>
+      Icons made by
+      <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from
+      <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </div>
     <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
     <svg
       version="1.1"
@@ -9,8 +13,8 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-    :width="width"
-            :height="height"
+      :width="width"
+      :height="height"
       viewBox="0 0 29.643 29.643"
       style="enable-background:new 0 0 29.643 29.643;"
       xml:space="preserve"
@@ -42,13 +46,13 @@
 </template>
 <script>
 export default {
-  props: ['height', 'width']
-}
+  props: ["height", "width"]
+};
 </script>
 
 
 <style scoped lang="scss">
-@import '@/styles/_variables.scss';
+@import "@/styles/_variables.scss";
 svg {
   fill: $config;
 }

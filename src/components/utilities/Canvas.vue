@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <div>Score: {{score}}</div> -->
     <canvas
       id="canvas"
       v-on:mousedown="mouseDown"
@@ -79,9 +80,9 @@
 
 <script>
 import CoordinatesMixin from "../mixins/CoordinatesMixin.js";
+import ValidationMixin from "../mixins/ValidationMixin.js";
 export default {
-  mixins: [CoordinatesMixin],
-
+  mixins: [CoordinatesMixin, ValidationMixin],
   props: {
     canvasWidth: {
       type: String,
@@ -96,6 +97,10 @@ export default {
       default: false
     },
     drawAnimationTrigger: {
+      type: Boolean,
+      default: false
+    },
+    validationTrigger: {
       type: Boolean,
       default: false
     },
@@ -132,14 +137,21 @@ export default {
       animationRecording: [],
       animationBuildLine: {},
       animationBuildCounter: 0,
-      animationBuildStep: 2
+      animationBuildStep: 2,
+      score: 0
     };
   },
   computed: {
     canvasHeightAsNumber() {
       return parseInt(this.canvasHeight, 10);
     },
-
+    relevantCoordinateList() {
+      if (this.$store.getters.lowerCaseLetter === true) {
+        return this.coordinates.coordinateListLower;
+      } else {
+        return this.coordinates.coordinateListUpper;
+      }
+    },
     coordinates() {
       return this.$store.getters.letterCoordinatesOfActiveLetter;
     }
@@ -157,9 +169,13 @@ export default {
   watch: {
     clearCanvasTrigger(newVal, oldVal) {
       this.clearCanvas();
+      this.$store.commit("SET_VALIDATION_SCORE", 0);
     },
     drawAnimationTrigger(newVal, oldVal) {
       this.animateTracing();
+    },
+    validationTrigger(){
+      this.validateDrawing()
     }
   },
 
@@ -186,16 +202,11 @@ export default {
       //make backup of canvasdocument
       this.canvasBack = document.createElement("canvas");
       // console.log(coordinateObj);
-      let coordinateList;
-      if (this.$store.getters.lowerCaseLetter === true) {
-        coordinateList = this.coordinates.coordinateListLower;
-      } else {
-        coordinateList = this.coordinates.coordinateListUpper;
-      }
+      let coordinateList = this.relevantCoordinateList;
 
       var i;
       for (i = 0; i < coordinateList.length; i++) {
-        console.log("entered loop");
+        // console.log("entered loop");
         //deep copy object value to translate scaling (without mutating the vuex state!)
         let rowObj = JSON.parse(
           JSON.stringify(coordinateList[i])
@@ -205,8 +216,7 @@ export default {
           rowObj.type,
           this.canvasHeightAsNumber
         );
-
-        console.log("Row obj: " + rowObj);
+        // console.log("Row obj: " + rowObj);
         if (rowObj.type === "line") {
           await this.animateLine(translatedCoordinates);
         } else if (rowObj.type === "arc") {
@@ -223,7 +233,7 @@ export default {
         let startY = lineObj.startY;
         let endX = lineObj.endX;
         let endY = lineObj.endY;
-        console.log("drawing: startx: " + startX + " startY: "+ startY + " endX: "+ endX+ " endY: "+ endY);
+        // console.log("drawing: startx: " + startX + " startY: "+ startY + " endX: "+ endX+ " endY: "+ endY);
 
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
@@ -232,11 +242,15 @@ export default {
         var canvasBack = document.createElement("canvas");
         canvasBack.width = ctx.canvas.width;
         // console.log("width: " + ctx.canvas.width + ", canvasWidth: " + this.canvasHeight);
-        canvasBack.height = ctx.canvas.height;
-        canvasBack.ctx = canvasBack.getContext("2d");
-        canvasBack.ctx.drawImage(canvas, 0, 0);
-        var img = document.getElementById("pencilsvg");
-        ctx.drawImage(img, startX, startY - 45, 50, 50);
+
+        
+        // canvasBack.height = ctx.canvas.height;
+        // canvasBack.ctx = canvasBack.getContext("2d");
+        // canvasBack.ctx.drawImage(canvas, 0, 0);
+        // var img = document.getElementById("pencilsvg");
+        // ctx.drawImage(img, startX, startY - 45, 50, 50);
+
+
 
         //calculate number of iterations for drawing loop
         const diffX = Math.abs(endX - startX);
@@ -280,8 +294,8 @@ export default {
               // console.log(
               //   "execution of method complete! requestID: " + requestId
               // );
-              ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-              ctx.drawImage(canvasBack, 0, 0);
+              // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+              // ctx.drawImage(canvasBack, 0, 0);
               resolve("completed");
               return;
             }
@@ -296,24 +310,24 @@ export default {
             ctx.strokeStyle = "#000";
             
 
-            //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            // ctx.globalAlpha = 0.997;
-            ctx.drawImage(canvasBack, 0, 0);
+            // //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
+            // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            // // ctx.globalAlpha = 0.997;
+            // ctx.drawImage(canvasBack, 0, 0);
 
             // ctx.globalAlpha = 0.50;
             ctx.stroke();
             
 
-            //backup canvas again after stroke
-            canvasBack.width = ctx.canvas.width;
-            canvasBack.height = ctx.canvas.height;
-            canvasBack.ctx = canvasBack.getContext("2d");
-            canvasBack.ctx.drawImage(canvas, 0, 0);
+            // //backup canvas again after stroke
+            // canvasBack.width = ctx.canvas.width;
+            // canvasBack.height = ctx.canvas.height;
+            // canvasBack.ctx = canvasBack.getContext("2d");
+            // canvasBack.ctx.drawImage(canvas, 0, 0);
 
             // ctx.globalAlpha = 1;
             //add pencil
-            ctx.drawImage(img, endX, endY - 45, 50, 50);
+            // ctx.drawImage(img, endX, endY - 45, 50, 50);
 
             startX += xIncrement;
             endX += xIncrement;
@@ -503,10 +517,6 @@ export default {
     mouseDown: function(event) {
       this.mousePressed = true;
       this.setCurrentMousePosition(event);
-      
-      //helper method for drawing coordinates
-      this.printCoordinates();
-      
       this.drawLine(event);
       this.validatePosition(event);
     },
@@ -535,7 +545,7 @@ export default {
       let endX = this.cursor.current.x / ratio;
       let endY = this.cursor.current.y / ratio;
       
-      console.log('('+ endX +','+ endY +')');
+      // console.log('('+ endX +','+ endY +')');
 
       //       animationRecording: [],
       // animationBuildLine: {},
@@ -552,15 +562,16 @@ export default {
                           endY: endY
                         }};
 
-                        console.log("adding data : " + this.animationBuildLine.data);
+                        // console.log("adding data : " + this.animationBuildLine.data);
       }
 
       if ( (this.animationBuildCounter >= this.animationBuildStep) || (isMouseup === true) ) {
           this.animationBuildLine.data.endX = endX;
           this.animationBuildLine.data.endY = endY;
           
-          this.animationRecording.push(JSON.stringify(this.animationBuildLine));
-          console.log("line pushed");
+          // this.animationRecording.push(JSON.stringify(this.animationBuildLine));
+          this.animationRecording.push(this.animationBuildLine);
+          // console.log("line pushed");
           
           this.animationBuildLine = {};
           this.animationBuildCounter = 0;
@@ -577,6 +588,11 @@ export default {
       console.log(document.write(this.animationRecording));
     },
 
+    validateDrawing() {
+      //call to ValidationMixin
+      this.score = this.validateCoordinates(this.animationRecording, this.relevantCoordinateList);
+      this.$store.commit("SET_VALIDATION_SCORE", this.score);
+    },
     validatePosition(event) {
       //check if position is correct starting point
       if (this.traceAnimateRelevant) {
@@ -632,7 +648,7 @@ export default {
       this.cursor.previous.y = -1;
 
       //end recording
-      this.recordAnimateCoordinates(true);
+      // this.recordAnimateCoordinates(true);
     },
 
     mouseMove(event) {

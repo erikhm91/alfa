@@ -7,27 +7,28 @@
             <unnr-speaker></unnr-speaker>
           </button>
         </div>
-        <div class="col-md-12 mt-md-2 col-s-12 col-3">
+        <div class="col-md-12 mt-md-1 col-s-12 col-3">
           <button class="btn btn-primary" @click="clearCanvas()">
             <unnr-eraser></unnr-eraser>
           </button>
         </div>
-        <div class="col-md-12 mt-md-2 col-s-12 col-3">
+        <div class="col-md-12 mt-md-1 col-s-12 col-3">
           <button class="btn btn-primary" @click="triggerDrawAnimation()">
             <unnr-question></unnr-question>
+          </button>
+        </div>
+        <div class="col-md-12 mt-md-1 col-s-12 col-3">
+          <button class="btn btn-primary" @click="validateDrawing()">
+            <mester-validate></mester-validate>
           </button>
         </div>
       </div>
     </div>
     <div class="col-lg-8 col-md-8 col-xs-9">
-      <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
+      <div class="drawcontainer" :style="{ height: canvasHeight, width: canvasWidth}">
         <!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
         <div class="illustrationImage">
-          <unnrLetterImage
-          :capitalLetter="activeLetter.imagekey"
-          width="150px"
-          height="150px"
-        ></unnrLetterImage>
+          <unnrLetterImage :capitalLetter="activeLetter.imagekey" width="150px" height="150px"></unnrLetterImage>
         </div>
         <unnrCanvas
           class="canvas"
@@ -35,6 +36,7 @@
           :canvasWidth="canvasWidth"
           :clearCanvasTrigger="clearCanvasTrigger"
           :drawAnimationTrigger="drawAnimationTrigger"
+          :validationTrigger="validationTrigger"
           :drawImage="task.url"
         ></unnrCanvas>
         <div>
@@ -50,6 +52,7 @@
       </div>
     </div>
     <div class="col-lg-1 col-md-1 col-xs-0"></div>
+    <div class="col-3">Score: {{ this.$store.getters.validationScore }}</div>
   </div>
 </template>
 
@@ -57,6 +60,7 @@
 import Speaker from "../icons/Speaker.vue";
 import Eraser from "../icons/Eraser.vue";
 import Question from "../icons/Question.vue";
+import Validate from "../icons/Validate.vue";
 import Canvas from "../utilities/Canvas.vue";
 import letterImage from "../icons/illustrations/LetterImage.vue";
 
@@ -71,6 +75,7 @@ export default {
     unnrSpeaker: Speaker,
     unnrEraser: Eraser,
     unnrQuestion: Question,
+    mesterValidate: Validate,
     unnrCanvas: Canvas,
     unnrLetterImage: letterImage
   },
@@ -84,7 +89,8 @@ export default {
       },
       // *************************************
       clearCanvasTrigger: false,
-      drawAnimationTrigger: false
+      drawAnimationTrigger: false,
+      validationTrigger: false
     };
   },
   computed: {
@@ -125,7 +131,7 @@ export default {
   },
   mounted() {
     this.audio = new Audio();
-    this.audio.src = '../../../assets/audio/' + this.activeLetter.audio;
+    this.audio.src = "../../../assets/audio/" + this.activeLetter.audio;
     console.log("task.src: " + this.task.src);
   },
   watch: {
@@ -137,14 +143,15 @@ export default {
     playSound() {
       this.audio.play();
     },
-
     clearCanvas() {
       //change value to trigger update in child component
       this.clearCanvasTrigger = !this.clearCanvasTrigger;
     },
-
     triggerDrawAnimation() {
       this.drawAnimationTrigger = !this.drawAnimationTrigger;
+    },
+    validateDrawing() {
+      this.validationTrigger = !this.validationTrigger;
     }
   }
 };
@@ -170,14 +177,14 @@ export default {
   position: absolute;
   z-index: 10;
   -moz-user-select: none;
--webkit-user-select: none;
-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .drawcontainer {
   -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-  outline: 0.25rem solid $primary;
+  outline: 0.5rem solid $primary;
   position: relative;
   margin-left: auto;
   margin-right: auto;
