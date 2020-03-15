@@ -2,74 +2,82 @@
   <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
   <div>
     <svg
-      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:cc="http://creativecommons.org/ns#"
-      xmlns:dc="http://purl.org/dc/elements/1.1/"
-      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-      xmlns:svg="http://www.w3.org/2000/svg"
-      xmlns:ns1="http://sozi.baierouge.fr"
+      xmlns:cc="http://web.resource.org/cc/"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      id="svg2"
-      sodipodi:docname="checkmarks_ocal081028_f1.svg"
-      viewBox="0 0 190 190"
-      sodipodi:version="0.32"
-      version="1.0"
-      inkscape:output_extension="org.inkscape.output.svg.inkscape"
-      inkscape:version="0.46"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+      xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+      xmlns:ns1="http://sozi.baierouge.fr"
+      id="svg4252"
+      viewBox="0 0 128 128"
+      version="1.1"
+      inkscape:version="0.91 r13725"
       width="50%"
       height="100%"
     >
-      <sodipodi:namedview
-        id="base"
-        borderColor="#666666"
-        inkscape:pageshadow="2"
-        guidetolerance="10"
-        pagecolor="#ffffff"
-        gridtolerance="10000"
-        inkscape:window-height="963"
-        inkscape:zoom="3.9"
-        objecttolerance="10"
-        showgrid="false"
-        borderopacity="1.0"
-        inkscape:current-layer="layer1"
-        inkscape:cx="95"
-        inkscape:cy="95"
-        inkscape:window-y="48"
-        inkscape:window-x="158"
-        inkscape:window-width="1170"
-        inkscape:pageopacity="0.0"
-        inkscape:document-units="px"
-      />
-      <g
-        id="layer1"
-        inkscape:label="Layer 1"
-        inkscape:groupmode="layer"
-        transform="translate(-73.248 -53.178)"
-      >
-        <g id="g2414" inkscape:label="Layer 1" transform="translate(-123.39 12.728)">
-          <text
-            id="text3228"
-            y="137.75861"
-            x="163.32207"
-            style="font-size:40px;font-family:Kochi Gothic;fill:#000000"
-            xml:space="preserve"
-          >
-            <tspan id="tspan3230" y="137.75861" x="163.32207" sodipodi:role="line" />
-          </text>
-          <path
-            id="path2418"
-            sodipodi:nodetypes="csssccssssccc"
-            style="fill-rule:evenodd;fill:#000000"
-            d="m289.67 57.934c-45.77 0-83.03 37.263-83.03 83.026 0 45.77 37.26 83.03 83.03 83.03s83.03-37.26 83.03-83.03c0-19.78-6.7-37.48-18.07-51.972l-7.81 9.266c9.91 12.206 13.79 25.756 13.79 42.706 0 39.22-31.72 70.92-70.94 70.92s-70.94-31.7-70.94-70.92 31.72-70.934 70.94-70.934c12.43 0 21.72 1.786 31.87 7.391l7.43-9.754c-11.88-6.562-24.8-9.729-39.3-9.729z"
-          />
-          <path
-            id="path2510"
-            style="fill:#000000"
-            d="m258.94 130.04c3.35 0 5.88 2.75 7.6 8.25 3.43 10.3 5.88 15.45 7.34 15.45 1.11 0 2.27-0.86 3.47-2.58 24.13-38.63 46.45-69.879 66.97-93.745 5.32-6.181 13.78-9.272 25.37-9.272 2.74 0 4.59 0.258 5.53 0.773 0.95 0.515 1.42 1.159 1.42 1.931 0 1.202-1.42 3.563-4.25 7.083-33.14 39.835-63.87 81.9-92.2 126.2-1.98 3.09-6.01 4.64-12.11 4.64-6.18 0-9.83-0.26-10.94-0.78-2.92-1.28-6.36-7.85-10.31-19.7-4.46-13.13-6.69-21.38-6.69-24.72 0-3.61 3-7.09 9.01-10.44 3.69-2.06 6.96-3.09 9.79-3.09"
-          />
-        </g>
+      <defs id="defs4254">
+        <linearGradient
+          id="linearGradient4206"
+          y2="390.78"
+          gradientUnits="userSpaceOnUse"
+          x2="311.27"
+          gradientTransform="matrix(5.2962 0 0 4.9975 -1603.1 -1873.1)"
+          y1="377.95"
+          x1="302.74"
+        >
+          <stop id="stop4556" style="stop-color:#ffffff" offset="0" />
+          <stop id="stop4558" style="stop-color:#ffffff;stop-opacity:0" offset="1" />
+        </linearGradient>
+        <linearGradient
+          id="linearGradient4222"
+          y2="390.49"
+          gradientUnits="userSpaceOnUse"
+          x2="414.39"
+          gradientTransform="matrix(2.7132 0 0 2.7135 -1076 -978.37)"
+          y1="376.14"
+          x1="401.93"
+        >
+          <stop id="stop4740" style="stop-color:#ffffff;stop-opacity:.72656" offset="0" />
+          <stop id="stop4742" style="stop-color:#ffffff" offset="1" />
+        </linearGradient>
+        <linearGradient
+          id="linearGradient4213"
+          y2="387.44"
+          gradientUnits="userSpaceOnUse"
+          x2="332.02"
+          y1="369.98"
+          x1="314.57"
+        >
+          <stop id="stop4570" style="stop-color:#118909" offset="0" />
+          <stop id="stop4572" style="stop-color:#084c06" offset="1" />
+        </linearGradient>
+      </defs>
+      <g id="layer1" transform="matrix(.89070 0 0 .89070 .000036618 .048430)">
+        <path
+          id="path4531"
+          style="fill:#084c06"
+          d="m339.54 378.06a13.967 13.967 0 1 1 -27.933 0 13.967 13.967 0 1 1 27.933 0z"
+          transform="matrix(5.1447 0 0 5.1447 -1603.1 -1873.1)"
+        />
+        <path
+          id="path4533"
+          style="stroke:#ffffff;stroke-width:.32492;fill:url(#linearGradient4213)"
+          d="m339.54 378.06a13.967 13.967 0 1 1 -27.933 0 13.967 13.967 0 1 1 27.933 0z"
+          transform="matrix(4.6973 0 0 4.6973 -1457.5 -1704)"
+        />
+        <path
+          id="rect4574"
+          style="fill:url(#linearGradient4222)"
+          d="m39.65 58.141c-0.41675 0-1.1011 0.25149-1.4034 0.56585l-13.473 13.752c-0.60447 0.61076-0.60357 1.3625 0 1.9652l21.177 20.113 13.753 13.754c0.30538 0.30537 0.70596 0.55686 1.1227 0.55686 0.30807 0 0.59998-0.32334 0.84159-0.55686l13.753-13.472 43.509-43.505c0.61255-0.60178 0.61076-1.641 0-2.2454l-13.76-13.754c-0.61076-0.60178-1.3619-0.61076-1.9648 0l-42.384 42.383-20.054-18.99c-0.303-0.306-0.706-0.566-1.123-0.566z"
+        />
+        <path
+          id="path4537"
+          style="fill:url(#linearGradient4206)"
+          d="m71.81 6.2838c-36.214 0-65.594 29.381-65.594 65.595 0 17.399 7.1006 32.947 18.167 44.693 5.7491-47.485 45.827-84.404 94.855-84.404 1.322 0 2.5496 0.26945 3.8586 0.32334-12-15.605-30.101-26.207-51.29-26.207z"
+        />
       </g>
       <metadata>
         <rdf:RDF>
@@ -82,24 +90,24 @@
                 <dc:title>Openclipart</dc:title>
               </cc:Agent>
             </dc:publisher>
-            <dc:title>checkmark_on_circle</dc:title>
-            <dc:date>2008-10-26T10:10:59</dc:date>
-            <dc:description>Checkmarks/ticks on circles&#13;\nLeft version comes with an intersected circle (as a path). Right version has a full circle. There the tick is a overlay (with a "shadow"; made gray only for visibility)</dc:description>
-            <dc:source>https://openclipart.org/detail/19803/checkmark_on_circle-by-andrea_s</dc:source>
+            <dc:title>OK icon</dc:title>
+            <dc:date>2010-10-09T13:35:09</dc:date>
+            <dc:description>Green round glosy OK icon</dc:description>
+            <dc:source>https://openclipart.org/detail/89245/ok-icon-by-kuba</dc:source>
             <dc:creator>
               <cc:Agent>
-                <dc:title>andrea_S</dc:title>
+                <dc:title>kuba</dc:title>
               </cc:Agent>
             </dc:creator>
             <dc:subject>
               <rdf:Bag>
+                <rdf:li>button</rdf:li>
                 <rdf:li>check</rdf:li>
-                <rdf:li>checkmark</rdf:li>
-                <rdf:li>circle</rdf:li>
+                <rdf:li>glosy</rdf:li>
+                <rdf:li>green</rdf:li>
+                <rdf:li>icon</rdf:li>
+                <rdf:li>ok</rdf:li>
                 <rdf:li>round</rdf:li>
-                <rdf:li>sign</rdf:li>
-                <rdf:li>symbol</rdf:li>
-                <rdf:li>tick</rdf:li>
               </rdf:Bag>
             </dc:subject>
           </cc:Work>

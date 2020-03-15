@@ -244,11 +244,11 @@ export default {
         // console.log("width: " + ctx.canvas.width + ", canvasWidth: " + this.canvasHeight);
 
         
-        // canvasBack.height = ctx.canvas.height;
-        // canvasBack.ctx = canvasBack.getContext("2d");
-        // canvasBack.ctx.drawImage(canvas, 0, 0);
-        // var img = document.getElementById("pencilsvg");
-        // ctx.drawImage(img, startX, startY - 45, 50, 50);
+        canvasBack.height = ctx.canvas.height;
+        canvasBack.ctx = canvasBack.getContext("2d");
+        canvasBack.ctx.drawImage(canvas, 0, 0);
+        var img = document.getElementById("pencilsvg");
+        ctx.drawImage(img, startX, startY - 45, 50, 50);
 
 
 
@@ -266,7 +266,7 @@ export default {
         // // console.log("iterations: " + iterations);
         // let maxCount = Math.round(iterations);
         // if (maxCount === 0) { maxCount = 1 };
-        let maxCount = 1;
+        let maxCount = 2;
 
         //TO BE REMOVED, avoid waiting on animation
         // maxCount = 1;
@@ -286,7 +286,7 @@ export default {
         let requestId;
 
         function animate() {
-          setTimeout(function() {
+          // setTimeout(function() {
             requestId = requestAnimationFrame(animate);
 
             if (count >= maxCount) {
@@ -294,8 +294,8 @@ export default {
               // console.log(
               //   "execution of method complete! requestID: " + requestId
               // );
-              // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-              // ctx.drawImage(canvasBack, 0, 0);
+              ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+              ctx.drawImage(canvasBack, 0, 0);
               resolve("completed");
               return;
             }
@@ -310,31 +310,31 @@ export default {
             ctx.strokeStyle = "#000";
             
 
-            // //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
-            // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-            // // ctx.globalAlpha = 0.997;
-            // ctx.drawImage(canvasBack, 0, 0);
+            //clear canvas to overwrite pencil with existing drawings (treat the canvasbackup as an image)
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            // ctx.globalAlpha = 0.997;
+            ctx.drawImage(canvasBack, 0, 0);
 
             // ctx.globalAlpha = 0.50;
             ctx.stroke();
             
 
-            // //backup canvas again after stroke
+            //backup canvas again after stroke
             // canvasBack.width = ctx.canvas.width;
             // canvasBack.height = ctx.canvas.height;
             // canvasBack.ctx = canvasBack.getContext("2d");
-            // canvasBack.ctx.drawImage(canvas, 0, 0);
+            canvasBack.ctx.drawImage(canvas, 0, 0);
 
             // ctx.globalAlpha = 1;
             //add pencil
-            // ctx.drawImage(img, endX, endY - 45, 50, 50);
+            ctx.drawImage(img, endX, endY - 45, 50, 50);
 
             startX += xIncrement;
             endX += xIncrement;
             startY += yIncrement;
             endY += yIncrement;
             count += 1;
-          }, 1000 / framesPerSecond);
+          // }, 1000 / framesPerSecond);
         }
         animate();
       });
@@ -590,7 +590,7 @@ export default {
 
     validateDrawing() {
       //call to ValidationMixin
-      this.score = this.validateCoordinates(this.animationRecording, this.relevantCoordinateList);
+      this.score = this.getValidationScore(this.animationRecording, this.relevantCoordinateList);
       this.$store.commit("SET_VALIDATION_SCORE", this.score);
     },
     validatePosition(event) {

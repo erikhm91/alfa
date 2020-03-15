@@ -22,10 +22,11 @@
             <mester-validate></mester-validate>
           </button>
         </div>
+        <div class="col-6 drawcontainer mt-2">Score: {{ this.$store.getters.validationScore }}</div>
       </div>
     </div>
     <div class="col-lg-8 col-md-8 col-xs-9">
-      <div class="drawcontainer" :style="{ height: canvasHeight, width: canvasWidth}">
+      <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
         <!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
         <div class="illustrationImage">
           <unnrLetterImage :capitalLetter="activeLetter.imagekey" width="150px" height="150px"></unnrLetterImage>
@@ -52,7 +53,7 @@
       </div>
     </div>
     <div class="col-lg-1 col-md-1 col-xs-0"></div>
-    <div class="col-3">Score: {{ this.$store.getters.validationScore }}</div>
+    
   </div>
 </template>
 
@@ -184,7 +185,7 @@ export default {
 .drawcontainer {
   -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-  outline: 0.5rem solid $primary;
+  outline: 0.25rem solid $primary;
   position: relative;
   margin-left: auto;
   margin-right: auto;

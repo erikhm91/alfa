@@ -2,7 +2,14 @@ var validationMixin = {
 
     methods: {
 
-        validateCoordinates(actualCoordinates, templateCoordinates) {
+        getValidationScore(actualCoordinates, templateCoordinates) {
+            let scoreActual = this.validateCoordinates(actualCoordinates, templateCoordinates);
+            let scoreTemplate = this.validateCoordinates(templateCoordinates, actualCoordinates);
+            let totalScore = Math.round((scoreActual + scoreTemplate) / 2);
+            return totalScore;
+        },
+
+        validateCoordinates(toBeComparedCoordinates, baseCoordinates) {
             //both parameters are arrays of objects containing coordinates in the .data-attribute, on the form 
             //[{"type":"line","data":{"startX":50.862068965517246,"startY":76.84729064039409,"endX":50.862068965517246,"endY":76.84729064039409}},{"type":"line","data":{"startX":50.862068965517246,"startY":76.84729064039409,"endX":51.60098522167488,"endY":75.12315270935962}}]
             let score = 100;
@@ -10,10 +17,10 @@ var validationMixin = {
             let isValid;
 
             //only compare starting points
-            let actualX = actualCoordinates[0].data.startX;
-            let actualY = actualCoordinates[0].data.startY;
-            let templateX = templateCoordinates[0].data.startX;
-            let templateY = templateCoordinates[0].data.startY;
+            let actualX = toBeComparedCoordinates[0].data.startX;
+            let actualY = toBeComparedCoordinates[0].data.startY;
+            let templateX = baseCoordinates[0].data.startX;
+            let templateY = baseCoordinates[0].data.startY;
 
             //validate starting point
             isValid = validateSingleCoordinate(actualX, actualY, templateX, templateY, 2);
@@ -24,10 +31,10 @@ var validationMixin = {
             }
 
             //validate end point (sometimes errors in the final entry - take second to last instead)
-            actualX = actualCoordinates[actualCoordinates.length - 2].data.endX;
-            actualY = actualCoordinates[actualCoordinates.length - 2].data.endY;
-            templateX = templateCoordinates[templateCoordinates.length - 1].data.endX;
-            templateY = templateCoordinates[templateCoordinates.length - 1].data.endY;
+            actualX = toBeComparedCoordinates[toBeComparedCoordinates.length - 2].data.endX;
+            actualY = toBeComparedCoordinates[toBeComparedCoordinates.length - 2].data.endY;
+            templateX = baseCoordinates[baseCoordinates.length - 1].data.endX;
+            templateY = baseCoordinates[baseCoordinates.length - 1].data.endY;
             isValid = validateSingleCoordinate(actualX, actualY, templateX, templateY, 2);
             if (isValid === false) {
                 score = 0;
@@ -36,17 +43,17 @@ var validationMixin = {
             }
             
             //validate middle points in loop - calculate score
-            for (let i = 0; i < actualCoordinates.length; i++) {
+            for (let i = 0; i < toBeComparedCoordinates.length; i++) {
 
                 //always check some steps ahead to see if user just drew faster/with less coordinates recorded, accept if hit and record ok.
                 let templateIndex = lastValidatedTemplateIndex;
                 for (let j = 0; j < stepDiscrepancyTolerance; j++) {
 
-                    actualX = actualCoordinates[i].data.startX;
-                    actualY = actualCoordinates[i].data.startY;
+                    actualX = toBeComparedCoordinates[i].data.startX;
+                    actualY = toBeComparedCoordinates[i].data.startY;
                     try {
-                        templateX = templateCoordinates[templateIndex].data.startX;
-                        templateY = templateCoordinates[templateIndex].data.startY;
+                        templateX = baseCoordinates[templateIndex].data.startX;
+                        templateY = baseCoordinates[templateIndex].data.startY;
                         isValid = validateSingleCoordinate(actualX, actualY, templateX, templateY, 1)
                         if (isValid) {
                             lastValidatedTemplateIndex = templateIndex;
