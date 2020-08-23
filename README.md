@@ -1,29 +1,16 @@
-# unnr1
+# Mester
 
-## Project setup
-```
-npm install
-```
+Link to working demo: http://mester.netlify.com
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+A proof of concept-application for teaching children the Norwegian alphabet, combining sounds with tracing the letters digitally, preferrably using pen or finger on tablet.
+Created for fun for a teacher friend who spends a lot of time and natural resources working the printer :)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+How to use:
+Select a letter, then the letter sound is played along with the image and sound of an example usage word.
+Trace/draw the letter, play back sound, play instruction for drawing the letter, validate tracing, navigate to other tasks. 
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Some room for improvement:
+- Very slow initial load (bloated app and too much prefetching I assume).
+- Validation algorithm and functionality is not good enough.
+- Performance on weaker devices using the less-than optimal i chose for the animation in canvas.
+- Scaling is a bit off on navigation buttons in drawing screen.
