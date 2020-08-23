@@ -6,7 +6,12 @@ module.exports = {
       preProcessor: 'scss',
       patterns: [path.resolve(__dirname, "@/styles/app.scss")]
     }
+  },
+  //enable debugging in Chrome:
+  configureWebpack: {
+    devtool: 'source-map'
   }
+
 }
 // vue.config.js
 // module.exports = {
@@ -15,7 +20,7 @@ module.exports = {
 //       // pass options to sass-loader
 //       // @/ is an alias to src/
 //       // so this assumes you have a file named `src/variables.sass`
-     
+
 //       // by default the `sass` option will apply to both syntaxes
 //       // because `scss` syntax is also processed by sass-loader underlyingly
 //       // but when configuring the `data` option

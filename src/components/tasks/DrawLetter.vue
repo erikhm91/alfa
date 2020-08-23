@@ -1,244 +1,158 @@
-
 <template>
-  <div class="row mt-4 text-center">
-    <div class="col-md-2 col-xs-4">
-      <div>
-        <button
-          class="btn btn-secondary text-light"
-          type="button"
-          id="clearbutton2"
-          @click="clearCanvas()"
-        >Clear Sketchpad button</button>
+  <div class="row justify-content-center">
+    <div class="col-lg-2 col-md-2 col-12">
+      <div class="row mb-2 mb-md-0 justify-content-center">
+        <div class="col-md-12 col-s-12 col-3">
+          <button class="btn btn-primary" @click="playSound()">
+            <unnr-speaker></unnr-speaker>
+          </button>
+        </div>
+        <div class="col-md-12 mt-md-1 col-s-12 col-3">
+          <button class="btn btn-primary" @click="clearCanvas()">
+            <unnr-eraser></unnr-eraser>
+          </button>
+        </div>
+        <div class="col-md-12 mt-md-1 col-s-12 col-3">
+          <button class="btn btn-primary" @click="triggerDrawAnimation()">
+            <unnr-question></unnr-question>
+          </button>
+        </div>
+        <div class="col-md-12 mt-md-1 col-s-12 col-3">
+          <button class="btn btn-primary" @click="validateDrawing()">
+            <mester-validate></mester-validate>
+          </button>
+        </div>
+        <div class="col-6 drawcontainer mt-2">Score: {{ this.$store.getters.validationScore }}</div>
       </div>
     </div>
-
-    <div class="col-md-10 text-left col-xs-12">
-      <div>
-        <div class="centerdraw" style="height:300px; width:400px">
-          <canvas
-            id="canvas"
-            
-
-            v-on:mousedown="mouseDown"
-            v-on:mousemove="mouseMove"
-            v-on:touchstart="sketchpadTouchStart"
-            v-on:touchend="sketchpadTouchEnd"
-            v-on:touchmove="sketchpadTouchMove"
-            :width="canvas.width"
-            :height="canvas.height"
-          ></canvas>
-          <div>
-            <img
-              id="taskImage"
-              class="img"
-              :src="task.image"
-              :alt="task.alt"
-              :width="canvas.width"
-              :height="canvas.height"
-            />
-          </div>
+    <div class="col-lg-8 col-md-8 col-xs-9">
+      <div class="drawcontainer mt-1" :style="{ height: canvasHeight, width: canvasWidth}">
+        <!-- :style="{ height: canvasHeight, width: canvasWidth}" -->
+        <div class="illustrationImage">
+          <unnrLetterImage :capitalLetter="activeLetter.imagekey" width="150px" height="150px"></unnrLetterImage>
+        </div>
+        <unnrCanvas
+          class="canvas"
+          :canvasHeight="canvasHeight"
+          :canvasWidth="canvasWidth"
+          :clearCanvasTrigger="clearCanvasTrigger"
+          :drawAnimationTrigger="drawAnimationTrigger"
+          :validationTrigger="validationTrigger"
+          :drawImage="task.url"
+        ></unnrCanvas>
+        <div>
+          <img
+            id="taskImage"
+            class="img"
+            :src="task.src"
+            :alt="task.alt"
+            :width="canvasWidth"
+            :height="canvasHeight"
+          />
         </div>
       </div>
     </div>
+    <div class="col-lg-1 col-md-1 col-xs-0"></div>
+    
   </div>
 </template>
 
-
 <script>
+import Speaker from "../icons/Speaker.vue";
+import Eraser from "../icons/Eraser.vue";
+import Question from "../icons/Question.vue";
+import Validate from "../icons/Validate.vue";
+import Canvas from "../utilities/Canvas.vue";
+import letterImage from "../icons/illustrations/LetterImage.vue";
+
 export default {
-  props: {
-    task: {
-      type: Object
-    }
+  // props: {
+  //   task: {
+  //     type: HTMLImageElement
+  //   }
+  // },
+  props: ["task", "activeLetter"],
+  components: {
+    unnrSpeaker: Speaker,
+    unnrEraser: Eraser,
+    unnrQuestion: Question,
+    mesterValidate: Validate,
+    unnrCanvas: Canvas,
+    unnrLetterImage: letterImage
   },
 
   data: function() {
     return {
-      // canvasBlank: true,
+      // canvas sizes here not in use atm****
       canvas: {
-        height: "300 px",
-        width: "400 px"
+        height: "300px",
+        width: "400px"
       },
-
-      cursor: {
-        current: {
-          x: 0,
-          y: 0
-        },
-        previous: {
-          x: -1,
-          y: -1
-        },
-        size: 25
-      },
-      mousePressed: false,
-      showImage: true
+      // *************************************
+      clearCanvasTrigger: false,
+      drawAnimationTrigger: false,
+      validationTrigger: false
     };
   },
   computed: {
-    //**************not in use atm************************ */
-    canvasHeight() {
-      var reduction = window.innerHeight / 2;
+    canvasHeightOrWidthRule() {
+      if (window.innerWidth / window.innerHeight < 1.5) {
+        return "width";
+      } else {
+        return "height";
+      }
+    },
+    maxCanvasHeight() {
+      var reduction = window.innerHeight / 2.5;
       var height = window.innerHeight - reduction;
+      // console.log("Height: " + height);
+      return height;
+    },
+    maxCanvasWidth() {
+      var reduction = window.innerWidth / 3.7;
+      var width = window.innerWidth - reduction;
+      return width;
+    },
+
+    canvasHeight() {
+      if (this.canvasHeightOrWidthRule === "height") {
+        return this.maxCanvasHeight + "px";
+      }
+      let height = this.maxCanvasWidth / 1.7;
       return height + "px";
     },
+
     canvasWidth() {
-      var reduction = window.innerWidth / 1.5;
-      var width = window.innerWidth - reduction;
+      if (this.canvasHeightOrWidthRule === "width") {
+        return this.maxCanvasWidth + "px";
+      }
+      let width = this.maxCanvasHeight * 1.7;
       return width + "px";
     }
-    //****************************************** */
   },
-
-  created: function() {
-    //initiate eventlistener on window on startup (as window not available in template)
-    window.addEventListener("mouseup", this.handleMouseUp);
-    console.log(this.task);
+  mounted() {
+    this.audio = new Audio();
+    this.audio.src = "../../../assets/audio/" + this.activeLetter.audio;
+    console.log("task.src: " + this.task.src);
   },
-  destroyed: function() {
-    window.removeEventListener("mouseup", this.handleMouseUp);
+  watch: {
+    task() {
+      this.clearCanvas();
+    }
   },
-
   methods: {
+    playSound() {
+      this.audio.play();
+    },
     clearCanvas() {
-      var c = document.getElementById("canvas");
-      var ctx = c.getContext("2d");
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      //change value to trigger update in child component
+      this.clearCanvasTrigger = !this.clearCanvasTrigger;
     },
-
-    drawLine(event) {
-      //   If lastX is not set, set lastX and lastY to the current position
-      if (this.cursor.previous.x == -1) {
-        this.cursor.previous.x = this.cursor.current.x;
-        this.cursor.previous.y = this.cursor.current.y;
-      }
-
-      var c = document.getElementById("canvas");
-
-      var ctx = c.getContext("2d");
-
-      // Let's use black by setting RGB values to 0, and 255 alpha (completely opaque)
-      var r = 255;
-      var g = 0;
-      var b = 0;
-      var a = 75;
-
-      // Select a fill style
-      ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
-      // Set the line "cap" style to round, so lines at different angles can join into each other
-      ctx.lineCap = "round";
-      // Draw a filled line
-      ctx.beginPath();
-      // First, move to the old (previous) position
-      ctx.moveTo(this.cursor.previous.x, this.cursor.previous.y);
-      // Now draw a line to the current touch/pointer position
-      ctx.lineTo(this.cursor.current.x, this.cursor.current.y);
-      // Set the line thickness and draw the line
-      ctx.lineWidth = this.cursor.size;
-      ctx.stroke();
-      ctx.closePath();
-
-      // Update the last position to reference the current position
-      this.cursor.previous.x = this.cursor.current.x;
-      this.cursor.previous.y = this.cursor.current.y;
+    triggerDrawAnimation() {
+      this.drawAnimationTrigger = !this.drawAnimationTrigger;
     },
-    mouseDown: function(event) {
-      this.mousePressed = true;
-      this.setCurrentMousePosition(event);
-      this.drawLine(event);
-    },
-    handleMouseUp: function() {
-      this.mousePressed = false;
-
-      //for drawline method, reset tracking when mouse released
-      this.cursor.previous.x = -1;
-      this.cursor.previous.y = -1;
-    },
-
-    mouseMove(event) {
-      // Update the mouse co-ordinates when moved (best practice to take from event, computed is not right here)
-      this.setCurrentMousePosition(event);
-
-      // Draw a dot if the mouse button is currently being pressed
-      //   console.log("mousemove event triggered");
-      if (this.mousePressed == true) {
-        this.drawLine(event); //remove event? Not used.
-      }
-    },
-
-    setCurrentMousePosition(event) {
-      if (event.offsetX) {
-        this.cursor.current = {
-          x: event.offsetX,
-          y: event.offsetY
-        };
-      }
-      // to support firefox, but not perfect i think. Be wary..
-      else if (event.layerX) {
-        this.cursor.current = {
-          x: event.layerX,
-          y: event.layerY
-        };
-      }
-    },
-
-    //*****************touchpad methods******************************** */
-
-    // Draw something when a touch start is detected
-    sketchpadTouchStart(event) {
-      // Update the touch co-ordinates
-      this.getTouchPos(event);
-
-      this.drawLine();
-
-      // Prevents an additional mousedown event being triggered
-      event.preventDefault();
-    },
-
-    sketchpadTouchEnd() {
-      // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
-      this.cursor.previous.x = -1;
-      this.cursor.previous.y = -1;
-    },
-
-    // Draw something and prevent the default scrolling when touch movement is detected
-    sketchpadTouchMove(event) {
-      // Update the touch co-ordinates
-      this.getTouchPos(event);
-      // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-      this.drawLine();
-
-      // Prevent a scrolling action as a result of this touchmove triggering.
-      event.preventDefault();
-    },
-
-    // Get the touch position relative to the top-left of the canvas
-    // When we get the raw values of pageX and pageY below, they take into account the scrolling on the page
-    // but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and
-    // "target.offsetTop" to get the correct values in relation to the top left of the canvas.
-    getTouchPos(event) {
-      // console.log("reading touch");
-      if (event.touches) {
-        if (event.touches.length == 1) {
-          // Only deal with one finger
-
-          var rect = event.target.getBoundingClientRect();
-          this.cursor.current.x = event.targetTouches[0].pageX - rect.left;
-          this.cursor.current.y = event.targetTouches[0].pageY - rect.top;
-
-          // var touch = event.touches[0]; // Get the information for finger #1
-
-          // // this.cursor.current.x=touch.pageX-touch.target.offsetLeft;
-          // // this.cursor.current.y=touch.pageY-touch.target.offsetTop;
-
-          // this.cursor.current.x=touch.clientX - touch.target.offsetLeft;
-          // this.cursor.current.y=touch.clientY - touch.target.offsetTop;
-
-          // console.log("touch.pageX: " + touch.pageX );
-          // console.log("touch.pageY: " + touch.pageY);
-          // console.log("touch.target: " + touch.target.offsetLeft);
-        }
-      }
+    validateDrawing() {
+      this.validationTrigger = !this.validationTrigger;
     }
   }
 };
@@ -247,8 +161,14 @@ export default {
 <style scoped lang="scss">
 @import "@/styles/_variables.scss";
 
-canvas {
-  border: 0.25rem solid $secondary;
+.illustrationImage {
+  z-index: 100;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
+.canvas {
   position: absolute;
   z-index: 20;
   display: block;
@@ -257,14 +177,21 @@ canvas {
 .img {
   position: absolute;
   z-index: 10;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-#drawcontainer {
-  /* display: block; */
-}
-
-.centerdraw {
-  border: 1px solid black;
+.drawcontainer {
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+  outline: 0.25rem solid $primary;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.outline {
+  border: solid black 1px;
 }
 </style>

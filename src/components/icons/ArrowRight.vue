@@ -6,8 +6,8 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0px"
     y="0px"
-    width="100%"
-    height="100%"
+    :width="width"
+    :height="height"
     viewBox="0 0 348.728 348.728"
     style="enable-background:new 0 0 348.728 348.728;"
     xml:space="preserve"
@@ -25,12 +25,15 @@
 </template>
 
 <script>
+export default {
+  props: ['height', 'width']
+}
 </script>
 
 <style scoped lang="scss">
 @import '@/styles/_variables.scss';
 svg {
-  fill: $secondary;
+  fill: $primary;
 }
 /* 
 svg:hover {

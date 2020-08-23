@@ -1,54 +1,44 @@
 <template>
-  <div>
-    <div hidden>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
-    <div class="row">
-      <div class="text-right col-md-3">
-        
-          <button @click="backToList" class="btn btn-primary">Tilbake</button>
-      </div>
-      <div class="text-left col-md-9">
-        <p>Valgt bokstav: {{letter.l}}</p>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-xs-12">
+        <unnr-draw-letter :task="tasks[taskIndex]" :activeLetter="activeLetter"></unnr-draw-letter>
       </div>
     </div>
-
-    <div class="row text-center">
-      <div class="col-md-2 col-s-6 mt-5">
-        <span v-if="prevTaskExist" @click="prevTask()"
-            class="clickable">
-          <unnr-arrow-left></unnr-arrow-left>
+    <div class="row justify-content-center">
+      <div class="col-md-1"></div>
+      <div class="col-md-3 col-4 arrow">
+        <span v-show="prevTaskExist" @click="prevTask()" class="clickable">
+          <unnr-arrow-left height="150px" width="150px"></unnr-arrow-left>
         </span>
       </div>
-
-      <div class="col-md-8 col-xs-12">
-        <unnr-draw-letter :task="letter.tasks[taskIndex]"></unnr-draw-letter>
-      </div>
-
-      <div class="col-md-2 col-xs-6 mt-5">
-        <span v-if="nextTaskExist" @click="nextTask()"
-            class="clickable">
-              <unnr-arrow-right></unnr-arrow-right>
+      <div class="col-md-3 col-4 arrow">
+        <span v-show="nextTaskExist" @click="nextTask()" class="clickable">
+          <unnr-arrow-right height="150px" width="150px"></unnr-arrow-right>
         </span>
       </div>
     </div>
   </div>
 </template>
 
-
 <script>
 import DrawLetter from "./tasks/DrawLetter.vue";
 import ArrowLeft from "./icons/ArrowLeft.vue";
 import ArrowRight from "./icons/ArrowRight.vue";
-
+// import store from '../store/store';
 export default {
-  props: {
-    letter: {
-      type: Object
-    }
-  },
+  props: ["letter"],
+
   data() {
     return {
       taskIndex: 0,
-      selectedTask: this.letter.tasks[0]
+      activeLetter : this.$store.getters.activeLetter,
+      // this.$store.getters['letterObject'](this.letter),
+      selectedTask: this.$store.getters.activeLetter.tasks[0],
+      // selectedTask: activeLetter.tasks[0],
+      tasks : this.$store.getters.taskImages
+
+      // 
     };
   },
   components: {
@@ -56,9 +46,13 @@ export default {
     unnrArrowLeft: ArrowLeft,
     unnrArrowRight: ArrowRight
   },
+  created() {
+    this.$store.commit("SET_LOWER_CASE_LETTER", false);
+  },
+
   computed: {
     nextTaskExist() {
-      if (this.letter.tasks.length > this.taskIndex + 1) {
+      if ( this.$store.getters.activeLetter.tasks.length > this.taskIndex + 1) {   //should implement better reading of values. map getters.
         return true;
       } else {
         return false;
@@ -72,14 +66,19 @@ export default {
       }
     }
   },
+
+  watch: {
+    taskIndex() {
+      let bool;
+      if (this.taskIndex === 1) {
+        bool = true;
+      } else {
+        bool = false;
+      }
+      this.$store.commit("SET_LOWER_CASE_LETTER", bool);
+    }
+  },
   methods: {
-    /*     playSound() {
-       var audio = new Audio("../assets/apekatt.mp3");
-        audio.play();
-    }, */
-    backToList() {
-      this.$emit("backToList", true);
-    },
     //**********************************//can remove these checks as button disappears if not valid************************ */
     prevTask() {
       if (this.taskIndex > 0) {
@@ -87,8 +86,10 @@ export default {
       }
     },
     nextTask() {
-      if (this.letter.tasks.length > this.taskIndex + 1) {
+      if (this.activeLetter.tasks.length > this.taskIndex + 1) {
         this.taskIndex++;
+        //sets letter visited/green when navigating to new task
+        this.$store.commit("SET_LETTER_VISITED", this.activeLetter.l);
       }
     }
     //************************************************************************************************************** */
@@ -97,16 +98,14 @@ export default {
 </script>
 
 <style scoped>
-
 .clickable {
   cursor: pointer;
 }
-/* 
-p {
-  font-size: 1px;
-} */
+.outline {
+  border: solid black 1px;
+}
 
-/* div {
-  border: 1px solid black;
-} */
+div {
+  overflow: hidden;
+}
 </style>
