@@ -12,5 +12,5 @@ Trace/draw the letter, play back sound, play instruction for drawing the letter,
 Some room for improvement:
 - Very slow initial load (bloated app and too much prefetching I assume).
 - Validation algorithm and functionality.
-- Performance of drawing animation (not solved ideally).
+- Performance of drawing animation on weaker devices.
 - Scaling is a bit off on navigation buttons in drawing screen.
