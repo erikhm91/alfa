@@ -1,6 +1,6 @@
 # Mester
 
-Link to demo: http://mester.netlify.com
+Link to demo: https://mester.netlify.com
 
 A proof of concept-application for teaching children the Norwegian alphabet, combining sound with tracing letters, preferrably using pen or finger on tablet.
 Created for fun for a teacher friend who spends a lot of time and natural resources working the printer :)
